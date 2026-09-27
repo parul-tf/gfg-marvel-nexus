@@ -1,0 +1,1150 @@
+/* ==========================================================================
+   INFINITY STONE HUD, CUSTOM CURSOR, SNAP EASTER EGG & MODAL STYLES
+   ========================================================================== */
+
+/* ==========================================================================
+   1. VERTICAL INFINITY STONE PROGRESS BAR
+   ========================================================================== */
+.infinity-stone-nav {
+  position: fixed;
+  left: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  pointer-events: auto;
+}
+
+.stone-conduit-track {
+  position: absolute;
+  left: 17px;
+  top: 15px;
+  bottom: 15px;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.12);
+  z-index: 1;
+}
+
+.stone-conduit-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: linear-gradient(180deg, var(--stone-space), var(--stone-reality), var(--stone-power), var(--stone-time), var(--stone-mind), var(--stone-soul));
+  box-shadow: 0 0 10px var(--arc-cyan);
+  transition: height 0.15s ease-out;
+}
+
+.stone-nodes-list {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  list-style: none;
+}
+
+.stone-node {
+  position: relative;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  outline: none;
+}
+
+.stone-gem {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #0A0B12;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-normal);
+  position: relative;
+}
+
+.stone-gem::after {
+  content: '';
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 10px currentColor;
+  opacity: 0.4;
+  transition: all var(--transition-fast);
+}
+
+/* Individual Stone Glows */
+.stone-space { color: var(--stone-space); }
+.stone-reality { color: var(--stone-reality); }
+.stone-power { color: var(--stone-power); }
+.stone-time { color: var(--stone-time); }
+.stone-mind { color: var(--stone-mind); }
+.stone-soul { color: var(--stone-soul); }
+
+.stone-node:hover .stone-gem,
+.stone-node.active .stone-gem {
+  border-color: currentColor;
+  box-shadow: 0 0 20px currentColor, inset 0 0 10px currentColor;
+  transform: scale(1.2);
+}
+
+.stone-node:hover .stone-gem::after,
+.stone-node.active .stone-gem::after {
+  opacity: 1;
+  transform: scale(1.3);
+  box-shadow: 0 0 18px currentColor;
+}
+
+/* Stone Tooltip */
+.stone-tooltip {
+  position: absolute;
+  left: 48px;
+  background: rgba(11, 13, 20, 0.95);
+  border: 1px solid currentColor;
+  color: #FFFFFF;
+  font-family: var(--font-hud);
+  font-size: 0.65rem;
+  letter-spacing: 1.5px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all var(--transition-fast);
+  box-shadow: 0 0 15px currentColor;
+}
+
+.stone-node:hover .stone-tooltip {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (max-width: 1100px) {
+  .infinity-stone-nav {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   2. CUSTOM ENERGY CURSOR
+   ========================================================================== */
+/* ==========================================================================
+   2. S.H.I.E.L.D. STARK HUD QUANTUM RETICLE CURSOR
+   ========================================================================== */
+@media (hover: hover) and (pointer: fine) {
+  html, body, a, button, input, select, textarea, [role="button"], [role="tab"] {
+    cursor: none !important;
+  }
+}
+
+.stark-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 99999;
+}
+
+/* 1:1 Instant Tracking Pointer Tip */
+.cursor-pointer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 22px;
+  height: 22px;
+  pointer-events: none;
+  z-index: 100000;
+  transform: translate3d(-100px, -100px, 0) translate(-50%, -50%);
+  will-change: transform;
+  transition: opacity 0.15s ease;
+}
+
+.pointer-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 0 6px var(--arc-cyan));
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.2s ease;
+}
+
+.pointer-diamond {
+  fill: #FFFFFF;
+  stroke: var(--arc-cyan);
+  stroke-width: 1.5;
+  transition: fill 0.2s ease, stroke 0.2s ease;
+}
+
+.pointer-core {
+  fill: var(--arc-cyan);
+  transition: fill 0.2s ease;
+}
+
+/* Damped Trailing Tactical Target Brackets */
+.cursor-target-lock {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 44px;
+  height: 44px;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate3d(-100px, -100px, 0) translate(-50%, -50%);
+  will-change: transform;
+  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+              height 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+              opacity 0.2s ease;
+}
+
+/* 4 Corner HUD Target Brackets */
+.target-bracket {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-color: var(--arc-cyan);
+  border-style: solid;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: drop-shadow(0 0 4px var(--arc-cyan));
+}
+
+.bracket-tl {
+  top: 0;
+  left: 0;
+  border-width: 2px 0 0 2px;
+}
+
+.bracket-tr {
+  top: 0;
+  right: 0;
+  border-width: 2px 2px 0 0;
+}
+
+.bracket-bl {
+  bottom: 0;
+  left: 0;
+  border-width: 0 0 2px 2px;
+}
+
+.bracket-br {
+  bottom: 0;
+  right: 0;
+  border-width: 0 2px 2px 0;
+}
+
+/* Subtle crosshair tick lines */
+.target-crosshair {
+  position: absolute;
+  inset: 50%;
+  width: 4px;
+  height: 4px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: rgba(0, 240, 255, 0.4);
+  box-shadow: 0 0 8px var(--arc-cyan);
+  transition: all 0.2s ease;
+}
+
+/* Contextual Micro HUD Telemetry Badge */
+.cursor-hud-label {
+  position: absolute;
+  left: 24px;
+  top: -14px;
+  transform: none;
+  font-family: var(--font-hud);
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--arc-cyan);
+  background: rgba(7, 9, 15, 0.88);
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  border-radius: 3px;
+  padding: 2px 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Hover State: Target Lock Engaged */
+body.cursor-active .cursor-target-lock {
+  width: 52px;
+  height: 52px;
+}
+
+body.cursor-active .target-bracket {
+  border-color: var(--marvel-red);
+  filter: drop-shadow(0 0 6px var(--marvel-red));
+  width: 12px;
+  height: 12px;
+}
+
+body.cursor-active .pointer-svg {
+  transform: rotate(45deg);
+  filter: drop-shadow(0 0 8px var(--marvel-red));
+}
+
+body.cursor-active .pointer-diamond {
+  fill: var(--stark-gold);
+  stroke: var(--marvel-red);
+}
+
+body.cursor-active .pointer-core {
+  fill: var(--marvel-red);
+}
+
+body.cursor-active .cursor-hud-label {
+  color: var(--stark-gold);
+  border-color: var(--marvel-red);
+  box-shadow: 0 0 12px rgba(237, 29, 36, 0.35);
+  background: rgba(18, 10, 15, 0.95);
+}
+
+/* Click Shockwave Ring */
+.cursor-click-shockwave {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--stark-gold);
+  box-shadow: 0 0 16px var(--arc-cyan);
+  pointer-events: none;
+  z-index: 99998;
+  opacity: 0;
+  transform: translate3d(-100px, -100px, 0) translate(-50%, -50%) scale(0.5);
+  will-change: transform, opacity;
+}
+
+.cursor-click-shockwave.pulse {
+  animation: cursor-repulsor-pulse 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes cursor-repulsor-pulse {
+  0% {
+    opacity: 0.9;
+    transform: translate3d(var(--pulse-x), var(--pulse-y), 0) translate(-50%, -50%) scale(0.5);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--pulse-x), var(--pulse-y), 0) translate(-50%, -50%) scale(3.5);
+  }
+}
+
+/* Trailing Spark Particles */
+.cursor-spark-particle {
+  position: fixed;
+  pointer-events: none;
+  border-radius: 50%;
+  z-index: 99997;
+  will-change: transform, opacity;
+  animation: spark-fade 0.5s ease-out forwards;
+}
+
+@keyframes spark-fade {
+  0% { opacity: 0.9; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.2) translateY(8px); }
+}
+
+@media (pointer: coarse) {
+  .stark-cursor,
+  .cursor-pointer,
+  .cursor-target-lock,
+  .cursor-click-shockwave {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   3. THANOS SNAP EASTER EGG OVERLAY
+   ========================================================================== */
+.snap-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.snap-overlay.active {
+  z-index: 999999 !important;
+  pointer-events: all !important;
+  opacity: 1 !important;
+  cursor: pointer;
+}
+
+.snap-flash {
+  position: fixed;
+  inset: 0;
+  background: #FFFFFF !important;
+  opacity: 0;
+  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.snap-overlay.active .snap-flash {
+  opacity: 1 !important;
+  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.05);
+}
+
+.snap-whiteout-container {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 40px 24px;
+  max-width: 680px;
+  opacity: 0;
+  transform: translateY(25px) scale(0.95);
+  transition: opacity 0.8s ease 0.5s, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s;
+  pointer-events: auto;
+}
+
+.snap-overlay.active .snap-whiteout-container {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.thanos-infinity-symbol {
+  color: #7928CA;
+  font-size: 1.5rem;
+  letter-spacing: 12px;
+  margin-bottom: 14px;
+  filter: drop-shadow(0 0 10px rgba(121, 40, 202, 0.4));
+  animation: pulse-telemetry 1.5s infinite alternate;
+}
+
+.thanos-quote {
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 7.5vw, 5.8rem);
+  letter-spacing: 6px;
+  color: #0F172A;
+  line-height: 0.95;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.thanos-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-hud);
+  font-size: clamp(0.72rem, 1.2vw, 0.85rem);
+  letter-spacing: 2px;
+  color: #7928CA;
+  background: rgba(121, 40, 202, 0.08);
+  border: 1px solid rgba(121, 40, 202, 0.28);
+  border-radius: 999px;
+  padding: 6px 18px;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 15px rgba(121, 40, 202, 0.12);
+}
+
+.thanos-status-pill .status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--marvel-red);
+  box-shadow: 0 0 8px var(--marvel-red);
+  animation: pulse-telemetry 1s infinite alternate;
+}
+
+.thanos-desc {
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+  color: #475569;
+  line-height: 1.6;
+  max-width: 540px;
+  margin: 0 auto 28px;
+}
+
+.snap-reload-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px 36px;
+  background: #0F172A;
+  color: #FFFFFF;
+  border: 2px solid #0F172A;
+  border-radius: 8px;
+  font-family: var(--font-hud);
+  font-size: clamp(0.82rem, 1.2vw, 0.95rem);
+  font-weight: 800;
+  letter-spacing: 2px;
+  cursor: pointer;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2), 0 0 25px rgba(237, 29, 36, 0.25);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.snap-reload-cta:hover {
+  background: var(--marvel-red);
+  border-color: var(--marvel-red);
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 16px 40px rgba(237, 29, 36, 0.45);
+}
+
+.snap-reload-cta .reload-spin-icon {
+  font-size: 1.25rem;
+  font-weight: 900;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-block;
+}
+
+.snap-reload-cta:hover .reload-spin-icon {
+  transform: rotate(180deg);
+}
+
+.snap-reload-hint {
+  margin-top: 18px;
+  font-family: var(--font-hud);
+  font-size: clamp(0.65rem, 1vw, 0.75rem);
+  letter-spacing: 1.5px;
+  color: #94A3B8;
+  text-transform: uppercase;
+}
+
+.snap-reload-hint strong {
+  color: #0F172A;
+  font-weight: 800;
+}
+
+/* ==========================================================================
+   4. SAVED TICKETS MODAL
+   ========================================================================== */
+.hud-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9995;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 5, 8, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.modal-window {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 35px rgba(255, 215, 0, 0.2);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+}
+
+.modal-title {
+  font-family: var(--font-hud);
+  font-size: 0.9rem;
+  letter-spacing: 1.5px;
+  color: var(--stark-gold);
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: #FFFFFF;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+.modal-close:hover {
+  color: var(--marvel-red);
+}
+
+.saved-ticket-item {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.st-info h4 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: #FFFFFF;
+  letter-spacing: 1px;
+}
+
+.st-info p {
+  font-family: var(--font-hud);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.st-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.st-view-btn {
+  background: var(--marvel-red);
+  color: #FFFFFF;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-family: var(--font-hud);
+  font-size: 0.65rem;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   5. GLOBAL TOP MARVEL QUANTUM SCROLL BEAM
+   ========================================================================== */
+.global-scroll-beam {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #d91f40 0%, #00e5ff 35%, #fcd052 70%, #d91f40 100%);
+  background-size: 200% 100%;
+  transform-origin: left center;
+  transform: scaleX(0);
+  z-index: 99999;
+  pointer-events: none;
+  box-shadow: 0 0 12px rgba(217, 31, 64, 0.95), 0 0 24px rgba(0, 229, 255, 0.7);
+  animation: beam-shift 4s linear infinite;
+}
+
+.global-scroll-beam::after {
+  content: '';
+  position: absolute;
+  right: -2px;
+  top: -3px;
+  width: 10px;
+  height: 9px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  box-shadow: 0 0 12px 3px #00F0FF, 0 0 20px 6px #ED1D24;
+  pointer-events: none;
+}
+
+@keyframes beam-shift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* ==========================================================================
+   6. LENIS SMOOTH MOMENTUM SCROLL STYLES
+   ========================================================================== */
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   7. SCROLL-DRIVEN COMPONENT ENHANCEMENTS
+   ========================================================================== */
+/* Trailer Video Scrub Expansion */
+.video-section .video {
+  transform-origin: center center;
+  will-change: transform, border-radius, box-shadow, filter;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+  transition: box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: #000000;
+}
+
+.trailer-cover-wrap {
+  cursor: pointer;
+}
+
+.trailer-poster-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-cinematic), filter 0.4s ease;
+  display: block;
+}
+
+.trailer-cover-wrap:hover .trailer-poster-img {
+  transform: scale(1.03);
+  filter: brightness(1.1);
+}
+
+.video-overlay-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(237, 29, 36, 0.12) 0%, rgba(7, 7, 11, 0.35) 60%, rgba(7, 7, 11, 0.75) 100%);
+  pointer-events: none;
+}
+
+.marvel-play-trigger {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: auto !important;
+  height: auto !important;
+  background: transparent !important;
+  border: none !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  z-index: 5;
+  transition: transform 0.3s var(--ease-cinematic);
+  cursor: pointer;
+  user-select: none;
+}
+
+.trailer-cover-wrap:hover .marvel-play-trigger {
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+.play-btn-wrap {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.play-pulse-ring {
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+  border: 2px solid var(--marvel-red);
+  box-shadow: 0 0 25px var(--marvel-red-glow);
+  animation: play-ring-pulse 2s infinite ease-out;
+  pointer-events: none;
+}
+
+@keyframes play-ring-pulse {
+  0% { transform: scale(0.9); opacity: 0.9; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+.play-btn-core {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--marvel-red), #990008);
+  border: 2px solid rgba(255, 215, 0, 0.7);
+  box-shadow: 0 0 30px var(--marvel-red-glow), 0 0 15px rgba(255, 215, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  transition: all var(--transition-fast);
+}
+
+.play-svg-icon {
+  width: 28px;
+  height: 28px;
+  margin-left: 4px;
+}
+
+.play-btn-label {
+  font-family: var(--font-hud);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  white-space: nowrap;
+  color: #FFFFFF;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 240, 255, 0.6);
+  background: rgba(7, 7, 11, 0.75);
+  padding: 6px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  backdrop-filter: blur(8px);
+}
+
+.marvel-trailer-embed {
+  width: 100%;
+  height: 100%;
+  border: none;
+  aspect-ratio: 16 / 9;
+  display: block;
+}
+
+
+/* Roadmap Quantum Energy Stroke & Active Node Glow */
+.roadmap-section .path-glow {
+  filter: drop-shadow(0 0 8px #d91f40) drop-shadow(0 0 16px rgba(217, 31, 64, 0.7));
+  stroke: #d91f40;
+}
+
+.roadmap-point {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
+}
+
+.roadmap-point.active {
+  transform: scale(1.22);
+  filter: drop-shadow(0 0 16px rgba(217, 31, 64, 0.95)) drop-shadow(0 0 26px rgba(255, 215, 0, 0.5));
+}
+
+.roadmap-point.active .stroke--center {
+  fill: #d91f40;
+}
+
+/* Coalition Battle Tracks Card Scroll & Active Glow */
+.coalition-section .hero {
+  will-change: transform;
+}
+
+.coalition-section .text-block {
+  border-left: 3px solid rgba(255, 255, 255, 0.1);
+  padding-left: 18px;
+  transition: all 0.4s ease;
+  will-change: transform, opacity;
+}
+
+.coalition-section .text-block.active {
+  border-left-color: #d91f40;
+  box-shadow: -8px 0 25px -4px rgba(217, 31, 64, 0.45);
+  transform: translateX(8px);
+}
+
+/* S.H.I.E.L.D. Intel Blog Cards 3D Perspective */
+.blog-section .card {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
+}
+
+.blog-section .card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(217, 31, 64, 0.35);
+}
+
+.blog-section .card-image img {
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform;
+}
+
+.blog-section .card:hover .card-image img {
+  transform: scale(1.08);
+}
+
+/* Avatar Roster Dock Entrance & Stage Aura */
+.hero-chip-btn {
+  will-change: transform, opacity;
+}
+
+.hero-dossier-card {
+  will-change: transform, opacity;
+}
+
+.hero-stage-card {
+  will-change: transform, opacity;
+}
+
+/* Spec Bars Fill Animation */
+.stat-bar-fill, .bundle-spec-fill {
+  transition: width 0.4s ease;
+  will-change: width;
+}
+
+/* ==========================================================================
+   8. S.H.I.E.L.D. TACTICAL HUD SECTOR & TELEMETRY MONITOR
+   ========================================================================== */
+.hud-scroll-telemetry {
+  position: fixed;
+  bottom: 24px;
+  right: 28px;
+  z-index: 95;
+  pointer-events: auto;
+  font-family: var(--font-hud);
+  user-select: none;
+  transition: transform var(--transition-normal), opacity var(--transition-normal);
+}
+
+.telemetry-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(9, 11, 18, 0.9);
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 240, 255, 0.15), inset 0 0 10px rgba(0, 240, 255, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 8px 14px;
+  border-radius: 8px;
+  position: relative;
+}
+
+/* Tactical micro corner ticks */
+.telemetry-inner::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 6px;
+  height: 6px;
+  border-top: 2px solid var(--arc-cyan);
+  border-left: 2px solid var(--arc-cyan);
+}
+
+.telemetry-inner::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  width: 6px;
+  height: 6px;
+  border-bottom: 2px solid var(--marvel-red);
+  border-right: 2px solid var(--marvel-red);
+}
+
+.telemetry-arc-compass {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.compass-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.compass-ring-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.12);
+  stroke-width: 2.5;
+}
+
+.compass-ring-stroke {
+  fill: none;
+  stroke: var(--arc-cyan);
+  stroke-width: 2.5;
+  stroke-dasharray: 88;
+  stroke-dashoffset: 88;
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  filter: drop-shadow(0 0 4px var(--arc-cyan));
+  transition: stroke-dashoffset 0.15s ease-out;
+}
+
+.compass-needle {
+  fill: var(--marvel-red);
+  transform-origin: 18px 18px;
+  transition: transform 0.1s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: drop-shadow(0 0 4px var(--marvel-red));
+}
+
+.compass-hub {
+  fill: #FFFFFF;
+}
+
+.telemetry-readout {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.telemetry-sector-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.telemetry-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--arc-cyan);
+  box-shadow: 0 0 8px var(--arc-cyan);
+  animation: pulse-telemetry 1.6s infinite ease-in-out;
+}
+
+#telemetry-sector-name {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #FFFFFF;
+  white-space: nowrap;
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+}
+
+.telemetry-stats-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.62rem;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+}
+
+.telemetry-stat {
+  color: var(--stark-gold);
+  font-weight: 600;
+}
+
+.telemetry-sep {
+  opacity: 0.35;
+}
+
+@media (max-width: 768px) {
+  .hud-scroll-telemetry {
+    bottom: 16px;
+    right: 16px;
+  }
+  .telemetry-inner {
+    padding: 6px 10px;
+    gap: 8px;
+  }
+  .telemetry-arc-compass {
+    width: 26px;
+    height: 26px;
+  }
+  #telemetry-sector-name {
+    font-size: 0.62rem;
+    letter-spacing: 1px;
+  }
+  .telemetry-stats-row {
+    font-size: 0.54rem;
+  }
+}
+
+/* ==========================================================================
+   9. TACTICAL HUD CORNER BRACKETS & REFINED SHARPNESS
+   ========================================================================== */
+.stark-card,
+.hero-stage-card,
+.hero-dossier-card,
+.reg-terminal-card,
+.bundle-intel-panel,
+.benefit-item,
+.faq-item {
+  position: relative;
+}
+
+.stark-card::before,
+.hero-stage-card::before,
+.hero-dossier-card::before,
+.reg-terminal-card::before,
+.bundle-intel-panel::before,
+.benefit-item::before,
+.faq-item::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid var(--arc-cyan);
+  border-left: 2px solid var(--arc-cyan);
+  pointer-events: none;
+  z-index: 5;
+  transition: all var(--transition-fast);
+}
+
+.stark-card::after,
+.hero-stage-card::after,
+.hero-dossier-card::after,
+.reg-terminal-card::after,
+.bundle-intel-panel::after,
+.benefit-item::after,
+.faq-item::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  width: 8px;
+  height: 8px;
+  border-bottom: 2px solid var(--marvel-red);
+  border-right: 2px solid var(--marvel-red);
+  pointer-events: none;
+  z-index: 5;
+  transition: all var(--transition-fast);
+}
+
+.benefit-item:hover::before,
+.faq-item:hover::before,
+.stark-card:hover::before,
+.hero-dossier-card:hover::before {
+  border-color: #FFFFFF;
+  box-shadow: 0 0 10px var(--arc-cyan);
+  width: 14px;
+  height: 14px;
+}
+
+.benefit-item:hover::after,
+.faq-item:hover::after,
+.stark-card:hover::after,
+.hero-dossier-card:hover::after {
+  border-color: #FFFFFF;
+  box-shadow: 0 0 10px var(--marvel-red);
+  width: 14px;
+  height: 14px;
+}
+
+/* Kinetic highlight on about section text */
+.about-section p {
+  background: linear-gradient(180deg, #FFFFFF 0%, #E2E8F0 60%, #94A3B8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.85;
+  font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.8);
+  transition: filter 0.4s ease;
+}
+
+
+

@@ -1,0 +1,106 @@
+/* ==========================================================================
+   WHY ATTEND (STARK TECH MATRIX) STYLES
+   ========================================================================== */
+
+.why-section {
+  position: relative;
+  padding: 120px 0;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.03) 0%, transparent 60%);
+}
+
+.perks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 28px;
+}
+
+.stark-hud-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 36px 30px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  overflow: hidden;
+  transition: all var(--transition-normal);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+.stark-hud-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 215, 0, 0.4);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), 0 0 25px rgba(255, 215, 0, 0.15);
+}
+
+/* Hexagonal Icon */
+.perk-icon-hex {
+  width: 58px;
+  height: 58px;
+  min-width: 58px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 215, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.1);
+  transition: all var(--transition-fast);
+}
+
+.stark-hud-card:hover .perk-icon-hex {
+  background: rgba(255, 215, 0, 0.15);
+  border-color: var(--stark-gold);
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
+  transform: scale(1.08) rotate(5deg);
+}
+
+.perk-emoji {
+  font-size: 1.8rem;
+}
+
+.perk-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.perk-title {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  letter-spacing: 1.2px;
+  color: #FFFFFF;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.perk-desc {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* Cybernetic corner brackets */
+.perk-corner-tech {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 24px;
+  height: 24px;
+  border-bottom: 2px solid var(--stark-gold);
+  border-right: 2px solid var(--stark-gold);
+  opacity: 0.4;
+  transition: opacity var(--transition-fast);
+}
+
+.stark-hud-card:hover .perk-corner-tech {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .stark-hud-card {
+    flex-direction: column;
+  }
+}

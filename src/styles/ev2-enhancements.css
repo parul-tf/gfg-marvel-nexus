@@ -1,0 +1,2232 @@
+/* ==========================================================================
+   EV2 ASSETS & ADVANCED CYBERNETIC VISUAL ENHANCEMENTS
+   ========================================================================== */
+
+/* 1. Global SVG Clip Paths */
+.clip-svg-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+/* 2. Hero Black Hole Video Background (Hardware-Accelerated DirectComposition) */
+.hero-video-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.62;
+  pointer-events: none;
+  z-index: 1;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -webkit-mask-image: radial-gradient(circle at 50% 45%, black 45%, transparent 88%);
+  mask-image: radial-gradient(circle at 50% 45%, black 45%, transparent 88%);
+}
+
+.hero-meteors-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('/assets/ev2/img/about/meteors.webp') no-repeat center top;
+  background-size: cover;
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 2;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  animation: meteors-drift 20s linear infinite;
+}
+
+@keyframes meteors-drift {
+  0% { transform: translate3d(-20px, -40px, 0); opacity: 0.25; }
+  50% { opacity: 0.5; }
+  100% { transform: translate3d(20px, 40px, 0); opacity: 0.25; }
+}
+
+.hero-fog-layer {
+  position: absolute;
+  top: 14vh;
+  left: 0;
+  right: 0;
+  bottom: -14vh;
+  height: 100%;
+  background: url('/assets/ev2/img/bg/purple-fog.webp') no-repeat center bottom;
+  background-size: cover;
+  opacity: 0.22;
+  pointer-events: none;
+  z-index: 2;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* 3. Angled Cybernetic Buttons (EV2 Clip Geometry) */
+.btn-cyber-clip {
+  position: relative;
+  clip-path: url(#clipButton);
+  -webkit-clip-path: url(#clipButton);
+  padding: 16px 36px;
+  background: linear-gradient(135deg, var(--marvel-red), #990008);
+  color: #FFFFFF;
+  font-family: var(--font-hud);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  box-shadow: 0 0 25px var(--marvel-red-glow);
+}
+
+.btn-cyber-clip:hover {
+  background: linear-gradient(135deg, var(--marvel-red-bright), #D91F40);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 0 35px var(--marvel-red-bright);
+}
+
+/* 4. MULTIVERSE ARMOR ARSENAL SECTION */
+.arsenal-section {
+  position: relative;
+  padding: 120px 0;
+  background: radial-gradient(circle at 50% 50%, rgba(14, 15, 28, 0.9) 0%, #060609 100%);
+  overflow: hidden;
+}
+
+.arsenal-bg-dust {
+  position: absolute;
+  inset: 0;
+  background: url('/assets/ev2/img/coalition/dust.webp') repeat;
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.arsenal-slider-wrap {
+  position: relative;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.arsenal-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 32px;
+}
+
+/* Dual-Image Character Card with Depth */
+.suit-card {
+  position: relative;
+  background: rgba(14, 16, 26, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: all var(--transition-normal);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+}
+
+.suit-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(0, 240, 255, 0.45);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 240, 255, 0.25);
+}
+
+.suit-stage {
+  position: relative;
+  width: 100%;
+  height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.suit-glow-orb {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.15) 0%, transparent 70%);
+  filter: blur(30px);
+  pointer-events: none;
+}
+
+.suit-card:hover .suit-glow-orb {
+  background: radial-gradient(circle, rgba(237, 29, 36, 0.25) 0%, rgba(0, 240, 255, 0.15) 50%, transparent 75%);
+  filter: blur(25px);
+}
+
+/* Dual Layer Images */
+.suit-img-sec {
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
+  opacity: 0.35;
+  transition: transform 0.5s var(--ease-cinematic), opacity 0.5s ease;
+  transform: scale(0.92);
+}
+
+.suit-img-main {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.5s var(--ease-cinematic), filter 0.5s ease;
+  filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.8));
+}
+
+.suit-card:hover .suit-img-sec {
+  opacity: 0.75;
+  transform: scale(1.05) translateY(-5px);
+}
+
+.suit-card:hover .suit-img-main {
+  transform: scale(1.08) translateY(-8px);
+  filter: drop-shadow(0 20px 35px rgba(0, 240, 255, 0.4));
+}
+
+.suit-classification {
+  font-family: var(--font-hud);
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  color: var(--arc-cyan);
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  padding: 4px 12px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.suit-name {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  letter-spacing: 1.5px;
+  color: #FFFFFF;
+  margin-bottom: 8px;
+  line-height: 1;
+}
+
+.suit-desc {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Suit Stat Bars */
+.suit-stats {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 14px 18px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.suit-stat-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-family: var(--font-hud);
+  font-size: 0.68rem;
+}
+
+.stat-label {
+  color: var(--text-muted);
+  width: 90px;
+}
+
+.stat-track {
+  flex: 1;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.stat-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--arc-cyan), var(--marvel-red));
+  border-radius: 3px;
+  box-shadow: 0 0 8px var(--arc-cyan);
+}
+
+.stat-val {
+  color: #FFFFFF;
+  font-weight: 700;
+  width: 32px;
+  text-align: right;
+}
+
+/* 5. CURVED QUANTUM TIMELINE (ROADMAP SECTION) */
+.timeline-section {
+  position: relative;
+  padding: 120px 0 100px;
+  background: #06060A;
+  overflow: hidden;
+}
+
+.timeline-bg-planet {
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(237, 29, 36, 0.35) 0%, rgba(138, 43, 226, 0.25) 40%, transparent 70%);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.timeline-curved-wrapper {
+  position: relative;
+  width: 100%;
+  margin: 40px auto 0;
+  overflow-x: auto;
+  padding-bottom: 20px;
+}
+
+.timeline-curved-inner {
+  position: relative;
+  min-width: 1100px;
+  height: 480px;
+}
+
+.roadmap-svg-track {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  height: 340px;
+  pointer-events: none;
+}
+
+.roadmap-svg-track .curve-bg {
+  stroke: rgba(255, 255, 255, 0.15);
+  stroke-width: 3;
+  fill: none;
+}
+
+.roadmap-svg-track .curve-pulse {
+  stroke: var(--arc-cyan);
+  stroke-width: 3;
+  stroke-dasharray: 12 12;
+  fill: none;
+  animation: dash-flow 25s linear infinite;
+}
+
+@keyframes dash-flow {
+  from { stroke-dashoffset: 1000; }
+  to { stroke-dashoffset: 0; }
+}
+
+/* Milestone Nodes on the Curve */
+.timeline-nodes {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.roadmap-milestone-node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.milestone-hex {
+  width: 64px;
+  height: 64px;
+  border-radius: 14px;
+  background: rgba(14, 16, 26, 0.95);
+  border: 2px solid var(--marvel-red);
+  box-shadow: 0 0 20px var(--marvel-red-glow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.roadmap-milestone-node:hover .milestone-hex,
+.roadmap-milestone-node.active .milestone-hex {
+  border-color: var(--arc-cyan);
+  box-shadow: 0 0 25px var(--arc-cyan-glow);
+  transform: scale(1.15);
+  background: rgba(20, 24, 38, 0.95);
+}
+
+.hex-time {
+  font-family: var(--font-hud);
+  font-size: 0.75rem;
+  font-weight: 900;
+  color: #FFFFFF;
+}
+
+.hex-unit {
+  font-family: var(--font-hud);
+  font-size: 0.55rem;
+  color: var(--stark-gold);
+}
+
+.milestone-card-popover {
+  position: absolute;
+  top: 76px;
+  width: 240px;
+  background: rgba(11, 13, 20, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  padding: 16px;
+  text-align: left;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+  pointer-events: none;
+  transition: all var(--transition-fast);
+}
+
+.milestone-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  letter-spacing: 1px;
+  color: #FFFFFF;
+  margin-bottom: 4px;
+}
+
+.milestone-desc {
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--text-secondary);
+}
+
+/* Position nodes along the mathematical curve */
+.node-1 { left: 8%; top: 310px; }
+.node-2 { left: 24%; top: 220px; }
+.node-3 { left: 42%; top: 150px; }
+.node-4 { left: 60%; top: 110px; }
+.node-5 { left: 78%; top: 90px; }
+.node-6 { left: 93%; top: 80px; }
+
+/* 6. Team Card Suit Avatars */
+.hero-suit-avatar {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  margin-bottom: 12px;
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.8));
+  transition: transform 0.4s var(--ease-cinematic);
+}
+
+.hero-card-flipper:hover .hero-suit-avatar {
+  transform: scale(1.1) translateY(-6px);
+}
+
+/* 7. Highlight Cards Planet Overlays */
+.card-planet-bg {
+  position: absolute;
+  bottom: -40px;
+  right: -40px;
+  width: 200px;
+  height: 200px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.18;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.highlight-card:hover .card-planet-bg {
+  opacity: 0.4;
+  transform: scale(1.15) rotate(10deg);
+}
+
+.card-space .card-planet-bg {
+  background-image: url('/assets/marvel/sanctum-mystic.jpg');
+}
+.card-reality .card-planet-bg {
+  background-image: url('/assets/marvel/quantum-realm.jpg');
+}
+.card-power .card-planet-bg {
+  background-image: url('/assets/marvel/stark-lab.jpg');
+}
+.card-time .card-planet-bg {
+  background-image: url('/assets/marvel/avengers-compound.jpg');
+}
+
+/* ==========================================================================
+   8. EV2 SECTION INTEGRATION OVERRIDES (Full Page Alignment)
+   ========================================================================== */
+
+/* Video Section */
+.video-section {
+  position: relative;
+  z-index: 3;
+  padding-block: 80px 100px !important;
+  background-color: #07070B !important;
+}
+
+.video-section .container {
+  margin-top: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+.video-section .video {
+  width: 100%;
+  max-width: 1100px;
+  aspect-ratio: 16/9;
+  position: relative;
+  clip-path: url(#videoClip);
+  -webkit-clip-path: url(#videoClip);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 50px rgba(0, 240, 255, 0.25), 0 25px 60px rgba(0, 0, 0, 0.9);
+}
+
+.video-section .video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-section .video-status {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(14, 16, 26, 0.85);
+  border: 2px solid var(--marvel-red);
+  box-shadow: 0 0 25px var(--marvel-red-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  z-index: 5;
+}
+
+.video-section .video-status:hover {
+  transform: scale(1.1);
+  border-color: var(--arc-cyan);
+  box-shadow: 0 0 35px var(--arc-cyan-glow);
+}
+
+.video-section .video-status .play {
+  width: 0;
+  height: 0;
+  border-top: 14px solid transparent;
+  border-bottom: 14px solid transparent;
+  border-left: 22px solid #FFFFFF;
+  margin-left: 4px;
+}
+
+.video-section .video-status.playing .play {
+  display: none;
+}
+
+.video-section .video-status.playing .pause {
+  display: flex;
+  gap: 6px;
+}
+
+.video-section .video-status .pause:before,
+.video-section .video-status .pause:after {
+  content: '';
+  width: 6px;
+  height: 24px;
+  background: #FFFFFF;
+  border-radius: 2px;
+}
+
+.video-section .video-link {
+  margin-top: 36px;
+}
+
+/* Roadmap Section */
+.roadmap-section {
+  position: relative;
+  color: var(--white);
+  overflow: hidden;
+  background-color: #06060A !important;
+  padding-block: 100px 120px !important;
+  z-index: 4;
+}
+
+.roadmap-section .section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.roadmap-section .roadmap-line {
+  position: relative;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 120px;
+}
+
+.roadmap-section .roadmap-frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.roadmap-section .roadmap-point {
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.roadmap-section .roadmap-point.active svg path.stroke--center {
+  fill: var(--marvel-red);
+}
+
+.roadmap-section .roadmap-point:hover,
+.roadmap-section .roadmap-point.active {
+  transform: translateY(-8px) scale(1.1);
+  filter: drop-shadow(0 0 15px var(--marvel-red-bright));
+}
+
+.roadmap-section .roadmap-info {
+  margin-top: 50px;
+  text-align: center;
+  align-items: center;
+}
+
+.roadmap-section .roadmap-items .item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.roadmap-section .item-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  letter-spacing: 1.5px;
+  color: #FFFFFF;
+}
+
+.roadmap-section .item-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.roadmap-section .roadmap-navs {
+  margin-top: 30px;
+  gap: 20px;
+}
+
+/* ==========================================================================
+   MULTIVERSE ARMOR & COMBAT SUITS ARMORY SECTION (OVERHAULED)
+   ========================================================================== */
+.bundles-section.armory-section,
+.bundles-section {
+  position: relative;
+  z-index: 5;
+  margin-top: 0 !important;
+  padding-block: 100px 140px !important;
+  background: radial-gradient(circle at 50% 30%, rgba(18, 22, 42, 0.7) 0%, #06060B 80%) !important;
+  color: var(--white);
+  overflow: hidden;
+  border-top: 1px solid rgba(0, 240, 255, 0.15);
+  border-bottom: 1px solid rgba(237, 29, 36, 0.2);
+}
+
+.armory-glow-ambience {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 900px;
+  height: 600px;
+  background: radial-gradient(ellipse at center, rgba(237, 29, 36, 0.1) 0%, rgba(0, 240, 255, 0.08) 45%, transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Force container to clean flex column, breaking EV2's 24-column grid constraint */
+.bundles-section .container.armory-container,
+.bundles-section .container {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  grid-template-columns: none !important;
+  width: 100% !important;
+  max-width: 1240px !important;
+  margin: 0 auto !important;
+  padding: 0 24px !important;
+  position: relative;
+  z-index: 10;
+}
+
+.bundles-section .section-header.armory-header,
+.bundles-section .section-header {
+  grid-area: auto !important;
+  width: 100% !important;
+  max-width: 820px !important;
+  margin: 0 auto 36px !important;
+  text-align: center !important;
+}
+
+/* Hero Suit Selector Dock (Horizontal Strip) */
+.armory-tabs-dock,
+.bundles-section .column-tabs {
+  grid-area: auto !important;
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  width: 100% !important;
+  max-width: 1140px !important;
+  margin: 0 auto 40px !important;
+  position: relative;
+  z-index: 10;
+}
+
+.armory-tabs-dock .suit-tab-btn,
+.bundles-section .suit-tab-btn {
+  background: rgba(14, 18, 30, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-secondary);
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  transition: all var(--transition-normal);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.armory-tabs-dock .suit-tab-icon {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.armory-tabs-dock .suit-tab-label {
+  font-family: var(--font-hud);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.armory-tabs-dock .suit-tab-tag {
+  font-family: var(--font-hud);
+  font-size: 0.58rem;
+  letter-spacing: 1px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-muted);
+  transition: all var(--transition-fast);
+}
+
+.armory-tabs-dock .suit-tab-btn:hover,
+.bundles-section .suit-tab-btn:hover {
+  background: rgba(26, 34, 58, 0.95);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+.armory-tabs-dock .suit-tab-btn:hover .suit-tab-tag {
+  background: rgba(0, 240, 255, 0.15);
+  color: var(--arc-cyan);
+}
+
+.armory-tabs-dock .suit-tab-btn.active,
+.bundles-section .suit-tab-btn.active {
+  background: rgba(237, 29, 36, 0.22);
+  border-color: var(--marvel-red);
+  color: #FFFFFF;
+  box-shadow: 0 0 20px rgba(237, 29, 36, 0.4);
+  transform: translateY(-2px);
+}
+
+.armory-tabs-dock .suit-tab-btn.active .suit-tab-tag {
+  background: var(--marvel-red);
+  color: #FFFFFF;
+  box-shadow: 0 0 8px var(--marvel-red-glow);
+}
+
+/* Main Armory Display Card (Dual-Pane Stark Lab Display) */
+.armory-showcase-card,
+.bundles-showcase-box {
+  grid-area: auto !important;
+  width: 100% !important;
+  max-width: 1140px !important;
+  margin: 0 auto !important;
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 40px;
+  align-items: center;
+  background: rgba(12, 15, 26, 0.88);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  border-radius: 20px;
+  padding: 40px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.85), inset 0 0 30px rgba(0, 240, 255, 0.03);
+  position: relative;
+}
+
+@media (max-width: 960px) {
+  .armory-showcase-card,
+  .bundles-showcase-box {
+    grid-template-columns: 1fr;
+    padding: 24px;
+    gap: 30px;
+  }
+}
+
+/* Left: Character Stage Pane */
+.armory-stage-pane,
+.bundle-character-frame {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  background: radial-gradient(circle at 50% 50%, rgba(18, 24, 48, 0.7) 0%, rgba(8, 10, 18, 0.95) 75%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  perspective: 1000px;
+}
+
+.armory-stage-aura {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.25) 0%, rgba(237, 29, 36, 0.15) 50%, transparent 70%);
+  filter: blur(50px);
+  pointer-events: none;
+  transition: all 0.6s ease;
+}
+
+/* Holographic Stage Pedestal */
+.armory-stage-pedestal {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 260px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.pedestal-disc-outer {
+  position: absolute;
+  width: 240px;
+  height: 45px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 240, 255, 0.4);
+  background: radial-gradient(ellipse at center, rgba(0, 240, 255, 0.18) 0%, transparent 70%);
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.4), inset 0 0 15px rgba(0, 240, 255, 0.2);
+  transform: rotateX(60deg);
+}
+
+.pedestal-disc-inner {
+  position: absolute;
+  width: 140px;
+  height: 25px;
+  border-radius: 50%;
+  border: 1.5px solid var(--stark-gold);
+  box-shadow: 0 0 15px var(--stark-gold);
+  transform: rotateX(60deg);
+}
+
+.pedestal-laser-beam {
+  position: absolute;
+  bottom: 0;
+  width: 180px;
+  height: 120px;
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 240, 255, 0.12) 80%, rgba(0, 240, 255, 0.3) 100%);
+  clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+  pointer-events: none;
+}
+
+.armory-character-wrap,
+.bundle-character-layer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+.armory-suit-img,
+.bundle-character-layer img {
+  max-width: 85%;
+  max-height: 85%;
+  object-fit: contain;
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 25px rgba(0, 240, 255, 0.35));
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+  user-select: none;
+}
+
+.armory-character-wrap:hover .armory-suit-img,
+.bundle-character-layer:hover img {
+  transform: scale(1.05) translateY(-5px);
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 35px rgba(0, 240, 255, 0.5));
+}
+
+.armory-status-badge {
+  position: absolute;
+  top: 16px;
+  left: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px;
+  background: rgba(8, 10, 18, 0.85);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  border-radius: 4px;
+  font-family: var(--font-hud);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--arc-cyan);
+  z-index: 5;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+.armory-status-badge .badge-beacon {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--arc-cyan);
+  box-shadow: 0 0 6px var(--arc-cyan);
+  animation: pulse-telemetry 1.5s infinite ease-in-out;
+}
+
+/* Right: Intel & Telemetry Pane */
+.armory-intel-pane,
+.bundle-intel-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 3;
+}
+
+.armory-meta-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.armory-dimension-tag {
+  font-family: var(--font-hud);
+  font-size: 0.68rem;
+  letter-spacing: 1.5px;
+  color: var(--arc-cyan);
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  padding: 4px 12px;
+  border-radius: 4px;
+}
+
+.armory-title,
+.bundle-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 3.8vw, 3.4rem);
+  color: #FFFFFF;
+  line-height: 1.05;
+  letter-spacing: 1.5px;
+  margin: 0;
+  text-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+}
+
+.armory-subtitle,
+.bundle-subtitle {
+  font-family: var(--font-hud);
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  color: var(--arc-cyan);
+  font-weight: 700;
+}
+
+.armory-lore,
+.bundle-lore {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: #CBD5E1;
+  font-weight: 400;
+}
+
+/* Specs Diagnostic Container */
+.armory-specs-container,
+.bundle-specs-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: rgba(8, 10, 18, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.armory-spec-row,
+.bundle-spec-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.spec-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.spec-name,
+.bundle-spec-label {
+  font-family: var(--font-hud);
+  font-size: 0.68rem;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+}
+
+.spec-val {
+  font-family: var(--font-hud);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--stark-gold);
+}
+
+.armory-spec-track,
+.bundle-spec-track {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+.armory-spec-fill,
+.bundle-spec-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--arc-cyan), var(--marvel-red));
+  border-radius: 3px;
+  box-shadow: 0 0 10px var(--arc-cyan);
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.spec-fill-spark {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: #FFFFFF;
+  box-shadow: 0 0 8px #FFFFFF;
+}
+
+/* Primary Action & Equip Button */
+.armory-action-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.armory-equip-btn {
+  background: linear-gradient(135deg, var(--marvel-red), #990008);
+  border: 1px solid var(--marvel-red-bright);
+  color: #FFFFFF;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-family: var(--font-hud);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap !important;
+  flex-shrink: 0;
+  box-shadow: 0 0 25px var(--marvel-red-glow);
+  transition: all var(--transition-fast);
+}
+
+.armory-equip-btn .btn-text {
+  position: static !important;
+  width: auto !important;
+  white-space: nowrap !important;
+  padding-inline: 0 !important;
+  font-family: var(--font-hud) !important;
+  font-size: 0.82rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 1.5px !important;
+  line-height: 1.2 !important;
+  color: #FFFFFF !important;
+}
+
+.armory-equip-btn:hover {
+  background: linear-gradient(135deg, var(--marvel-red-bright), #B8000A);
+  transform: translateY(-2px);
+  box-shadow: 0 0 35px rgba(237, 29, 36, 0.8);
+}
+
+.armory-equip-btn .btn-icon {
+  font-size: 1rem;
+}
+
+.armory-equip-success {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-hud);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--stone-time);
+  background: rgba(0, 255, 157, 0.1);
+  border: 1px solid rgba(0, 255, 157, 0.35);
+  padding: 8px 14px;
+  border-radius: 6px;
+  animation: fadeIn 0.3s ease;
+}
+
+.armory-equip-success .success-icon {
+  font-weight: 900;
+}
+
+/* ==========================================================================
+   SECTION 7: MULTIVERSE BATTLE TRACKS // S.H.I.E.L.D. COALITION COMMAND DECK
+   ========================================================================== */
+/* Coalition Section - The 4 Battle Tracks */
+.coalition-section {
+  position: relative;
+  z-index: 5;
+  background-color: #06060A !important;
+  color: var(--white) !important;
+  min-height: 100vh;
+  height: auto !important;
+  padding-block: 80px 100px !important;
+}
+
+.coalition-section .section-title {
+  color: var(--marvel-red) !important;
+  font-family: var(--font-display) !important;
+  letter-spacing: 1.5px !important;
+}
+
+.coalition-section .section-content {
+  z-index: 6 !important;
+  background: rgba(10, 11, 18, 0.88) !important;
+  border: 1px solid rgba(237, 29, 36, 0.35) !important;
+  border-radius: 16px !important;
+  padding: 36px 40px !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  box-shadow: 0 25px 55px rgba(0, 0, 0, 0.9), 0 0 35px rgba(237, 29, 36, 0.18) !important;
+}
+
+.coalition-section .section-content .text-block {
+  color: var(--white) !important;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease !important;
+  transform: translateY(8px);
+}
+
+.coalition-section .section-content .text-block.active {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: translateY(0) !important;
+}
+
+.coalition-section .section-content .text-block p {
+  color: var(--text-secondary) !important;
+  line-height: 1.6;
+}
+
+/* Authentic Marvel Avengers Heroes Staging */
+.coalition-section .section-heroes {
+  position: relative;
+  align-self: end;
+  bottom: 0;
+  max-height: 100vh;
+  grid-area: 1/1/2/17;
+  aspect-ratio: 1252/852;
+  z-index: 2;
+  margin-left: calc(clamp(18px, 3.2291666667vw, 62px) * -1);
+}
+
+.coalition-section .section-heroes .hero {
+  position: absolute;
+  bottom: 0;
+  height: 94% !important;
+  width: 30% !important;
+  aspect-ratio: auto !important;
+  background-size: contain !important;
+  background-position: bottom center !important;
+  background-repeat: no-repeat !important;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.85)) brightness(0.92);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease, opacity 0.3s ease !important;
+}
+
+.coalition-section .section-heroes .hero svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: auto !important;
+}
+
+/* Hero 1: Iron Man Mark 50 (Track 01 - AI Swarms & Stark Robotics) */
+.coalition-section .section-heroes .hero-1 {
+  left: 0% !important;
+  bottom: 6% !important;
+  height: 88% !important;
+  width: 32% !important;
+  z-index: 3 !important;
+  background-image: url('/assets/heroes/ironman.png') !important;
+}
+
+/* Hero 2: Captain America (Track 02 - Zero-Trust Security) */
+.coalition-section .section-heroes .hero-2 {
+  left: 21% !important;
+  z-index: 4 !important;
+  background-image: url('/assets/heroes/captain-america.png') !important;
+}
+
+/* Hero 3: Doctor Strange (Track 03 - Quantum Compute) */
+.coalition-section .section-heroes .hero-3 {
+  left: 45% !important;
+  z-index: 2 !important;
+  background-image: url('/assets/heroes/doctor-strange.png') !important;
+}
+
+/* Hero 4: Thor Odinson (Track 04 - Cloud & Edge Scale) */
+.coalition-section .section-heroes .hero-4 {
+  left: 68% !important;
+  z-index: 3 !important;
+  background-image: url('/assets/heroes/thor.png') !important;
+}
+
+/* Hover Lift & Marvel Energy Aura */
+.coalition-section .section-heroes .hero:hover,
+.coalition-section .section-heroes .hero.active {
+  transform: translateY(-16px) scale(1.08) !important;
+  filter: drop-shadow(0 20px 45px rgba(237, 29, 36, 0.9)) brightness(1.2) !important;
+  z-index: 10 !important;
+}
+
+/* CSS-based Hover Track Text Switching */
+.coalition-section:has(.hero-1:hover) .text-block-0,
+.coalition-section:has(.hero-2:hover) .text-block-0,
+.coalition-section:has(.hero-3:hover) .text-block-0,
+.coalition-section:has(.hero-4:hover) .text-block-0 {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.coalition-section:has(.hero-1:hover) .text-block-1,
+.coalition-section:has(.hero-2:hover) .text-block-2,
+.coalition-section:has(.hero-3:hover) .text-block-3,
+.coalition-section:has(.hero-4:hover) .text-block-4 {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: translateY(0) !important;
+}
+
+@media (max-width: 768px) {
+  .coalition-section .section-heroes {
+    height: 380px !important;
+    width: 100% !important;
+    margin-bottom: 24px !important;
+  }
+  .coalition-section .section-heroes .hero {
+    height: 90% !important;
+    width: 32% !important;
+  }
+  .coalition-section .section-heroes .hero-1 { left: -2% !important; }
+  .coalition-section .section-heroes .hero-2 { left: 24% !important; }
+  .coalition-section .section-heroes .hero-3 { left: 49% !important; }
+  .coalition-section .section-heroes .hero-4 { left: 72% !important; }
+}
+
+/* Planet Sections - Authentic Marvel MCU Battlegrounds */
+.planet-section {
+  position: relative;
+  color: var(--white);
+  padding-block: 160px !important;
+  min-height: 80vh !important;
+  height: auto !important;
+  overflow: hidden;
+  pointer-events: all !important;
+  margin-top: 0 !important;
+}
+
+/* Battleground 1: Sanctum Sanctorum */
+.planet-section.planet-1 .section-bg {
+  clip-path: url(#planetMask1) !important;
+  background-image: url('/assets/marvel/sanctum-mystic.jpg') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+/* Battleground 2: The Quantum Realm */
+.planet-section.planet-2 .section-bg {
+  clip-path: url(#planetMask2) !important;
+  background-image: url('/assets/marvel/quantum-realm.jpg') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+.planet-section .section-content {
+  position: relative;
+  z-index: 3;
+  max-width: 650px;
+  background: rgba(10, 11, 18, 0.88);
+  border: 1px solid rgba(237, 29, 36, 0.3);
+  border-radius: 16px;
+  padding: 40px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 35px rgba(237, 29, 36, 0.15);
+}
+
+.planet-section .section-subtitle {
+  color: var(--arc-cyan);
+  letter-spacing: 2px;
+}
+
+.planet-section .section-title {
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  letter-spacing: 2px;
+  color: #FFFFFF;
+}
+
+.planet-section .section-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* Blog / Intel Section */
+.blog-section {
+  position: relative;
+  padding-block: 100px 140px !important;
+  background: linear-gradient(1turn, #07070c, #100f22 88.23%) !important;
+  color: var(--white) !important;
+  z-index: 5;
+}
+
+.blog-section .section-title {
+  color: #FFFFFF !important;
+}
+
+.blog-section .card {
+  clip-path: url(#clipSVG);
+  -webkit-clip-path: url(#clipSVG);
+  background: rgba(20, 18, 38, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--white) !important;
+  transition: all var(--transition-fast);
+}
+
+.blog-section .card:hover {
+  border-color: var(--marvel-red);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 25px var(--marvel-red-glow);
+}
+
+.blog-section .card-title {
+  color: #FFFFFF !important;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+}
+
+.blog-section .card-desc {
+  color: var(--text-secondary) !important;
+}
+
+.blog-section .card-date {
+  color: var(--stark-gold) !important;
+  font-family: var(--font-hud);
+}
+
+.blog-section .card-image {
+  display: block !important;
+  position: relative !important;
+  width: 100% !important;
+  aspect-ratio: 16 / 9 !important;
+  overflow: hidden !important;
+  background: #0B0B14 !important;
+}
+
+.blog-section .card-image img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease !important;
+}
+
+.blog-section .card:hover .card-image img {
+  transform: scale(1.08) !important;
+  filter: brightness(1.15) contrast(1.05) !important;
+}
+
+/* Form Section (Follow Us / Registration) */
+.form-section {
+  margin-top: 0 !important;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+  pointer-events: all !important;
+  min-height: auto !important;
+  padding-block: 100px 140px !important;
+  background-color: #07070B !important;
+  color: var(--white) !important;
+  position: relative;
+  z-index: 5;
+}
+
+/* Footer Section */
+.footer {
+  background-color: #06060A !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--white) !important;
+  position: relative;
+  z-index: 6;
+}
+
+.footer .footer-logo a svg path {
+  fill: var(--marvel-red) !important;
+}
+
+.footer-menu .menu-nav a {
+  color: var(--text-secondary) !important;
+}
+
+.footer-menu .menu-nav a:hover {
+  color: var(--marvel-red) !important;
+}
+
+.footer-copyright {
+  color: var(--text-muted) !important;
+}
+
+/* ==========================================================================
+   MASTER VISIBILITY, TYPOGRAPHY & INTERACTIVE OVERRIDES
+   ========================================================================== */
+
+/* Global Text Contrast & Base Color Override */
+body {
+  color: #FFFFFF !important;
+  background-color: #07070B !important;
+}
+
+/* 1. INTRO / HERO SECTION FULL VISIBILITY */
+.intro-section {
+  position: relative !important;
+  min-height: 100vh !important;
+  height: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 100px 24px 40px !important;
+  overflow: hidden !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  z-index: 2 !important;
+}
+
+.intro-section .app {
+  position: relative !important;
+  width: 100% !important;
+  max-width: 1200px !important;
+  min-height: auto !important;
+  height: auto !important;
+  background: transparent !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: visible !important;
+}
+
+.intro-section .section-content {
+  position: relative !important;
+  inset: auto !important;
+  opacity: 1 !important;
+  transform: none !important;
+  scale: 1 !important;
+  pointer-events: all !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  width: 100% !important;
+  height: auto !important;
+  max-width: 1000px !important;
+  padding: 0 !important;
+  z-index: 5 !important;
+}
+
+.intro-section .section-logo {
+  display: flex !important;
+  justify-content: center !important;
+  margin-bottom: 20px !important;
+  width: auto !important;
+}
+
+.intro-section .section-subtitle {
+  max-width: 900px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+.intro-section .hero-hud-eyebrow {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  font-family: var(--font-hud) !important;
+  font-size: clamp(0.72rem, 1.3vw, 0.92rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: 3.5px !important;
+  color: var(--arc-cyan) !important;
+  text-shadow: 0 0 14px var(--arc-cyan-glow) !important;
+  margin-bottom: 12px !important;
+  padding: 6px 18px !important;
+  background: rgba(14, 18, 30, 0.8) !important;
+  border: 1px solid rgba(0, 240, 255, 0.3) !important;
+  border-radius: 999px !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.12), inset 0 0 10px rgba(0, 240, 255, 0.04) !important;
+  transition: all var(--transition-normal) !important;
+}
+
+.intro-section .hero-hud-eyebrow:hover {
+  border-color: var(--arc-cyan) !important;
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.3), inset 0 0 15px rgba(0, 240, 255, 0.1) !important;
+  transform: translateY(-1px) !important;
+}
+
+.intro-section .hero-hud-eyebrow .hud-bracket {
+  color: var(--stark-gold) !important;
+  font-weight: 900 !important;
+  font-size: 1.1em !important;
+}
+
+.intro-section .hero-hud-eyebrow .hud-dot {
+  width: 6px !important;
+  height: 6px !important;
+  border-radius: 50% !important;
+  background: var(--arc-cyan) !important;
+  box-shadow: 0 0 8px var(--arc-cyan) !important;
+  animation: pulse-telemetry 1.5s infinite ease-in-out !important;
+}
+
+.intro-section .hero-hud-eyebrow .hud-divider {
+  color: rgba(255, 255, 255, 0.35) !important;
+  font-weight: 400 !important;
+}
+
+.intro-section .hero-hud-eyebrow .hud-subtext {
+  color: var(--stark-gold) !important;
+  font-size: 0.9em !important;
+}
+
+.intro-section .hero-main-title {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 0.9 !important;
+  margin: 6px auto 16px !important;
+  text-align: center !important;
+  position: relative !important;
+  perspective: 1200px !important;
+  transform-style: preserve-3d !important;
+}
+
+.intro-section .hero-main-title .title-word {
+  display: inline-block !important;
+  text-transform: uppercase !important;
+  position: relative !important;
+  text-align: center !important;
+  transition: transform var(--transition-normal), filter var(--transition-normal) !important;
+}
+
+/* 1. AVENGERS (Cinematic Titanium & Molten Crimson) */
+.intro-section .hero-main-title .word-avengers {
+  font-family: var(--font-display) !important;
+  font-size: clamp(4.4rem, 11vw, 9.5rem) !important;
+  font-weight: 900 !important;
+  letter-spacing: clamp(5px, 1.8vw, 16px) !important;
+  line-height: 0.88 !important;
+  background: linear-gradient(180deg, #FFFFFF 0%, #FFB6B9 18%, #ED1D24 48%, #B80F14 75%, #590004 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  filter: drop-shadow(0 0 25px rgba(237, 29, 36, 0.65)) drop-shadow(0 15px 35px rgba(0, 0, 0, 0.95)) !important;
+  -webkit-text-stroke: 1.5px rgba(255, 182, 185, 0.35);
+  margin-bottom: 2px !important;
+}
+
+/* Continuous high-tech light shimmer on AVENGERS */
+.intro-section .hero-main-title .word-avengers::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 215, 0, 0.9) 53%, transparent 68%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  pointer-events: none;
+  animation: metallic-shine-sweep 6s infinite ease-in-out;
+  opacity: 0.8;
+}
+
+@keyframes metallic-shine-sweep {
+  0% { background-position: 200% 0; }
+  35%, 100% { background-position: -200% 0; }
+}
+
+/* 2. PROJECT NEXUS (Futuristic Quantum Orbitron Core) */
+.intro-section .hero-main-title .word-nexus {
+  font-family: var(--font-hud) !important;
+  font-size: clamp(1.9rem, 5.2vw, 4.2rem) !important;
+  font-weight: 900 !important;
+  letter-spacing: clamp(6px, 1.8vw, 22px) !important;
+  line-height: 1.15 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: clamp(8px, 1.5vw, 18px) !important;
+  margin-top: 4px !important;
+  background: linear-gradient(180deg, #FFFFFF 0%, #D8FCFF 22%, #00F0FF 55%, #0088FF 82%, #021B35 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  filter: drop-shadow(0 0 25px rgba(0, 240, 255, 0.8)) drop-shadow(0 0 50px rgba(0, 136, 255, 0.45)) drop-shadow(0 12px 30px rgba(0, 0, 0, 0.95)) !important;
+  -webkit-text-stroke: 1px rgba(0, 240, 255, 0.45);
+}
+
+.intro-section .hero-main-title .word-nexus .nexus-bracket {
+  color: var(--arc-cyan) !important;
+  -webkit-text-fill-color: var(--arc-cyan) !important;
+  font-weight: 300 !important;
+  font-size: 0.95em !important;
+  opacity: 0.8 !important;
+  text-shadow: 0 0 16px var(--arc-cyan-glow) !important;
+  filter: none !important;
+  transition: all var(--transition-normal) !important;
+  display: inline-block !important;
+}
+
+.intro-section .hero-main-title:hover .word-nexus .nexus-bracket {
+  opacity: 1 !important;
+  text-shadow: 0 0 25px var(--arc-cyan), 0 0 40px var(--arc-cyan) !important;
+}
+
+.intro-section .hero-main-title:hover .word-nexus .nexus-left {
+  transform: translateX(-4px) !important;
+}
+
+.intro-section .hero-main-title:hover .word-nexus .nexus-right {
+  transform: translateX(4px) !important;
+}
+
+/* 3. Futuristic Laser Telemetry Baseline */
+.intro-section .hero-title-telemetry {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 16px !important;
+  width: 100% !important;
+  max-width: 660px !important;
+  margin: 4px auto 24px !important;
+  opacity: 0.92 !important;
+}
+
+.intro-section .hero-title-telemetry .telemetry-line {
+  flex: 1 !important;
+  height: 1px !important;
+  position: relative !important;
+}
+
+.intro-section .hero-title-telemetry .telemetry-line.left {
+  background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.65)) !important;
+}
+
+.intro-section .hero-title-telemetry .telemetry-line.right {
+  background: linear-gradient(90deg, rgba(0, 240, 255, 0.65), transparent) !important;
+}
+
+.intro-section .hero-title-telemetry .telemetry-line::after {
+  content: '' !important;
+  position: absolute !important;
+  top: -2.5px !important;
+  width: 6px !important;
+  height: 6px !important;
+  border-radius: 50% !important;
+  background: var(--arc-cyan) !important;
+  box-shadow: 0 0 10px var(--arc-cyan) !important;
+}
+
+.intro-section .hero-title-telemetry .telemetry-line.left::after {
+  right: 0 !important;
+}
+
+.intro-section .hero-title-telemetry .telemetry-line.right::after {
+  left: 0 !important;
+}
+
+.intro-section .hero-title-telemetry .telemetry-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-family: var(--font-hud) !important;
+  font-size: clamp(0.68rem, 1.1vw, 0.8rem) !important;
+  letter-spacing: 2.8px !important;
+  color: var(--stark-gold) !important;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.4) !important;
+  text-transform: uppercase !important;
+  font-weight: 700 !important;
+  white-space: nowrap !important;
+}
+
+.intro-section .hero-title-telemetry .telemetry-badge .badge-gem {
+  color: var(--marvel-red) !important;
+  font-size: 0.75rem !important;
+  filter: drop-shadow(0 0 8px var(--marvel-red)) !important;
+}
+
+.intro-section .hero-tagline {
+  font-family: var(--font-body) !important;
+  font-size: clamp(0.95rem, 1.6vw, 1.2rem) !important;
+  color: #CBD5E1 !important;
+  max-width: 780px !important;
+  margin: 0 auto 20px !important;
+  line-height: 1.55 !important;
+}
+
+.intro-section .hero-radar-banner {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 8px !important;
+  background: rgba(14, 16, 26, 0.85) !important;
+  border: 1px solid rgba(0, 240, 255, 0.35) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 25px rgba(0, 240, 255, 0.15) !important;
+  border-radius: 8px !important;
+  padding: 12px 28px !important;
+  margin: 0 auto 26px !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
+
+/* Button & Link Stying in Hero */
+.intro-section .btn-clip,
+.intro-section .btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  pointer-events: all !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  font-family: var(--font-hud) !important;
+  font-size: 0.82rem !important;
+  letter-spacing: 2px !important;
+  font-weight: 700 !important;
+  padding: 14px 34px !important;
+  min-width: 190px !important;
+  border-radius: 6px !important;
+  position: relative !important;
+  overflow: hidden !important;
+  clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px) !important;
+  -webkit-clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.intro-section .btn-clip .btn-clip-icon {
+  display: none !important;
+}
+
+.intro-section .btn-clip .btn-text {
+  position: relative !important;
+  width: auto !important;
+  padding: 0 !important;
+  font-size: 0.82rem !important;
+  letter-spacing: 2px !important;
+  color: #FFFFFF !important;
+}
+
+.intro-section .btn--red {
+  background: linear-gradient(135deg, #d91f40, #990008) !important;
+  color: #FFFFFF !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 4px 20px rgba(217, 31, 64, 0.5) !important;
+}
+
+.intro-section .btn--red:hover {
+  background: linear-gradient(135deg, #ff2e38, #b8000a) !important;
+  box-shadow: 0 8px 30px rgba(217, 31, 64, 0.75) !important;
+  transform: translateY(-2px) scale(1.02) !important;
+}
+
+.intro-section .btn--dark {
+  background: rgba(14, 18, 30, 0.9) !important;
+  color: #FFFFFF !important;
+  border: 1px solid rgba(0, 240, 255, 0.45) !important;
+  box-shadow: 0 4px 20px rgba(0, 240, 255, 0.2) !important;
+}
+
+.intro-section .btn--dark:hover {
+  background: rgba(22, 28, 48, 0.95) !important;
+  border-color: var(--arc-cyan) !important;
+  box-shadow: 0 8px 30px rgba(0, 240, 255, 0.45) !important;
+  transform: translateY(-2px) scale(1.02) !important;
+}
+
+/* 2. ROADMAP SECTION FULL VISIBILITY */
+.roadmap-section {
+  position: relative !important;
+  color: #FFFFFF !important;
+  background-color: #06060A !important;
+  padding-block: 100px 120px !important;
+  z-index: 4 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: all !important;
+  overflow: visible !important;
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
+}
+
+.roadmap-section .section-header {
+  text-align: center !important;
+  margin-bottom: 50px !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.roadmap-section .section-title {
+  color: #FFFFFF !important;
+  font-family: var(--font-display) !important;
+  font-size: clamp(2rem, 5vw, 3.5rem) !important;
+  letter-spacing: 2px !important;
+}
+
+.roadmap-section .section-subtitle {
+  color: #CBD5E1 !important;
+  max-width: 650px !important;
+  margin: 12px auto 0 !important;
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+}
+
+.roadmap-section .roadmap-line {
+  position: relative !important;
+  width: 100% !important;
+  max-width: 1300px !important;
+  margin: 0 auto !important;
+  display: flex !important;
+  justify-content: space-around !important;
+  align-items: center !important;
+  padding-top: 80px !important;
+  padding-bottom: 40px !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.roadmap-section .roadmap-point {
+  position: relative !important;
+  z-index: 10 !important;
+  cursor: pointer !important;
+  opacity: 1 !important;
+  pointer-events: all !important;
+  visibility: visible !important;
+  background: transparent !important;
+  border: none !important;
+  width: clamp(52px, 3.5vw, 65px) !important;
+  height: clamp(46px, 3vw, 57px) !important;
+  transition: all var(--transition-fast) !important;
+}
+
+.roadmap-section .roadmap-point .stroke--static {
+  opacity: 1 !important;
+  transform: none !important;
+  stroke: rgba(255, 255, 255, 0.4) !important;
+  fill: rgba(20, 20, 35, 0.9) !important;
+}
+
+.roadmap-section .roadmap-point .stroke--progress {
+  stroke: var(--marvel-red) !important;
+}
+
+.roadmap-section .roadmap-point .stroke--center {
+  fill: #FFFFFF !important;
+}
+
+.roadmap-section .roadmap-point .text {
+  position: absolute !important;
+  bottom: calc(100% + 12px) !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  white-space: nowrap !important;
+  color: #FFFFFF !important;
+  opacity: 0.8 !important;
+  font-family: var(--font-hud) !important;
+  font-size: 0.85rem !important;
+  letter-spacing: 1px !important;
+}
+
+.roadmap-section .roadmap-point.active .stroke--center {
+  fill: var(--marvel-red) !important;
+}
+
+.roadmap-section .roadmap-point.active,
+.roadmap-section .roadmap-point:hover {
+  transform: translateY(-8px) scale(1.15) !important;
+  filter: drop-shadow(0 0 20px var(--marvel-red-bright)) !important;
+}
+
+.roadmap-section .roadmap-point.active .text {
+  opacity: 1 !important;
+  color: var(--stark-gold) !important;
+  font-weight: 700 !important;
+}
+
+.roadmap-section .roadmap-info {
+  margin-top: 40px !important;
+  text-align: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  padding: 0 20px !important;
+}
+
+.roadmap-section .roadmap-items {
+  max-width: 800px !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+  display: block !important;
+}
+
+.roadmap-section .roadmap-items .item {
+  display: none;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 12px !important;
+  max-width: 750px !important;
+  margin: 0 auto !important;
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
+  background: rgba(12, 16, 28, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 14px !important;
+  padding: 32px 36px !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+}
+
+.roadmap-section .roadmap-items .item.active {
+  display: flex !important;
+  opacity: 1 !important;
+}
+
+.roadmap-section .item-date-month {
+  font-family: var(--font-hud) !important;
+  font-size: 1.1rem !important;
+  color: var(--arc-cyan) !important;
+  letter-spacing: 2px !important;
+}
+
+.roadmap-section .item-title {
+  font-family: var(--font-display) !important;
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem) !important;
+  letter-spacing: 1.5px !important;
+  color: #FFFFFF !important;
+  margin: 6px 0 !important;
+}
+
+.roadmap-section .item-description {
+  font-size: 1.05rem !important;
+  line-height: 1.6 !important;
+  color: #CBD5E1 !important;
+}
+
+.roadmap-section .roadmap-navs {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 20px !important;
+  margin-top: 30px !important;
+}
+
+/* ==========================================================================
+   CONTAINER NORMALIZATION & SECTION LAYOUT RECOVERY
+   ========================================================================== */
+
+/* 1. Reset EV2 24-Column Grid on Non-EV2-Specific Containers */
+.heroes-lab-section .container,
+.form-section .container,
+.faq-section .container,
+.about-section .container,
+.video-section .container {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  width: 100% !important;
+  max-width: 1400px !important;
+  margin-inline: auto !important;
+  padding-inline: clamp(20px, 3.5vw, 60px) !important;
+  grid-template-columns: none !important;
+}
+
+.heroes-lab-section .container > *,
+.form-section .container > *,
+.faq-section .container > *,
+.about-section .container > *,
+.video-section .container > * {
+  width: 100% !important;
+  grid-column: 1 / -1 !important;
+}
+
+/* 2. 3D Hero Lab Viewport Grid */
+.heroes-lab-section .lab-viewport-grid {
+  display: grid !important;
+  grid-template-columns: 1.25fr 1fr !important;
+  gap: 40px !important;
+  width: 100% !important;
+  align-items: center !important;
+  margin-top: 20px !important;
+}
+
+@media (max-width: 1024px) {
+  .heroes-lab-section .lab-viewport-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.heroes-lab-section .hero-canvas-container {
+  width: 100% !important;
+  min-height: 480px !important;
+  position: relative !important;
+}
+
+.heroes-lab-section .three-canvas {
+  width: 100% !important;
+  height: 480px !important;
+  display: block !important;
+}
+
+.heroes-lab-section .hero-intel-dossier {
+  width: 100% !important;
+}
+
+/* 3. About Section Cleanup & White Fog Eradication */
+.about-section {
+  position: relative !important;
+  background-color: #07070B !important;
+  background: radial-gradient(circle at 50% 30%, rgba(20, 24, 45, 0.8) 0%, #07070B 80%) !important;
+  color: #FFFFFF !important;
+  padding-block: 100px 120px !important;
+  overflow: hidden !important;
+  z-index: 2 !important;
+}
+
+.about-section .section-top {
+  display: none !important;
+}
+
+.about-section .fog,
+.about-section .fog:after {
+  display: none !important;
+}
+
+.about-section .meteors {
+  opacity: 0.3 !important;
+  pointer-events: none !important;
+}
+
+.about-section .section-content {
+  text-align: center !important;
+  max-width: 880px !important;
+  margin: 0 auto 40px !important;
+  grid-area: auto !important;
+}
+
+.about-section .section-title {
+  color: #FFFFFF !important;
+  font-family: var(--font-display) !important;
+  font-size: clamp(2.5rem, 5vw, 4rem) !important;
+  letter-spacing: 2px !important;
+  margin-bottom: 20px !important;
+}
+
+.about-section p {
+  color: #CBD5E1 !important;
+  font-size: 1.1rem !important;
+  line-height: 1.7 !important;
+}
+
+/* 4. Registration Hub Form & Holographic Ticket */
+.form-section {
+  position: relative !important;
+  background-color: #07070B !important;
+  padding-block: 100px 120px !important;
+  color: #FFFFFF !important;
+  z-index: 5 !important;
+}
+
+.form-section .section-bg {
+  opacity: 0.25 !important;
+  mix-blend-mode: screen !important;
+}
+
+.form-section .section-header {
+  text-align: center !important;
+  align-items: center !important;
+  margin-bottom: 30px !important;
+}
+
+.form-section .section-title {
+  color: #FFFFFF !important;
+  font-family: var(--font-display) !important;
+  font-size: clamp(2.4rem, 5vw, 3.8rem) !important;
+  letter-spacing: 2px !important;
+}
+
+.form-section .section-subtitle {
+  color: #CBD5E1 !important;
+  max-width: 680px !important;
+  margin: 12px auto 0 !important;
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+}
+
+.form-section .registration-hub {
+  display: grid !important;
+  grid-template-columns: 1fr 1.15fr !important;
+  gap: 40px !important;
+  width: 100% !important;
+  align-items: start !important;
+}
+
+@media (max-width: 1024px) {
+  .form-section .registration-hub {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* 5. FAQ Accordion Grid */
+.faq-section {
+  position: relative !important;
+  background-color: #06060A !important;
+  padding-block: 100px 120px !important;
+  color: #FFFFFF !important;
+  z-index: 5 !important;
+}
+
+.faq-section .section-header {
+  text-align: center !important;
+  align-items: center !important;
+  margin-bottom: 50px !important;
+}
+
+.faq-section .section-title {
+  color: #FFFFFF !important;
+  font-family: var(--font-display) !important;
+  font-size: clamp(2.2rem, 4.5vw, 3.5rem) !important;
+  letter-spacing: 2px !important;
+}
+
+.faq-section .faq-accordion-list {
+  max-width: 880px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 16px !important;
+}
+
+/* 6. Coalition Section Top Fog Blend */
+.coalition-section .top-bg {
+  display: none !important;
+}
+
+
+

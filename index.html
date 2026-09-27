@@ -1,0 +1,1730 @@
+<!doctype html>
+<html lang="en" data-theme="avengers" class="loading">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GFG BU x MARVEL: PROJECT NEXUS | Official Event Registration</title>
+    <meta name="description" content="Official registration portal for Project Nexus, presented by GeeksForGeeks Student Chapter, Bennett University. Register with your university credentials for all-access event clearance, interactive Marvel zones, and boarding pass generation." />
+    
+    <!-- Force Scroll Restoration to Top on Page Load & Refresh -->
+    <script>
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+      window.scrollTo(0, 0);
+      if (window.location.hash) {
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
+      window.addEventListener('beforeunload', function () {
+        window.scrollTo(0, 0);
+      });
+    </script>
+    
+    <!-- Google Fonts Preconnect & Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel+Decorative:wght@700;900&family=Orbitron:wght@500;700;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  </head>
+  <body class="theme-avengers">
+    <!-- SVG Clip Path Definitions (from EV2 geometry) -->
+    <svg class="clip-svg-defs" aria-hidden="true">
+      <defs>
+        <!-- Arc Reactor Energy Ring Gradient -->
+        <linearGradient id="arcGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#00F0FF" />
+          <stop offset="55%" stop-color="#FFD700" />
+          <stop offset="100%" stop-color="#ED1D24" />
+        </linearGradient>
+
+        <!-- Futuristic Angled Cybernetic Button -->
+        <clipPath id="clipButton" clipPathUnits="objectBoundingBox">
+          <path d="M0.223,0.101 L0.021,0.511 C-0.01,0.574,-0.006,0.65,0.031,0.709 L0.166,0.918 C0.199,0.969,0.254,1,0.312,1 H0.637 C0.704,1,0.766,0.959,0.796,0.894 L0.982,0.489 C1,0.42,1,0.338,0.957,0.28 L0.787,0.066 C0.753,0.024,0.704,0,0.652,0 H0.38 C0.314,0,0.254,0.039,0.223,0.101"></path>
+        </clipPath>
+        <!-- Futuristic Card Frame -->
+        <clipPath id="clipSVG" clipPathUnits="objectBoundingBox">
+          <path d="M0.084,0.015 C0.09,0.005,0.097,0,0.105,0 H0.962 C0.965,0,0.968,0.003,0.971,0.007 L0.996,0.054 C0.999,0.058,1,0.064,1,0.071 V0.848 C1,0.865,0.996,0.881,0.99,0.892 L0.937,0.983 C0.931,0.994,0.923,1,0.915,1 H0.01 C0.004,1,0,0.992,0,0.982 V0.184 C0,0.169,0.003,0.155,0.009,0.144 L0.084,0.015"></path>
+        </clipPath>
+        <!-- Video Monitor Clip -->
+        <clipPath id="videoClip" clipPathUnits="objectBoundingBox">
+          <path d="M0,0.024 C0,0.011,0.005,0,0.01,0 H0.99 C0.995,0,1,0.011,1,0.024 V0.976 C1,0.989,0.995,1,0.99,1 H0.01 C0.005,1,0,0.989,0,0.976 V0.024"></path>
+        </clipPath>
+      </defs>
+    </svg>
+
+    <!-- S.H.I.E.L.D. Stark HUD Quantum Reticle Cursor -->
+    <div id="stark-cursor" class="stark-cursor" aria-hidden="true">
+      <!-- 1:1 Instant Pointer Tip (Zero Latency) -->
+      <div id="cursor-pointer" class="cursor-pointer">
+        <svg class="pointer-svg" viewBox="0 0 24 24">
+          <polygon points="12,2 20,12 14,12 12,22 10,12 4,12" class="pointer-diamond" />
+          <circle cx="12" cy="12" r="2.5" class="pointer-core" />
+        </svg>
+      </div>
+
+      <!-- Damped Trailing Tactical Target Brackets -->
+      <div id="cursor-target-lock" class="cursor-target-lock">
+        <div class="target-bracket bracket-tl"></div>
+        <div class="target-bracket bracket-tr"></div>
+        <div class="target-bracket bracket-bl"></div>
+        <div class="target-bracket bracket-br"></div>
+        <div class="target-crosshair"></div>
+        <span id="cursor-hud-label" class="cursor-hud-label">EARTH-616</span>
+      </div>
+
+      <!-- Click Shockwave Ring -->
+      <div id="cursor-click-shockwave" class="cursor-click-shockwave"></div>
+    </div>
+
+    <!-- Cosmic Background Canvas -->
+    <canvas id="cosmic-canvas" class="cosmic-canvas"></canvas>
+
+    <!-- CRT / Comic Halftone Subtle Overlay -->
+    <div class="hud-scanline-overlay" aria-hidden="true"></div>
+
+    <!-- Global Marvel Quantum Scroll Beam -->
+    <div id="global-scroll-beam" class="global-scroll-beam" aria-hidden="true"></div>
+
+    <!-- S.H.I.E.L.D. Tactical HUD Corner Sector & Telemetry Monitor -->
+    <aside id="hud-scroll-telemetry" class="hud-scroll-telemetry" aria-label="Sector Telemetry" aria-live="polite">
+      <div class="telemetry-inner">
+        <div class="telemetry-arc-compass">
+          <svg class="compass-svg" viewBox="0 0 36 36">
+            <circle cx="18" cy="18" r="14" class="compass-ring-bg" />
+            <circle cx="18" cy="18" r="14" class="compass-ring-stroke" id="telemetry-compass-stroke" />
+            <polygon points="18,7 21,18 18,16 15,18" class="compass-needle" id="telemetry-needle" />
+            <circle cx="18" cy="18" r="2.5" class="compass-hub" />
+          </svg>
+        </div>
+        <div class="telemetry-readout">
+          <div class="telemetry-sector-tag">
+            <span class="telemetry-live-dot"></span>
+            <span id="telemetry-sector-name">SECTOR // 01 HERO APEX</span>
+          </div>
+          <div class="telemetry-stats-row">
+            <span class="telemetry-stat" id="telemetry-depth-pct">00% DEPTH</span>
+            <span class="telemetry-sep">|</span>
+            <span class="telemetry-stat" id="telemetry-velocity-num">0.0 M/S</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Snap Easter Egg Full Whiteout Reality Wipe Overlay -->
+    <div id="snap-overlay" class="snap-overlay" aria-hidden="true">
+      <div class="snap-flash"></div>
+      <div class="snap-whiteout-container">
+        <div class="thanos-infinity-symbol">✦ ✦ ✦</div>
+        <h2 class="thanos-quote">"I AM INEVITABLE."</h2>
+        <div class="thanos-status-pill">
+          <span class="status-dot"></span>
+          <span>TIMELINE ANNIHILATED // 50% OF REALITY ERASED</span>
+        </div>
+        <p class="thanos-desc">
+          The Infinity Stones have decimated Earth-616. The universe cannot auto-restore. You must reboot the timeline to bring back the nexus.
+        </p>
+        <button id="snap-reload-btn" class="snap-reload-cta" title="Reload Timeline">
+          <span class="reload-spin-icon">↻</span>
+          <span class="reload-btn-label">RESTORE REALITY // RELOAD PAGE</span>
+        </button>
+        <div class="snap-reload-hint">
+          <span>PRESS <strong>F5</strong>, <strong>R</strong>, OR CLICK ANYWHERE TO REBOOT THE MULTIVERSE</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==============================================
+         S.H.I.E.L.D. QUANTUM BOOT PRELOADER
+         ============================================== -->
+    <div id="quantum-preloader" class="quantum-preloader" role="progressbar" aria-label="System Initializing" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <!-- Dual Cybernetic Shutter Panels -->
+      <div class="loader-shutter loader-shutter-top"></div>
+      <div class="loader-shutter loader-shutter-bottom"></div>
+
+      <!-- Cyber Matrix Grid Background & Ambient Core Glow -->
+      <div class="loader-grid-bg"></div>
+      <div class="loader-glow-spot"></div>
+
+      <!-- Corner HUD Telemetry Brackets -->
+      <div class="loader-corner corner-tl">
+        <span class="corner-bracket"></span>
+        <span class="corner-label">SYS.BOOT // VER. 4.8.2</span>
+      </div>
+      <div class="loader-corner corner-tr">
+        <span class="corner-bracket"></span>
+        <span class="corner-label">EARTH-616 // SANCTUM DEFENSE</span>
+      </div>
+      <div class="loader-corner corner-bl">
+        <span class="corner-bracket"></span>
+        <span class="corner-label">GFG BU // OFFICIAL EVENT REGISTRATION</span>
+      </div>
+      <div class="loader-corner corner-br">
+        <span class="corner-bracket"></span>
+        <span class="corner-label">STATUS: QUANTUM ENGAGED</span>
+      </div>
+
+      <!-- Skip Clearance Bypass Button -->
+      <button id="loader-skip-btn" class="loader-skip-btn" type="button" title="Skip Boot Sequence">
+        <span>SKIP [ESC]</span>
+        <span class="skip-arrow">→</span>
+      </button>
+
+      <!-- Center Holographic Assembly -->
+      <div class="loader-content-wrap">
+        <!-- Arc Reactor Assembly -->
+        <div class="loader-core-wrap">
+          <!-- Outer Rotating Tick Ring with Dynamic Energy Stroke -->
+          <div class="reactor-outer-ring">
+            <svg class="ring-svg" viewBox="0 0 200 200">
+              <circle cx="100" cy="100" r="90" class="ring-track" />
+              <circle cx="100" cy="100" r="90" class="ring-fill-energy" />
+              <g class="ring-ticks">
+                <line x1="100" y1="5" x2="100" y2="15" />
+                <line x1="100" y1="185" x2="100" y2="195" />
+                <line x1="5" y1="100" x2="15" y2="100" />
+                <line x1="185" y1="100" x2="195" y2="100" />
+                <line x1="33" y1="33" x2="40" y2="40" />
+                <line x1="167" y1="167" x2="160" y2="160" />
+                <line x1="167" y1="33" x2="160" y2="40" />
+                <line x1="33" y1="167" x2="40" y2="160" />
+              </g>
+            </svg>
+          </div>
+
+          <!-- Mid Counter-Rotating Segmented Coils -->
+          <div class="reactor-mid-ring">
+            <div class="segmented-coil coil-1"></div>
+            <div class="segmented-coil coil-2"></div>
+            <div class="segmented-coil coil-3"></div>
+            <div class="segmented-coil coil-4"></div>
+            <div class="segmented-coil coil-5"></div>
+            <div class="segmented-coil coil-6"></div>
+          </div>
+
+          <!-- Inner Core with Avengers Emblem -->
+          <div class="reactor-core">
+            <svg class="loader-avengers-icon" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="44" fill="none" stroke="currentColor" stroke-width="2.5" />
+              <g transform="translate(0, 8)">
+                <polygon points="50,15 63,57 53,57 49,42 41,42 37,57 27,57" fill="currentColor" />
+                <polygon points="45,46 56,46 59,52 43,52" fill="#07070B" />
+                <line x1="20" y1="57" x2="68" y2="57" stroke="#FFD700" stroke-width="3" stroke-linecap="round" />
+                <polygon points="63,52 76,57 63,62" fill="#FFD700" />
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Boot Telemetry & Progress Readout -->
+        <div class="loader-telemetry">
+          <div class="loader-tag">
+            <span class="telemetry-pulse"></span>
+            <span class="loader-tag-text">S.H.I.E.L.D. QUANTUM BOOT SEQUENCE</span>
+          </div>
+
+          <!-- Numeric Counter -->
+          <div class="loader-counter">
+            <span id="loader-percent-num" class="loader-number">0</span>
+            <span class="loader-percent-sym">%</span>
+          </div>
+
+          <!-- Holographic Segmented Progress Bar -->
+          <div class="loader-bar-shell">
+            <div id="loader-bar-fill" class="loader-bar-fill">
+              <div class="bar-head-laser"></div>
+            </div>
+            <div class="loader-bar-segments">
+              <span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+
+          <!-- Dynamic Status Terminal Logs -->
+          <div class="loader-status-stream">
+            <span class="status-prefix">&gt;&gt;</span>
+            <span id="loader-status-msg" class="status-msg">INITIALIZING S.H.I.E.L.D. QUANTUM PROTOCOLS...</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GLOBAL HUD HEADER -->
+    <header class="hud-header">
+      <div class="header-inner">
+        <!-- Brand / Identity -->
+        <a href="#hero" class="brand-link" aria-label="Project Nexus Home">
+          <div class="brand-emblem">
+            <svg class="avengers-icon" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="3" />
+              <polygon points="50,15 63,57 53,57 49,42 41,42 37,57 27,57" fill="currentColor" />
+              <polygon points="45,46 56,46 59,52 43,52" fill="#07070B" />
+              <line x1="20" y1="57" x2="68" y2="57" stroke="#FFD700" stroke-width="3" stroke-linecap="round" />
+              <polygon points="63,52 76,57 63,62" fill="#FFD700" />
+            </svg>
+          </div>
+          <div class="brand-text">
+            <span class="brand-title">GFG BU <span class="accent-text">✕</span> MARVEL</span>
+            <span class="brand-subtitle">BENNETT UNIVERSITY STUDENT CHAPTER</span>
+          </div>
+        </a>
+
+        <!-- System Telemetry Badge -->
+        <div class="header-telemetry hide-mobile">
+          <span class="telemetry-dot"></span>
+          <span class="telemetry-label">EARTH-616 // S.H.I.E.L.D. DEFENSE: ACTIVE</span>
+        </div>
+
+        <!-- Controls: Sound, Theme, Snap Easter Egg, CTA -->
+        <div class="header-controls">
+          <!-- Audio Synthesizer Toggle -->
+          <button id="audio-toggle-btn" class="hud-ctrl-btn" title="Toggle Cinematic Web Audio FX" aria-label="Toggle Cinematic Audio">
+            <span class="audio-wave">
+              <span></span><span></span><span></span><span></span>
+            </span>
+            <span class="ctrl-label">AUDIO FX: <span id="audio-status-text">OFF</span></span>
+          </button>
+
+          <!-- Choose Your Side Toggle -->
+          <button id="side-toggle-btn" class="hud-ctrl-btn side-toggle" title="Switch Theme: Avengers vs Thanos" aria-label="Choose Your Side">
+            <span class="side-icon-hero">🛡️</span>
+            <span class="side-icon-villain">🪐</span>
+            <span class="ctrl-label" id="side-status-text">HERO MODE</span>
+          </button>
+
+          <!-- Thanos Snap Easter Egg -->
+          <button id="snap-easter-egg-btn" class="hud-ctrl-btn snap-btn" title="Click for the Thanos Snap Easter Egg!" aria-label="Thanos Snap Easter Egg">
+            <span class="gauntlet-icon">✨ 🧤</span>
+            <span class="ctrl-label">SNAP</span>
+          </button>
+
+          <!-- Register Fast Link -->
+          <a href="#register" class="hud-cta-link magnetic-btn">
+            <span class="btn-shine"></span>
+            <span class="btn-text">GET CLEARANCE</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN SCENE CONTAINER -->
+    <main id="main-content">
+      
+      <!-- ==============================================
+           SECTION 1: INTRO SECTION (EV2 CINEMATIC UNIVERSE INTRO)
+           ============================================== -->
+      <section class="intro-section" id="hero" data-section-index="0">
+        <!-- EV2 High-Res Looping Black Hole Video Background -->
+        <video class="hero-video-bg" autoplay loop muted playsinline>
+          <source src="/assets/ev2/video/black-hole.mp4" type="video/mp4" />
+        </video>
+        <!-- EV2 Drifting Meteors & Cosmic Nebula Layers -->
+        <div class="hero-meteors-layer"></div>
+        <div class="hero-fog-layer"></div>
+
+        <div class="app">
+          <div class="section-content flex-v">
+            <!-- Classification Badge -->
+            <div class="section-logo flex-h">
+              <div class="stark-hud-pill">
+                <span class="pill-pulse"></span>
+                <span class="pill-text">CLASSIFIED // LEVEL 5 ACCESS REQUIRED // BENNETT UNIVERSITY</span>
+              </div>
+            </div>
+
+            <!-- Orbitron Subtitle & Assemble Headline -->
+            <div class="section-subtitle orbitro-24">
+              <!-- Futuristic Stark HUD Eyebrow -->
+              <div class="hero-hud-eyebrow">
+                <span class="hud-bracket">[</span>
+                <span class="hud-dot"></span>
+                <span class="hud-text">GFG BENNETT UNIVERSITY PRESENTS</span>
+                <span class="hud-divider">//</span>
+                <span class="hud-subtext">EARTH-616 CONVERGENCE</span>
+                <span class="hud-bracket">]</span>
+              </div>
+
+              <h1 class="hero-main-title">
+                <span class="title-word word-avengers" data-text="AVENGERS">AVENGERS</span>
+                <span class="title-word word-nexus" data-text="PROJECT NEXUS">
+                  <span class="nexus-bracket nexus-left">[</span>
+                  <span class="nexus-text">PROJECT NEXUS</span>
+                  <span class="nexus-bracket nexus-right">]</span>
+                </span>
+              </h1>
+
+              <!-- Futuristic Laser Telemetry Baseline -->
+              <div class="hero-title-telemetry">
+                <div class="telemetry-line left"></div>
+                <div class="telemetry-badge">
+                  <span class="badge-gem">◆</span>
+                  <span class="badge-code">DIMENSIONAL HACKATHON // FALL 2026</span>
+                  <span class="badge-gem">◆</span>
+                </div>
+                <div class="telemetry-line right"></div>
+              </div>
+
+              <p class="hero-tagline" style="max-width: 800px; margin: 0 auto 30px;">
+                When infinite timelines collide, innovation knows no bounds. Join 1,000+ Bennett University students for Project Nexus — an extraordinary Marvel-themed tech experience, live exhibitions, and interactive demonstrations hosted by GeeksForGeeks Student Chapter.
+              </p>
+              
+              <!-- Radar Telemetry Readout & Live Event Registration Status -->
+              <div class="hero-radar-banner" style="margin-bottom: 25px;">
+                <div class="radar-tag">
+                  <span class="radar-beacon"></span>
+                  <span>REGISTRATIONS LIVE // S.H.I.E.L.D. CLEARANCE ACTIVE</span>
+                </div>
+                <div class="radar-event-status">
+                  <span class="status-indicator-live"></span>
+                  <span class="radar-event-title">OFFICIAL EVENT REGISTRATION PORTAL</span>
+                  <span class="radar-event-sub">• OFFICIAL CAMPUS EVENT • FREE ADMISSION • ALL BRANCHES</span>
+                </div>
+              </div>
+
+              <!-- Cybernetic Buttons (EV2 Clip Geometry) -->
+              <div class="flex-h flex-c" style="gap: 20px; flex-wrap: wrap;">
+                <a href="#register" class="btn btn-clip btn--red" title="Register Now for Project Nexus">
+                  <div class="btn-clip-icon red lg"></div>
+                  <span class="btn-text">REGISTER FOR EVENT</span>
+                </a>
+                <a href="#heroes-lab" class="btn btn-clip btn--dark" title="Choose Your Marvel Avatar">
+                  <div class="btn-clip-icon gradient lg"></div>
+                  <span class="btn-text">CHOOSE AVATAR</span>
+                </a>
+                <a href="#tracks" class="btn btn-clip btn--dark" title="Explore Battle Tracks">
+                  <div class="btn-clip-icon red lg"></div>
+                  <span class="btn-text">VIEW TRACKS</span>
+                </a>
+              </div>
+
+              <!-- Event Registration Highlights Bar -->
+              <div class="hero-event-strip">
+                <div class="event-strip-item">
+                  <span class="strip-icon">⚡</span>
+                  <span class="strip-text"><strong>Flagship Event</strong> Marvel Experience</span>
+                </div>
+                <div class="event-strip-divider"></div>
+                <div class="event-strip-item">
+                  <span class="strip-icon">🎟️</span>
+                  <span class="strip-text"><strong>Instant Pass</strong> Dynamic QR Clearance</span>
+                </div>
+                <div class="event-strip-divider"></div>
+                <div class="event-strip-item">
+                  <span class="strip-icon">🍕</span>
+                  <span class="strip-text"><strong>Free Swag & Kits</strong> Refreshments Included</span>
+                </div>
+                <div class="event-strip-divider"></div>
+                <div class="event-strip-item">
+                  <span class="strip-icon">🛡️</span>
+                  <span class="strip-text"><strong>Zero Entry Fee</strong> Verified Bennett Students</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================================
+           SECTION 2: CHOOSE YOUR MULTIVERSE AVATAR
+           (Simple, Cinematic Marvel Hero Showcase)
+           ============================================== -->
+      <section id="heroes-lab" class="heroes-lab-section">
+        <div class="lab-bg-haze" id="hero-ambient-glow"></div>
+        <div class="container relative-content">
+          <div class="section-header text-center">
+            <div class="hud-category-tag">
+              <span class="tag-hash">#AVATAR-SELECT</span>
+              <span class="tag-name">MARVEL HERO ROSTER // PROJECT NEXUS</span>
+            </div>
+            <h2 class="section-title section-title--marvel">
+              CHOOSE YOUR AVATAR
+            </h2>
+            <div class="title-accent-bar"></div>
+            <p class="section-lead">
+              Select your Marvel champion to badge your official Bennett University event pass and represent your faction.
+            </p>
+          </div>
+
+          <!-- Hero Selector Roster (Clean, Sleek Tab Strip) -->
+          <div class="hero-roster-dock" role="tablist" aria-label="Hero Selection">
+            <button class="hero-chip-btn active" data-hero="spiderman" role="tab" aria-selected="true">
+              <span class="hero-chip-icon">🕷️</span>
+              <span class="hero-chip-label">Spider-Man</span>
+            </button>
+            <button class="hero-chip-btn" data-hero="ironman" role="tab" aria-selected="false">
+              <span class="hero-chip-icon">⚡</span>
+              <span class="hero-chip-label">Iron Man</span>
+            </button>
+            <button class="hero-chip-btn" data-hero="captain-america" role="tab" aria-selected="false">
+              <span class="hero-chip-icon">🛡️</span>
+              <span class="hero-chip-label">Captain America</span>
+            </button>
+            <button class="hero-chip-btn" data-hero="thor" role="tab" aria-selected="false">
+              <span class="hero-chip-icon">🔨</span>
+              <span class="hero-chip-label">Thor</span>
+            </button>
+            <button class="hero-chip-btn" data-hero="hulk" role="tab" aria-selected="false">
+              <span class="hero-chip-icon">💥</span>
+              <span class="hero-chip-label">Hulk</span>
+            </button>
+            <button class="hero-chip-btn" data-hero="doctor-strange" role="tab" aria-selected="false">
+              <span class="hero-chip-icon">👁️</span>
+              <span class="hero-chip-label">Dr. Strange</span>
+            </button>
+            <button class="hero-chip-btn" data-hero="black-panther" role="tab" aria-selected="false">
+              <span class="hero-chip-icon">🐾</span>
+              <span class="hero-chip-label">Black Panther</span>
+            </button>
+          </div>
+
+          <!-- Hero Showcase Grid (Stage + Dossier) -->
+          <div class="hero-showcase-grid">
+            <!-- Left: Hero Visual Stage -->
+            <div class="hero-stage-card" id="hero-stage">
+              <!-- Prev / Next Navigation Arrows -->
+              <button class="hero-nav-arrow arrow-prev" id="hero-prev-btn" aria-label="Previous Hero">‹</button>
+              <button class="hero-nav-arrow arrow-next" id="hero-next-btn" aria-label="Next Hero">›</button>
+
+              <!-- Central Stage Platform Aura -->
+              <div class="hero-stage-aura" id="hero-stage-aura"></div>
+              <div class="hero-pedestal-disc"></div>
+
+              <!-- Main Hero Image (Crisp, High-Resolution, Subtle Parallax) -->
+              <div class="hero-image-wrap" id="hero-image-wrap">
+                <img
+                  src="/assets/heroes/spiderman.png"
+                  alt="Spider-Man"
+                  id="hero-main-img"
+                  class="hero-main-img"
+                  loading="eager"
+                />
+              </div>
+
+              <!-- Subtle Interactive Drag/Hover Badge -->
+              <div class="hero-stage-badge">
+                <span class="badge-dot"></span>
+                <span>INTERACTIVE 3D PARALLAX</span>
+              </div>
+            </div>
+
+            <!-- Right: Clean Hero Dossier Card -->
+            <div class="hero-dossier-card stark-card">
+              <!-- Top Badges -->
+              <div class="dossier-top-meta">
+                <div class="dossier-secret-badge" id="hero-secret">IDENTITY: PETER PARKER</div>
+                <div class="dossier-track-badge" id="hero-track">TRACK: WEB & ASYNC SYSTEMS</div>
+              </div>
+
+              <!-- Hero Name & Title -->
+              <h3 class="dossier-hero-name" id="hero-name">SPIDER-MAN</h3>
+              <div class="dossier-hero-title" id="hero-title">THE WEB-SLINGER // AGILITY & REACTIVE SPECIALIST</div>
+
+              <!-- Lore & Quote -->
+              <p class="dossier-lore" id="hero-lore">
+                Bio-enhanced reflexes capable of managing millions of concurrent websocket connections and asynchronous event streams with zero latency.
+              </p>
+              <div class="dossier-quote" id="hero-quote">
+                "With great compute power comes great responsibility."
+              </div>
+
+              <!-- 3 Clean, Simple Stat Bars -->
+              <div class="dossier-stats-container">
+                <div class="dossier-stat-row">
+                  <div class="dossier-stat-meta">
+                    <span class="stat-name">AGILITY & SPEED</span>
+                    <span class="stat-val" id="stat-val-agility">99%</span>
+                  </div>
+                  <div class="stat-bar-track">
+                    <div class="stat-bar-fill" id="stat-fill-agility" style="width: 99%;"></div>
+                  </div>
+                </div>
+
+                <div class="dossier-stat-row">
+                  <div class="dossier-stat-meta">
+                    <span class="stat-name">COMPUTE & LOGIC</span>
+                    <span class="stat-val" id="stat-val-compute">94%</span>
+                  </div>
+                  <div class="stat-bar-track">
+                    <div class="stat-bar-fill" id="stat-fill-compute" style="width: 94%;"></div>
+                  </div>
+                </div>
+
+                <div class="dossier-stat-row">
+                  <div class="dossier-stat-meta">
+                    <span class="stat-name">DEFENSE & RESILIENCE</span>
+                    <span class="stat-val" id="stat-val-defense">88%</span>
+                  </div>
+                  <div class="stat-bar-track">
+                    <div class="stat-bar-fill" id="stat-fill-defense" style="width: 88%;"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Action Button: Equip on Ticket -->
+              <div class="dossier-action-btn">
+                <button class="hero-equip-btn" id="equip-avatar-btn">
+                  <span class="btn-sigil">⚡</span>
+                  <span class="btn-text" id="equip-avatar-btn-text">EQUIP AVATAR ON TICKET</span>
+                </button>
+                <div class="equip-success-badge hidden" id="equip-success-badge">
+                  <span class="badge-icon">✓</span>
+                  <span class="badge-text" id="equip-success-text">AVATAR SYNCHRONIZED FOR OFFICIAL PASS</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================================
+           SECTION 3: ABOUT THE EVENT
+           ============================================== -->
+      <section class="about-section" id="about" data-section-index="1">
+        <div class="section-top"></div>
+        <div class="meteors"></div>
+        <div class="container mobile-narrow">
+          <div class="section-content flex-v">
+            <h2 class="section-title section-title--large">About Project Nexus</h2>
+            <p>
+              Step into the collegiate technological convergence where dimensional anomalies threaten Earth-616. You, the student innovators of Bennett University, hold the key to timeline stabilization. Gather neural architectures, build your personalized Marvel battle armor, and face high-stakes algorithmic challenges. Compete across 4 core engineering tracks for prestigious championship honors, physical Infinity trophies, research grants, and direct VC incubation rounds. The future of multiversal engineering rests in your hands.
+            </p>
+          </div>
+        </div>
+        <div class="fog"></div>
+      </section>
+
+      <!-- ==============================================
+           SECTION 4: MARVEL'S TRAILER VIDEO SECTION
+           ============================================== -->
+      <section class="video-section" id="trailer">
+        <div class="container">
+          <div class="section-content flex-c obj-cover">
+            <div class="video trailer-cover-wrap" role="button" tabindex="0" aria-label="Play Marvel Studios Trailer">
+              <img 
+                src="/assets/marvel/avengers-trailer-poster.jpg" 
+                alt="Marvel Studios Official Trailer" 
+                class="trailer-poster-img"
+              />
+              <div class="video-overlay-glow"></div>
+              
+              <!-- Center Marvel Holographic Play Trigger -->
+              <div class="marvel-play-trigger flex-c" role="button" tabindex="0" aria-label="Play Official Marvel Trailer" title="Play Official Marvel Trailer">
+                <div class="play-btn-wrap">
+                  <div class="play-pulse-ring"></div>
+                  <div class="play-btn-core">
+                    <svg class="play-svg-icon" viewBox="0 0 24 24" fill="currentColor">
+                      <polygon points="6,3 20,12 6,21" />
+                    </svg>
+                  </div>
+                </div>
+                <span class="play-btn-label">PLAY MARVEL TRAILER</span>
+              </div>
+            </div>
+            <a class="btn btn-clip video-link" target="_blank" href="https://www.youtube.com/watch?v=wS_qbDztgVY" rel="noreferrer" title="Watch Marvel Studios Official Trailer on YouTube">
+              <div class="btn-clip-icon red md"><div class="icon icon_play"></div></div>
+              <span class="btn-out-text">WATCH MARVEL'S TRAILER</span>
+            </a>
+          </div>
+        </div>
+        <svg class="clip-svg">
+          <clipPath id="videoClip" clipPathUnits="objectBoundingBox">
+            <path d="M0,0.024 C0,0.011,0.005,0,0.01,0 H0.99 C0.995,0,1,0.011,1,0.024 V0.976 C1,0.989,0.995,1,0.99,1 H0.01 C0.005,1,0,0.989,0,0.976 V0.024"></path>
+          </clipPath>
+        </svg>
+      </section>
+
+      <!-- ==============================================
+           SECTION 5: EVENT ROADMAP & EXPERIENCE SCHEDULE
+           ============================================== -->
+      <section class="roadmap-section" id="roadmap">
+        <div class="section-bg"></div>
+        <div class="container mobile-narrow">
+          <div class="section-header flex-v">
+            <h2 class="section-title section-title--large">Journey Ahead</h2>
+            <p class="section-subtitle">
+              Explore the timeline and experience flow of Project Nexus – an epic celebration of interactive tech showcases, keynote sessions, gaming challenges, and Marvel entertainment at Bennett University.
+            </p>
+          </div>
+          <div class="section-content">
+            <div class="roadmap">
+              <div class="roadmap-img">
+                <div class="img img--1"></div>
+                <div class="img img--2"></div>
+                <div class="img img--3"></div>
+              </div>
+              <div class="roadmap-content">
+                <div class="roadmap-line">
+                  <svg class="roadmap-frame" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 390">
+                    <path class="path path-bg" d="M0 390c360,-300 840,-440 1440,-353.62" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="2"></path>
+                    <path id="roadmap-glow-path" class="path path-glow" d="M0 390c360,-300 840,-440 1440,-353.62" fill="none" stroke="#d91f40" stroke-width="4" stroke-linecap="round"></path>
+                    <path class="line" d="M0 390c360,-300 840,-440 1440,-353.62l0 353.62 -1440 0z" fill="none" stroke="none"></path>
+                  </svg>
+                  
+                  <!-- Milestone 1 -->
+                  <button class="roadmap-point svg-icon active" data-index="0" title="Phase 1">
+                    <svg viewBox="0 0 65 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path class="stroke stroke--static" data-stroke="static" d="M16.8503 4.18802L1.70773 32.73C0.658417 34.7079 0.797624 37.1054 2.06879 38.9485L13.4196 55.4065C14.5396 57.0304 16.3862 58 18.3588 58H43.7649C46.0516 58 48.1394 56.7003 49.1487 54.6485L63.2554 25.9733C64.314 23.8215 63.9896 21.2461 62.4306 19.424L48.4628 3.09926C47.3229 1.76698 45.6572 1 43.9039 1H22.1506C19.93 1 17.891 2.22642 16.8503 4.18802Z"></path>
+                      <path class="stroke stroke--progress" data-stroke="progress" d="M16.8503 4.18802L1.70773 32.73C0.658417 34.7079 0.797624 37.1054 2.06879 38.9485L13.4196 55.4065C14.5396 57.0304 16.3862 58 18.3588 58H43.7649C46.0516 58 48.1394 56.7003 49.1487 54.6485L63.2554 25.9733C64.314 23.8215 63.9896 21.2461 62.4306 19.424L48.4628 3.09926C47.3229 1.76698 45.6572 1 43.9039 1H22.1506C19.93 1 17.891 2.22642 16.8503 4.18802Z"></path>
+                      <path class="stroke stroke--center" data-stroke="center" d="M27.4101 22.0251L22.6228 30.6001C22.2431 31.2803 22.2929 32.1192 22.7505 32.7497L26.308 37.6515C26.6842 38.1699 27.2861 38.4768 27.9266 38.4768H36.109C36.8565 38.4768 37.5415 38.06 37.8851 37.3962L42.3358 28.7989C42.7186 28.0593 42.6032 27.16 42.046 26.5412L37.6527 21.6618C37.2735 21.2405 36.7332 21 36.1664 21H29.1564C28.4316 21 27.7635 21.3922 27.4101 22.0251Z"></path>
+                    </svg>
+                    <div class="text"><div class="text-month">Phase 1</div><div class="text-year">09:00 AM</div></div>
+                  </button>
+
+                  <!-- Milestone 2 -->
+                  <button class="roadmap-point svg-icon" data-index="1" title="Phase 2">
+                    <svg viewBox="0 0 65 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path class="stroke stroke--static" data-stroke="static" d="M16.8503 4.18802L1.70773 32.73C0.658417 34.7079 0.797624 37.1054 2.06879 38.9485L13.4196 55.4065C14.5396 57.0304 16.3862 58 18.3588 58H43.7649C46.0516 58 48.1394 56.7003 49.1487 54.6485L63.2554 25.9733C64.314 23.8215 63.9896 21.2461 62.4306 19.424L48.4628 3.09926C47.3229 1.76698 45.6572 1 43.9039 1H22.1506C19.93 1 17.891 2.22642 16.8503 4.18802Z"></path>
+                      <path class="stroke stroke--progress" data-stroke="progress" d="M16.8503 4.18802L1.70773 32.73C0.658417 34.7079 0.797624 37.1054 2.06879 38.9485L13.4196 55.4065C14.5396 57.0304 16.3862 58 18.3588 58H43.7649C46.0516 58 48.1394 56.7003 49.1487 54.6485L63.2554 25.9733C64.314 23.8215 63.9896 21.2461 62.4306 19.424L48.4628 3.09926C47.3229 1.76698 45.6572 1 43.9039 1H22.1506C19.93 1 17.891 2.22642 16.8503 4.18802Z"></path>
+                      <path class="stroke stroke--center" data-stroke="center" d="M27.4101 22.0251L22.6228 30.6001C22.2431 31.2803 22.2929 32.1192 22.7505 32.7497L26.308 37.6515C26.6842 38.1699 27.2861 38.4768 27.9266 38.4768H36.109C36.8565 38.4768 37.5415 38.06 37.8851 37.3962L42.3358 28.7989C42.7186 28.0593 42.6032 27.16 42.046 26.5412L37.6527 21.6618C37.2735 21.2405 36.7332 21 36.1664 21H29.1564C28.4316 21 27.7635 21.3922 27.4101 22.0251Z"></path>
+                    </svg>
+                    <div class="text"><div class="text-month">Phase 2</div><div class="text-year">11:00 AM</div></div>
+                  </button>
+
+                  <!-- Milestone 3 -->
+                  <button class="roadmap-point svg-icon" data-index="2" title="Phase 3">
+                    <svg viewBox="0 0 65 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path class="stroke stroke--static" data-stroke="static" d="M16.8503 4.18802L1.70773 32.73C0.658417 34.7079 0.797624 37.1054 2.06879 38.9485L13.4196 55.4065C14.5396 57.0304 16.3862 58 18.3588 58H43.7649C46.0516 58 48.1394 56.7003 49.1487 54.6485L63.2554 25.9733C64.314 23.8215 63.9896 21.2461 62.4306 19.424L48.4628 3.09926C47.3229 1.76698 45.6572 1 43.9039 1H22.1506C19.93 1 17.891 2.22642 16.8503 4.18802Z"></path>
+                      <path class="stroke stroke--progress" data-stroke="progress" d="M16.8503 4.18802L1.70773 32.73C0.658417 34.7079 0.797624 37.1054 2.06879 38.9485L13.4196 55.4065C14.5396 57.0304 16.3862 58 18.3588 58H43.7649C46.0516 58 48.1394 56.7003 49.1487 54.6485L63.2554 25.9733C64.314 23.8215 63.9896 21.2461 62.4306 19.424L48.4628 3.09926C47.3229 1.76698 45.6572 1 43.9039 1H22.1506C19.93 1 17.891 2.22642 16.8503 4.18802Z"></path>
+                      <path class="stroke stroke--center" data-stroke="center" d="M27.4101 22.0251L22.6228 30.6001C22.2431 31.2803 22.2929 32.1192 22.7505 32.7497L26.308 37.6515C26.6842 38.1699 27.2861 38.4768 27.9266 38.4768H36.109C36.8565 38.4768 37.5415 38.06 37.8851 37.3962L42.3358 28.7989C42.7186 28.0593 42.6032 27.16 42.046 26.5412L37.6527 21.6618C37.2735 21.2405 36.7332 21 36.1664 21H29.1564C28.4316 21 27.7635 21.3922 27.4101 22.0251Z"></path>
+                    </svg>
+                    <div class="text"><div class="text-month">Phase 3</div><div class="text-year">02:00 PM</div></div>
+                  </button>
+
+                  <!-- Milestone 4 -->
+                  <button class="roadmap-point svg-icon" data-index="3" title="Phase 4">
+                    <svg viewBox="0 0 65 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path class="stroke stroke--static" data-stroke="static" d="M16.8503 4.18802L1.70773 32.73C0.658417 34.7079 0.797624 37.1054 2.06879 38.9485L13.4196 55.4065C14.5396 57.0304 16.3862 58 18.3588 58H43.7649C46.0516 58 48.1394 56.7003 49.1487 54.6485L63.2554 25.9733C64.314 23.8215 63.9896 21.2461 62.4306 19.424L48.4628 3.09926C47.3229 1.76698 45.6572 1 43.9039 1H22.1506C19.93 1 17.891 2.22642 16.8503 4.18802Z"></path>
+                      <path class="stroke stroke--progress" data-stroke="progress" d="M16.8503 4.18802L1.70773 32.73C0.658417 34.7079 0.797624 37.1054 2.06879 38.9485L13.4196 55.4065C14.5396 57.0304 16.3862 58 18.3588 58H43.7649C46.0516 58 48.1394 56.7003 49.1487 54.6485L63.2554 25.9733C64.314 23.8215 63.9896 21.2461 62.4306 19.424L48.4628 3.09926C47.3229 1.76698 45.6572 1 43.9039 1H22.1506C19.93 1 17.891 2.22642 16.8503 4.18802Z"></path>
+                      <path class="stroke stroke--center" data-stroke="center" d="M27.4101 22.0251L22.6228 30.6001C22.2431 31.2803 22.2929 32.1192 22.7505 32.7497L26.308 37.6515C26.6842 38.1699 27.2861 38.4768 27.9266 38.4768H36.109C36.8565 38.4768 37.5415 38.06 37.8851 37.3962L42.3358 28.7989C42.7186 28.0593 42.6032 27.16 42.046 26.5412L37.6527 21.6618C37.2735 21.2405 36.7332 21 36.1664 21H29.1564C28.4316 21 27.7635 21.3922 27.4101 22.0251Z"></path>
+                    </svg>
+                    <div class="text"><div class="text-month">Phase 4</div><div class="text-year">04:30 PM</div></div>
+                  </button>
+
+                  <!-- Milestone 5 -->
+                  <button class="roadmap-point svg-icon" data-index="4" title="Phase 5">
+                    <svg viewBox="0 0 65 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path class="stroke stroke--static" data-stroke="static" d="M16.8503 4.18802L1.70773 32.73C0.658417 34.7079 0.797624 37.1054 2.06879 38.9485L13.4196 55.4065C14.5396 57.0304 16.3862 58 18.3588 58H43.7649C46.0516 58 48.1394 56.7003 49.1487 54.6485L63.2554 25.9733C64.314 23.8215 63.9896 21.2461 62.4306 19.424L48.4628 3.09926C47.3229 1.76698 45.6572 1 43.9039 1H22.1506C19.93 1 17.891 2.22642 16.8503 4.18802Z"></path>
+                      <path class="stroke stroke--progress" data-stroke="progress" d="M16.8503 4.18802L1.70773 32.73C0.658417 34.7079 0.797624 37.1054 2.06879 38.9485L13.4196 55.4065C14.5396 57.0304 16.3862 58 18.3588 58H43.7649C46.0516 58 48.1394 56.7003 49.1487 54.6485L63.2554 25.9733C64.314 23.8215 63.9896 21.2461 62.4306 19.424L48.4628 3.09926C47.3229 1.76698 45.6572 1 43.9039 1H22.1506C19.93 1 17.891 2.22642 16.8503 4.18802Z"></path>
+                      <path class="stroke stroke--center" data-stroke="center" d="M27.4101 22.0251L22.6228 30.6001C22.2431 31.2803 22.2929 32.1192 22.7505 32.7497L26.308 37.6515C26.6842 38.1699 27.2861 38.4768 27.9266 38.4768H36.109C36.8565 38.4768 37.5415 38.06 37.8851 37.3962L42.3358 28.7989C42.7186 28.0593 42.6032 27.16 42.046 26.5412L37.6527 21.6618C37.2735 21.2405 36.7332 21 36.1664 21H29.1564C28.4316 21 27.7635 21.3922 27.4101 22.0251Z"></path>
+                    </svg>
+                    <div class="text"><div class="text-month">Phase 5</div><div class="text-year">06:30 PM</div></div>
+                  </button>
+
+                  <!-- Milestone 6 -->
+                  <button class="roadmap-point svg-icon" data-index="5" title="Phase 6">
+                    <svg viewBox="0 0 65 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path class="stroke stroke--static" data-stroke="static" d="M16.8503 4.18802L1.70773 32.73C0.658417 34.7079 0.797624 37.1054 2.06879 38.9485L13.4196 55.4065C14.5396 57.0304 16.3862 58 18.3588 58H43.7649C46.0516 58 48.1394 56.7003 49.1487 54.6485L63.2554 25.9733C64.314 23.8215 63.9896 21.2461 62.4306 19.424L48.4628 3.09926C47.3229 1.76698 45.6572 1 43.9039 1H22.1506C19.93 1 17.891 2.22642 16.8503 4.18802Z"></path>
+                      <path class="stroke stroke--progress" data-stroke="progress" d="M16.8503 4.18802L1.70773 32.73C0.658417 34.7079 0.797624 37.1054 2.06879 38.9485L13.4196 55.4065C14.5396 57.0304 16.3862 58 18.3588 58H43.7649C46.0516 58 48.1394 56.7003 49.1487 54.6485L63.2554 25.9733C64.314 23.8215 63.9896 21.2461 62.4306 19.424L48.4628 3.09926C47.3229 1.76698 45.6572 1 43.9039 1H22.1506C19.93 1 17.891 2.22642 16.8503 4.18802Z"></path>
+                      <path class="stroke stroke--center" data-stroke="center" d="M27.4101 22.0251L22.6228 30.6001C22.2431 31.2803 22.2929 32.1192 22.7505 32.7497L26.308 37.6515C26.6842 38.1699 27.2861 38.4768 27.9266 38.4768H36.109C36.8565 38.4768 37.5415 38.06 37.8851 37.3962L42.3358 28.7989C42.7186 28.0593 42.6032 27.16 42.046 26.5412L37.6527 21.6618C37.2735 21.2405 36.7332 21 36.1664 21H29.1564C28.4316 21 27.7635 21.3922 27.4101 22.0251Z"></path>
+                    </svg>
+                    <div class="text"><div class="text-month">Phase 6</div><div class="text-year">08:00 PM</div></div>
+                  </button>
+                </div>
+
+                <!-- Milestone Info & Items -->
+                <div class="roadmap-info flex-v">
+                  <div class="roadmap-items">
+                    <div class="item flex-h" style="display: flex;">
+                      <div class="item-date"><div class="item-date-month">Phase 1</div><div class="item-date-year">09:00 AM</div></div>
+                      <div class="item-content flex-v">
+                        <h3 class="item-title">Campus Check-in & Pass Verification</h3>
+                        <p class="item-description">Campus check-in at Bennett University Grand Foyer. Present your digital S.H.I.E.L.D. Quantum Boarding Pass QR, collect event credentials, and claim your Marvel welcome kits.</p>
+                      </div>
+                    </div>
+                    <div class="item flex-h" style="display: none;">
+                      <div class="item-date"><div class="item-date-month">Phase 2</div><div class="item-date-year">11:00 AM</div></div>
+                      <div class="item-content flex-v">
+                        <h3 class="item-title">Opening Ceremony & Tech Exhibitions</h3>
+                        <p class="item-description">Grand opening ceremony in the Bennett University Auditorium. Interactive Marvel zones, AI demonstration pods, and technology exhibits open for exploration.</p>
+                      </div>
+                    </div>
+                    <div class="item flex-h" style="display: none;">
+                      <div class="item-date"><div class="item-date-month">Phase 3</div><div class="item-date-year">02:00 PM</div></div>
+                      <div class="item-content flex-v">
+                        <h3 class="item-title">Interactive Challenges & Gaming Arenas</h3>
+                        <p class="item-description">Engage in live technology challenges, gaming tournaments, and tech quizzes. Complimentary refreshments, food counters, and energy lounges open.</p>
+                      </div>
+                    </div>
+                    <div class="item flex-h" style="display: none;">
+                      <div class="item-date"><div class="item-date-month">Phase 4</div><div class="item-date-year">04:30 PM</div></div>
+                      <div class="item-content flex-v">
+                        <h3 class="item-title">Keynote Talks & Industry Workshops</h3>
+                        <p class="item-description">Inspiring keynote addresses and hands-on masterclasses conducted by senior tech leaders from top engineering companies.</p>
+                      </div>
+                    </div>
+                    <div class="item flex-h" style="display: none;">
+                      <div class="item-date"><div class="item-date-month">Phase 5</div><div class="item-date-year">06:30 PM</div></div>
+                      <div class="item-content flex-v">
+                        <h3 class="item-title">Creator Showdowns & Interactive Demos</h3>
+                        <p class="item-description">Live demonstrations, creative tech showcases, and project spotlights presented by participating student creators and innovators.</p>
+                      </div>
+                    </div>
+                    <div class="item flex-h" style="display: none;">
+                      <div class="item-date"><div class="item-date-month">Phase 6</div><div class="item-date-year">08:00 PM</div></div>
+                      <div class="item-content flex-v">
+                        <h3 class="item-title">Grand Finale & Felicitation Gala</h3>
+                        <p class="item-description">Grand closing ceremony in the Main Auditorium. Certificate distributions, winner recognitions, and celebration with the Bennett University community.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="roadmap-navs flex-h">
+                    <button class="btn btn-clip btn-prev" title="Previous Milestone">
+                      <div class="btn-clip-icon gradient sm"><div class="icon icon_arrow l"></div></div>
+                    </button>
+                    <button class="btn btn-clip btn-next" title="Next Milestone">
+                      <div class="btn-clip-icon gradient sm"><div class="icon icon_arrow r"></div></div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================================
+           SECTION 6: BUNDLES SECTION (ASSEMBLE YOUR AVENGERS // SUIT SELECTOR)
+           ============================================== -->
+      <!-- ==============================================
+           SECTION 6: MULTIVERSE ARMOR & COMBAT SUITS
+           ============================================== -->
+      <section class="bundles-section armory-section" id="suits">
+        <div class="top-bg"></div>
+        <div class="section-bg"></div>
+        <div class="armory-glow-ambience"></div>
+
+        <div class="container armory-container">
+          <!-- Centered Tactical Armory Header -->
+          <div class="section-header text-center armory-header">
+            <div class="hud-category-tag">
+              <span class="tag-hash">#ARMORY-SPECS</span>
+              <span class="tag-name">MULTIVERSE COMBAT SUITS // STARK TECH</span>
+            </div>
+            <h2 class="section-title section-title--marvel">
+              ASSEMBLE YOUR AVENGERS
+            </h2>
+            <div class="title-accent-bar"></div>
+            <p class="section-lead">
+              Inspect authentic MCU battle suits, nanotech density, and quantum timeline synchronization. Select your combat armor to badge your official Bennett University clearance ticket.
+            </p>
+          </div>
+
+          <!-- Hero Suit Selector Dock (Clean, Sleek Tab Strip) -->
+          <div class="armory-tabs-dock" role="tablist" aria-label="Multiverse Suit Selection">
+            <button class="suit-tab-btn active" data-suit="spiderman" role="tab" aria-selected="true">
+              <span class="suit-tab-icon">🕷️</span>
+              <span class="suit-tab-label">Spider-Man</span>
+              <span class="suit-tab-tag">NANO-WEAVE</span>
+            </button>
+            <button class="suit-tab-btn" data-suit="ironman" role="tab" aria-selected="false">
+              <span class="suit-tab-icon">⚡</span>
+              <span class="suit-tab-label">Iron Man</span>
+              <span class="suit-tab-tag">MARK 50</span>
+            </button>
+            <button class="suit-tab-btn" data-suit="captain-america" role="tab" aria-selected="false">
+              <span class="suit-tab-icon">🛡️</span>
+              <span class="suit-tab-label">Captain America</span>
+              <span class="suit-tab-tag">STEALTH</span>
+            </button>
+            <button class="suit-tab-btn" data-suit="thor" role="tab" aria-selected="false">
+              <span class="suit-tab-icon">🔨</span>
+              <span class="suit-tab-label">Thor</span>
+              <span class="suit-tab-tag">ASGARDIAN</span>
+            </button>
+            <button class="suit-tab-btn" data-suit="hulk" role="tab" aria-selected="false">
+              <span class="suit-tab-icon">💥</span>
+              <span class="suit-tab-label">The Hulk</span>
+              <span class="suit-tab-tag">GAMMA</span>
+            </button>
+            <button class="suit-tab-btn" data-suit="doctor-strange" role="tab" aria-selected="false">
+              <span class="suit-tab-icon">👁️</span>
+              <span class="suit-tab-label">Dr. Strange</span>
+              <span class="suit-tab-tag">MYSTIC</span>
+            </button>
+            <button class="suit-tab-btn" data-suit="black-panther" role="tab" aria-selected="false">
+              <span class="suit-tab-icon">🐾</span>
+              <span class="suit-tab-label">Black Panther</span>
+              <span class="suit-tab-tag">VIBRANIUM</span>
+            </button>
+          </div>
+
+          <!-- Main Armory Display Card (Dual-Pane Stark Lab Display) -->
+          <div class="armory-showcase-card stark-card">
+            <!-- Left: Holographic Suit Pedestal & Character Stage -->
+            <div class="armory-stage-pane">
+              <div class="armory-stage-aura" id="armory-stage-aura"></div>
+              <div class="armory-stage-pedestal">
+                <div class="pedestal-disc-outer"></div>
+                <div class="pedestal-disc-inner"></div>
+                <div class="pedestal-laser-beam"></div>
+              </div>
+
+              <!-- Character Hero Image with 3D Parallax Tilt -->
+              <div class="armory-character-wrap">
+                <img id="bundle-suit-img" src="/assets/heroes/spiderman.png" alt="Spider-Man Suit" class="armory-suit-img" />
+              </div>
+
+              <!-- HUD Pedestal Status Badge -->
+              <div class="armory-status-badge">
+                <span class="badge-beacon"></span>
+                <span>HOLOGRAPHIC SUIT SPEC // ACTIVE</span>
+              </div>
+            </div>
+
+            <!-- Right: Armor Telemetry & Tech Specs Panel -->
+            <div class="armory-intel-pane">
+              <div class="armory-meta-header">
+                <div class="bundle-role-tag" id="bundle-suit-role">REACTIVE SYSTEMS ARCHITECT</div>
+                <div class="armory-dimension-tag">EARTH-616 // MCU REPO</div>
+              </div>
+
+              <h3 class="armory-title" id="bundle-suit-title">THE WEB-SLINGER SUIT</h3>
+              <div class="armory-subtitle" id="bundle-suit-sub">INTEGRATED NANO-WEAVE // EARTH-616</div>
+
+              <p class="armory-lore" id="bundle-suit-lore">
+                High-tensile synthetic spider-silk mesh integrated with Stark HUD heads-up display. Engineered for instantaneous reactive execution and event loop orchestration.
+              </p>
+
+              <!-- Diagnostic Spec Meters with Live Value Readouts -->
+              <div class="armory-specs-container">
+                <div class="armory-spec-row">
+                  <div class="spec-label-row">
+                    <span class="spec-name">AGILITY & SPEED</span>
+                    <span class="spec-val" id="bundle-stat-agility-val">99%</span>
+                  </div>
+                  <div class="armory-spec-track">
+                    <div class="armory-spec-fill" id="bundle-stat-agility" style="width: 99%;">
+                      <div class="spec-fill-spark"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="armory-spec-row">
+                  <div class="spec-label-row">
+                    <span class="spec-name">COMPUTE EFFICIENCY</span>
+                    <span class="spec-val" id="bundle-stat-compute-val">94%</span>
+                  </div>
+                  <div class="armory-spec-track">
+                    <div class="armory-spec-fill" id="bundle-stat-compute" style="width: 94%;">
+                      <div class="spec-fill-spark"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="armory-spec-row">
+                  <div class="spec-label-row">
+                    <span class="spec-name">DEFENSIVE ARMOR</span>
+                    <span class="spec-val" id="bundle-stat-defense-val">88%</span>
+                  </div>
+                  <div class="armory-spec-track">
+                    <div class="armory-spec-fill" id="bundle-stat-defense" style="width: 88%;">
+                      <div class="spec-fill-spark"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="armory-spec-row">
+                  <div class="spec-label-row">
+                    <span class="spec-name">QUANTUM TIMELINE SYNC</span>
+                    <span class="spec-val" id="bundle-stat-sync-val">98%</span>
+                  </div>
+                  <div class="armory-spec-track">
+                    <div class="armory-spec-fill" id="bundle-stat-sync" style="width: 98%;">
+                      <div class="spec-fill-spark"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Equip Action & Feedback -->
+              <div class="armory-action-bar">
+                <button type="button" id="armory-equip-btn" class="armory-equip-btn magnetic-btn" title="Equip Armor on Official Pass">
+                  <span class="btn-sheen"></span>
+                  <span class="btn-icon">⚡</span>
+                  <span class="btn-text" id="armory-equip-text">EQUIP SUIT ON TICKET</span>
+                </button>
+                <div class="armory-equip-success hidden" id="armory-equip-success">
+                  <span class="success-icon">✓</span>
+                  <span>ARMOR SYNCHRONIZED FOR CLEARANCE PASS</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================================
+           SECTION 7: COALITION SECTION (THE 4 BATTLE TRACKS)
+           ============================================== -->
+      <section class="coalition-section" id="tracks"><div class="top-bg"></div><div class="container mobile-narrow"><div class="section-heroes"><div class="hero hero-1 svg-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 416 852"><polygon data-mask="hover" points="227.08,233.98 236.57,233.98 238.03,235.68 240.71,234.95 242.17,234.46 244.12,234.46 245.09,236.65 245.09,238.6 244.12,239.82 241.44,241.28 237.55,243.47 232.68,247.37 231.7,248.58 231.95,249.55 232.19,251.26 231.7,252.72 232.92,255.15 234.38,258.56 235.6,262.46 235.84,262.94 235.84,269.27 234.87,271.22 234.14,272.44 234.14,274.63 234.38,275.11 234.38,284.85 234.14,285.09 234.14,286.55 236.33,290.69 236.82,292.15 238.03,291.91 239.98,290.69 244.85,288.74 247.04,288.01 250.93,287.53 252.15,287.28 253.37,287.77 253.85,289.96 254.34,290.45 254.58,292.88 256.05,295.8 257.75,296.53 257.75,297.02 265.29,297.02 269.92,297.75 272.11,298.72 274.06,299.45 275.52,300.67 275.76,302.37 276.49,303.35 276.73,304.08 277.46,303.59 280.39,303.35 282.09,302.62 282.33,301.4 283.31,300.43 286.96,300.43 288.17,297.02 289.88,296.29 290.61,296.05 294.02,296.05 295.72,297.02 297.67,299.21 298.4,300.91 297.67,303.59 300.1,304.08 300.59,305.78 300.34,307.97 300.1,309.43 300.83,310.65 302.05,311.38 303.02,311.62 303.26,310.89 304.73,310.41 306.43,310.41 307.4,310.65 311.78,310.89 313.97,312.11 314.46,313.57 314.7,317.46 313.24,322.58 312.27,324.77 310.81,324.77 310.81,326.23 312.03,328.66 312.51,329.39 312.27,330.37 311.05,331.82 313.49,334.5 313.49,334.99 317.63,334.99 319.57,335.72 322.01,339.13 321.76,340.59 319.82,344.97 317.87,348.38 318.6,348.62 317.63,348.86 317.38,350.32 316.17,350.81 315.43,350.32 315.19,352.27 314.22,353.25 312.51,353.49 312.76,355.92 313,356.41 313,359.57 308.62,361.52 307.4,361.28 307.65,361.76 307.89,363.95 308.13,364.2 308.62,366.39 309.11,367.36 309.84,371.26 310.32,371.74 310.57,379.05 312.51,381.72 312.76,382.45 313.73,382.94 314.46,384.16 315.68,383.67 316.9,383.91 319.33,385.86 321.28,387.56 322.74,389.51 324.68,393.41 325.9,397.3 326.39,399.25 327.85,401.68 329.31,403.87 330.28,407.77 330.77,409.96 331.01,410.2 331.01,412.88 329.8,414.58 330.53,416.77 332.23,419.21 333.69,423.1 334.91,427.24 335.39,429.43 336.37,429.92 338.8,433.57 340.02,436.25 340.26,436.73 340.26,438.92 338.32,440.87 337.59,442.33 337.83,443.55 338.56,445.49 341.48,452.8 341.97,454.74 342.94,456.93 344.4,458.64 344.64,461.56 345.13,462.05 345.62,463.99 345.86,464.48 346.1,466.67 346.59,467.4 346.83,473 347.81,474.7 347.81,476.41 347.32,476.41 347.56,482.73 347.81,483.22 348.05,486.39 348.78,487.85 348.78,489.79 349.27,489.79 349.27,493.2 348.78,493.2 348.54,493.93 347.32,494.18 345.13,492.71 343.91,491.01 342.94,488.33 342.45,487.85 341.97,486.14 341.72,483.71 340.75,484.19 338.07,486.87 337.34,487.85 336.61,487.85 336.37,488.82 335.15,489.79 332.96,492.47 331.26,494.18 329.31,494.18 328.34,492.71 328.09,491.25 326.39,492.71 324.93,493.2 323.47,492.47 323.22,491.25 322.74,491.25 322.74,489.79 323.95,487.6 326.14,485.41 326.63,483.46 327.12,482.49 328.58,481.52 330.28,480.79 331.99,480.3 333.69,479.33 334.18,479.33 334.66,478.35 335.88,477.38 335.88,475.19 336.37,472.51 334.91,472.02 333.93,470.81 332.96,469.83 331.74,467.89 329.07,464.97 328.33,464.48 328.33,463.02 326.87,462.78 325.66,462.29 324.93,464.48 324.44,465.7 323.95,465.7 323.71,468.62 323.47,468.86 323.22,471.29 321.52,473.49 319.82,474.22 318.11,474.22 316.41,473.49 315.43,472.27 315.43,467.89 315.92,466.67 315.92,464.72 315.43,463.99 315.43,462.29 315.92,461.32 316.17,458.88 316.65,458.39 317.14,456.2 317.38,455.72 317.63,452.07 318.36,450.85 318.84,449.39 319.57,448.42 317.87,446.95 316.16,443.79 314.7,441.36 313.49,438.92 312.03,435.76 311.54,434.3 310.08,431.38 307.4,428.7 305.21,427 304.24,426.26 304.24,425.78 303.02,425.29 300.59,423.35 298.4,421.64 294.99,418.96 293.77,417.75 292.07,415.31 290.85,412.88 288.66,408.74 288.9,406.31 286.96,399.98 285.01,396.08 285.25,405.82 285.5,412.64 285.98,415.56 286.96,428.94 287.69,434.05 288.42,441.36 288.9,444.03 289.88,452.55 290.61,457.91 291.09,460.83 291.83,468.13 292.31,469.59 293.29,478.35 293.77,480.06 294.75,488.82 295.23,491.01 296.21,498.56 296.94,503.18 297.42,505.37 298.15,511.7 298.64,512.67 299.61,519.49 300.34,522.41 301.32,527.52 303.26,537.26 303.75,538.72 304.48,542.86 305.21,544.8 306.19,549.18 308.38,557.46 309.84,562.57 311.05,567.2 312.03,570.36 315.19,580.58 316.9,585.45 318.84,590.56 322.01,599.08 328.82,616.61 329.8,619.77 329.07,623.91 326.87,628.78 325.17,631.94 323.22,634.37 321.76,636.08 319.09,638.27 317.14,640.22 315.92,642.89 315.44,645.09 315.19,645.57 314.95,648.74 314.46,649.95 314.22,653.12 312.76,656.77 310.81,660.66 308.86,665.29 307.4,669.18 305.21,675.27 302.53,683.3 301.32,687.44 300.59,688.9 298.4,688.9 293.04,687.68 292.07,687.44 292.56,689.87 292.8,694.98 293.29,695.96 293.29,698.39 291.58,699.85 290.61,700.09 290.36,703.01 291.58,704.96 291.34,706.18 291.09,712.26 290.12,713.48 287.44,715.43 286.23,715.67 281.6,713.72 279.17,712.99 278.68,714.45 279.66,715.67 280.39,717.86 280.87,720.3 281.12,720.54 281.12,722 280.63,722.73 280.39,724.68 279.9,725.16 279.66,726.14 278.44,726.14 277.95,727.11 276,729.06 274.06,730.27 270.41,731.49 267.73,731.98 262.37,731.98 256.05,731.01 253.37,730.27 253.12,729.54 251.66,729.79 246.31,727.35 243.87,725.41 242.66,723.95 241.68,721.76 241.68,713.97 242.9,711.78 244.36,710.32 244.85,708.13 246.07,707.15 247.28,705.93 248.5,703.74 250.45,699.85 252.15,695.71 252.88,693.52 252.88,691.82 251.66,689.63 250.69,686.46 249.47,684.03 248.99,682.32 248.99,676.97 249.23,676 246.31,672.83 232.19,658.72 230.24,657.01 227.32,654.33 225.13,652.63 222.21,650.44 219.53,648.49 213.21,644.6 209.8,642.65 206.15,641.19 201.77,639.97 202.01,654.09 202.5,654.82 202.74,659.2 203.96,660.42 204.69,662.12 205.42,663.58 206.15,668.45 206.88,671.13 207.12,673.32 207.36,673.81 208.09,678.43 208.09,683.06 207.61,684.52 207.61,695.47 207.12,696.93 204.93,698.15 202.5,699.12 200.79,699.61 199.09,699.85 195.92,698.15 193,696.44 188.87,695.47 185.95,695.71 183.75,697.17 182.05,698.63 182.54,699.85 183.27,701.31 183.27,702.77 180.59,704.96 178.89,706.18 176.94,706.66 172.56,707.88 169.64,708.37 161.12,708.37 156.49,707.4 152.84,706.18 149.92,704.23 148.22,702.53 147.49,701.55 147.49,692.55 149.19,690.84 150.16,690.11 150.65,688.9 152.84,686.71 156.01,684.76 158.44,683.06 158.93,682.57 159.9,682.32 160.63,681.11 162.58,679.65 165.74,677.21 169.64,673.81 170.12,673.07 168.42,670.64 167.69,669.42 166.47,666.99 166.23,664.31 166.47,662.61 167.2,661.64 168.18,657.98 169.15,655.55 169.64,653.6 170.37,651.9 171.1,650.68 173.78,651.17 173.78,649.71 174.02,649.22 174.26,643.38 174.99,640.22 174.99,619.53 172.07,617.58 170.85,616.36 170.61,609.79 169.39,608.33 168.66,606.63 168.18,604.19 167.93,603.95 167.45,601.03 167.2,600.05 165.74,599.57 163.8,598.11 162.09,596.16 161.12,593.97 160.88,590.8 161.6,587.88 162.58,585.94 163.8,584.72 165.5,583.26 165.99,579.12 166.23,578.63 166.47,575.47 166.96,574.5 165.74,574.74 164.77,573.77 162.82,570.6 159.9,565.73 156.74,559.41 156.01,557.46 155.28,555.03 155.03,552.83 155.03,545.53 155.28,543.1 155.52,542.86 155.76,540.66 156.49,539.69 157.22,536.53 157.95,535.31 158.68,532.15 159.41,530.93 159.9,529.47 159.66,527.03 159.17,523.38 158.68,522.41 158.44,518.76 157.95,515.11 157.71,511.46 157.22,510.24 156.98,506.35 155.76,503.42 155.76,498.31 156.49,497.34 156.98,495.63 157.22,486.63 157.47,485.9 157.95,485.9 157.71,484.93 157.22,484.44 156.74,482.73 156.74,478.11 156.98,477.62 157.22,475.43 157.95,474.46 158.93,472.27 159.41,472.27 159.9,470.81 161.12,469.35 161.85,466.91 162.58,464.97 163.8,460.83 164.28,460.1 165.26,456.69 165.74,456.2 166.72,452.8 167.69,450.61 170.37,443.79 171.83,440.87 174.02,437.46 174.99,434.3 175.24,428.94 175.48,428.7 175.72,423.59 176.21,422.86 176.45,419.21 176.94,418.72 177.18,414.83 177.67,413.36 177.91,408.25 178.4,407.04 178.64,399.98 178.89,399 177.91,398.27 177.67,394.62 175.48,397.06 173.53,399.25 173.05,399.49 172.32,400.71 170.12,403.14 169.64,405.09 169.39,406.31 168.91,407.28 168.42,407.28 168.42,408.74 167.69,409.96 163.8,411.66 161.36,412.64 160.15,413.36 159.66,415.07 159.17,415.07 158.93,415.8 156.98,416.53 154.79,417.02 154.3,417.26 145.54,417.26 140.19,415.8 135.8,414.09 130.94,412.39 124.36,410.2 117.55,408.25 106.84,405.58 104.16,404.85 101.73,403.87 100.27,403.14 98.81,401.92 98.32,400.95 98.32,399.98 95.16,399.73 93.45,399.98 89.31,399.98 85.91,399 82.74,398.27 79.33,397.06 79.33,396.57 78.12,396.33 76.9,395.35 75.93,394.38 75.44,394.14 71.06,393.65 70.57,393.16 69.36,392.68 66.68,388.29 65.22,386.35 64.73,384.89 64.73,377.58 66.19,377.34 67.65,378.56 68.14,379.78 68.38,380.02 68.63,383.18 70.33,385.13 71.55,386.59 73.25,386.83 73.01,386.35 72.52,383.18 72.03,379.78 72.03,378.07 72.52,376.85 73.01,376.85 73.25,376.12 75.68,376.12 76.9,377.83 77.14,383.18 78.36,385.62 78.36,386.59 79.58,385.37 80.55,383.91 82.01,382.94 81.77,381.72 80.06,379.78 78.85,378.56 78.61,376.85 77.39,376.37 74.95,374.18 74.22,372.47 74.71,371.01 75.68,369.55 76.17,369.07 78.12,369.07 80.55,371.01 83.23,373.2 84.69,373.45 85.91,374.66 86.39,376.12 87.85,377.1 89.07,377.83 92.23,378.56 93.7,379.53 94.67,379.05 96.13,379.05 96.86,379.78 97.35,380.51 97.59,382.45 98.56,382.7 100.51,385.13 101.73,384.16 102.22,383.91 105.87,383.91 106.84,384.4 110.49,384.64 111.22,384.89 114.63,385.13 115.85,384.64 120.71,384.64 128.26,385.86 132.4,385.86 139.7,385.37 143.59,385.37 147.24,386.1 148.22,386.35 150.41,384.16 150.16,381.97 150.9,379.05 153.57,373.69 152.11,371.99 150.9,370.04 150.65,365.9 150.16,364.93 150.16,361.52 150.9,358.6 151.87,357.14 154.3,352.03 155.28,349.35 155.76,348.13 155.28,347.4 155.28,344.97 156.25,342.78 155.76,342.05 155.76,337.42 157.71,335.48 159.17,334.75 159.66,334.26 160.63,334.02 161.6,332.8 163.55,331.09 165.01,329.88 165.74,329.63 166.72,328.42 168.42,326.96 169.64,326.23 172.32,323.79 176.21,321.6 177.91,321.12 184,321.12 185.7,321.36 187.65,322.33 189.6,321.36 190.08,319.65 192.76,318.19 193.25,317.46 193.73,316 193.98,315.76 198.12,315.03 199.09,315.03 199.09,311.87 194.95,314.79 191.54,316.73 187.16,318.19 185.95,317.95 182.78,315.03 182.78,313.57 181.81,312.35 180.83,310.89 179.13,308.46 177.67,306.02 176.7,303.83 175.23,300.67 175.23,298.48 175.97,297.26 176.21,294.1 175.23,291.42 174.75,289.72 174.26,288.74 173.78,287.04 173.29,286.31 170.37,289.23 169.15,288.99 168.66,288.26 168.66,274.38 169.15,273.65 169.39,271.22 170.61,268.78 171.83,266.59 172.56,265.62 173.78,262.94 175.97,258.32 177.91,255.4 180.59,251.99 184,248.34 184.97,247.85 185.46,246.88 189.35,243.96 192.52,242.01 195.44,240.55 196.65,239.58 200.06,237.63 203.23,236.41 207.85,235.19 212.72,234.46 216.86,234.22 "></polygon></svg></div><div class="hero hero-2 svg-icon"><svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 432 852"><path data-mask="hover" d="M175.55 144.47c-0.25,0.34 -13.07,8.66 -14.99,9.72 -0.33,0.18 -1.09,0.59 -1.69,0.93 -3.12,1.69 -3.9,2.17 -4.34,2.76 -1.31,1.78 -2.47,3.53 -2.71,4.07 -0.63,1.49 -2.87,8.56 -3.98,12.68 -0.08,0.23 -0.3,1 -0.5,1.69 -0.39,1.23 -0.74,3.09 -1.47,7.79 -0.21,1.34 -0.46,2.79 -0.53,3.24 -0.08,0.44 -0.31,1.86 -0.52,3.16 -0.6,3.82 -0.66,4.22 -0.81,5.07 -0.38,2.26 -0.47,2.94 -0.75,5.66 -0.16,1.62 -0.33,3.53 -0.41,4.26 -0.14,1.59 0.05,16.91 0.27,22.46 0.14,3.56 0.2,4.04 0.59,5.44 0.23,0.82 0.6,2.2 0.82,3.05 0.22,0.86 0.44,1.71 0.51,1.92 0.06,0.2 0.25,0.89 0.43,1.54 0.16,0.65 0.47,1.79 0.69,2.56l0.37 1.38 -0.34 0.32c-0.84,0.8 -4.81,4.19 -4.88,4.19 -0.05,0 -0.09,-0.1 -0.09,-0.22 0,-0.29 -0.19,-0.27 -1.62,0.15 -0.66,0.21 -1.88,0.47 -2.7,0.6 -2.83,0.46 -8.22,2.03 -10.46,3.05 -4.61,2.1 -6.02,2.98 -8.08,5.11 -2.94,3.05 -3.31,3.81 -6.69,14.4 -0.58,1.82 -1.15,3.59 -1.27,3.94 -0.12,0.35 -0.44,1.51 -0.7,2.57 -0.28,1.08 -0.62,2.34 -0.75,2.83 -0.58,2.14 -0.81,4.92 -0.81,9.66 0,4.69 0.12,6.11 0.84,9.82 0.13,0.69 0.23,1.31 0.23,1.39 -0.01,0.17 -0.2,1.67 -0.56,4.49 -0.13,1.01 -0.32,2.87 -0.44,4.12 -0.23,2.7 -0.19,2.82 0.96,3.07 0.41,0.09 0.94,0.16 1.16,0.16 0.23,0 0.72,0.04 1.12,0.09l0.69 0.1 -0.09 0.6c-0.28,1.89 -2.1,8.52 -3.53,12.86 -0.87,2.63 -1.34,3.98 -2.72,7.86l-0.47 1.31 0.28 0.57 0.29 0.59 -0.38 0.77c-0.21,0.42 -0.49,0.89 -0.62,1.06 -0.25,0.27 -1.32,2.07 -2.5,4.19 -0.38,0.67 -0.6,0.94 -0.78,0.91 -0.66,-0.12 -5.85,4.25 -6.73,5.64 -0.23,0.4 -0.4,0.49 -1.07,0.56l-0.78 0.1 -0.93 1.58c-0.5,0.87 -1.26,2.1 -1.69,2.75 -0.43,0.65 -1.15,1.89 -1.62,2.78 -0.45,0.86 -1.26,2.3 -1.78,3.2 -0.51,0.88 -0.94,1.63 -0.94,1.65 0,0.03 -0.29,0.59 -0.66,1.22 -0.35,0.65 -1.06,2.12 -1.54,3.28l-0.9 2.1 0.15 1.38 0.14 1.37 -0.64 1.37c-0.34,0.73 -0.88,1.91 -1.18,2.6 -0.31,0.69 -0.73,1.66 -0.97,2.18 -0.23,0.51 -0.43,0.95 -0.43,0.98 0,0.04 -0.19,0.49 -0.41,0.99 -0.23,0.51 -0.61,1.38 -0.84,1.95 -0.23,0.56 -0.8,1.69 -1.26,2.5 -2.41,4.29 -3.03,5.54 -3.13,6.22 -0.21,1.4 -2.03,4.54 -4.6,7.93 -1.09,1.44 -1.08,1.42 -2.37,1.98 -1.4,0.6 -2.91,1.74 -4.1,3.04 -1.02,1.11 -1.08,1.21 -1.09,1.89 0,0.38 -0.12,1 -0.27,1.36l-0.28 0.67 -1.29 0.3c-2.85,0.68 -4.93,1.59 -5.91,2.56 -0.46,0.46 -2.06,3.34 -2.28,4.13 -0.04,0.12 -0.51,0.49 -1.04,0.8l-0.97 0.56 0 1.38 0 1.38 -0.47 -0.09c-0.47,-0.09 -0.58,0 -2.67,2.15 -2.1,2.15 -2.48,2.69 -2.88,3.97 -0.13,0.41 -0.11,0.63 0.06,1.06 0.12,0.29 0.3,0.54 0.37,0.54 0.09,0 0.19,0.11 0.23,0.22 0.15,0.36 -1.32,1.71 -2.55,2.37l-1.14 0.59 0.03 0.88c0.08,2.6 0.44,3.76 1.41,4.41 0.34,0.22 0.96,0.74 1.39,1.13 0.57,0.55 0.91,0.74 1.35,0.8 0.43,0.06 0.6,0.14 0.6,0.32 0,0.4 -0.63,1.96 -1.16,2.87 -0.44,0.75 -0.51,1.01 -0.51,1.81 0,0.92 0,0.94 0.8,1.75 0.45,0.44 1.18,1.04 1.65,1.33 0.72,0.43 0.96,0.5 1.4,0.43 0.31,-0.04 0.91,-0.03 1.35,0.04 0.99,0.17 1.13,0.08 2.57,-1.58 1.25,-1.43 1.55,-1.52 1.55,-0.44 0,0.41 0.12,1.35 0.25,2.1 0.29,1.62 0.5,1.85 2.44,2.79l1.34 0.65 0.85 -0.43c0.46,-0.23 0.98,-0.42 1.16,-0.42 0.18,0 0.68,-0.27 1.09,-0.58 0.73,-0.56 0.79,-0.57 1.4,-0.44 0.56,0.13 0.7,0.11 1.04,-0.16 0.24,-0.16 0.51,-0.29 0.65,-0.29 0.12,0 0.39,-0.25 0.63,-0.56 0.68,-0.94 1.18,-1.5 1.35,-1.5 0.44,0 1.37,-0.65 1.55,-1.08 0.1,-0.26 0.35,-0.61 0.54,-0.79 0.31,-0.29 0.43,-0.31 0.85,-0.19 1.28,0.37 2.37,-0.05 3.08,-1.16 0.47,-0.78 1.91,-3.24 2.32,-3.99 0.16,-0.28 0.84,-1.51 1.51,-2.72 0.68,-1.22 1.72,-3.29 2.31,-4.63 0.97,-2.17 1.08,-2.48 0.99,-3.06 -0.09,-0.6 -0.08,-0.63 0.36,-0.78 0.36,-0.11 0.58,-0.38 0.99,-1.16l0.51 -1 0.87 0.08c0.85,0.08 0.87,0.07 0.96,-0.34 0.19,-0.81 0.23,-0.87 0.78,-1.13 0.6,-0.28 1.17,-0.83 3.54,-3.37 2.04,-2.18 3.09,-3.44 3.28,-3.93 0.21,-0.54 -0.09,-1.78 -0.75,-3.03 -0.29,-0.57 -0.54,-1.07 -0.57,-1.13 -0.06,-0.14 1.85,-2.23 4.52,-4.94 2.3,-2.32 4.47,-4.01 7.14,-5.56 0.8,-0.47 1.97,-1.28 2.57,-1.82 0.6,-0.53 1.87,-1.59 2.79,-2.35 0.93,-0.75 2.83,-2.5 4.21,-3.87 2.14,-2.1 2.57,-2.46 2.79,-2.34 0.16,0.08 0.57,0.18 0.93,0.24 0.76,0.12 0.91,0.03 3.54,-2.03 2.21,-1.72 3.9,-3.69 5.79,-6.71 1.19,-1.89 1.42,-2.35 1.34,-2.7 -0.06,-0.31 0.09,-0.75 0.52,-1.62 1.13,-2.32 1.92,-4.4 1.73,-4.53 -0.1,-0.07 -0.42,-0.25 -0.7,-0.41 -1.02,-0.56 -1.02,-0.28 0.03,-2.63 0.16,-0.35 0.48,-1.34 0.72,-2.21 0.23,-0.85 0.5,-1.79 0.57,-2.07 0.09,-0.28 0.32,-1.25 0.51,-2.13 0.61,-2.65 0.68,-2.88 1.02,-3.02 0.22,-0.07 0.51,-0.57 0.95,-1.63 0.84,-1.95 1.59,-3.66 1.81,-4.03 0.09,-0.16 0.56,-1.08 1.05,-2.06 0.47,-0.97 1.14,-2.23 1.47,-2.79 0.78,-1.32 1.85,-3.48 2.53,-5.06 0.36,-0.85 0.76,-1.48 1.29,-2.07 0.65,-0.69 1,-1.31 2.01,-3.54 0.67,-1.49 1.49,-3.34 1.8,-4.11 0.32,-0.76 0.7,-1.66 0.85,-1.98 0.38,-0.87 1.26,-3.13 2,-5.22 1.02,-2.82 1.04,-2.93 1.38,-4.26 0.47,-1.83 0.49,-1.84 1.05,-0.67 0.44,0.94 1.97,3.64 3.63,6.4 0.37,0.6 1.37,1.9 2.25,2.87 1.48,1.66 1.67,1.82 3.32,2.75l1.77 0.98 0.19 0.84c0.25,1 0.47,1.35 2.33,3.57 0.78,0.94 2.09,2.53 2.89,3.55 0.79,1.01 1.89,2.29 2.42,2.86 2.03,2.13 9.09,10.37 11.59,13.53 0.41,0.5 0.56,0.53 1.35,0.22 0.41,-0.16 0.85,-0.29 1,-0.29 0.13,0.01 1.12,0.85 2.19,1.88 1.74,1.69 2.1,2.13 3.74,4.59 1.88,2.83 1.85,2.76 2.98,6.47 0.74,2.38 1.5,6.44 1.69,9.08 0.1,1.24 0.15,2.3 0.1,2.36 -0.04,0.07 -0.13,0.51 -0.22,1 -0.14,0.89 -0.6,3.47 -0.98,5.64 -0.24,1.34 -0.54,3.34 -1.16,7.65 -0.22,1.5 -0.49,2.86 -0.61,3.04 -0.1,0.18 -0.47,0.53 -0.79,0.79 -0.32,0.27 -0.98,0.99 -1.47,1.61 -0.93,1.2 -1.41,2.38 -1.76,4.26 -0.12,0.66 -0.34,1.18 -0.7,1.66 -0.27,0.4 -0.75,1.3 -1.05,1.99 -0.3,0.7 -1.12,2.26 -1.8,3.48 -0.69,1.21 -1.53,2.84 -1.87,3.6l-0.6 1.4 0.16 1.22c0.15,1.15 0.14,1.25 -0.14,1.63 -0.17,0.24 -0.99,1.74 -1.81,3.34 -1.49,2.9 -1.81,3.44 -2.07,3.44 -0.08,0 -0.36,-0.16 -0.62,-0.36 -0.27,-0.21 -0.53,-0.37 -0.57,-0.37 -0.05,0 -1.24,0.73 -2.65,1.61 -2.44,1.56 -2.68,1.75 -4.97,4.08 -1.69,1.7 -2.94,2.81 -4.15,3.69 -1.45,1.06 -1.92,1.48 -2.79,2.63 -1.6,2.09 -2.69,3.98 -3.62,6.31l-0.84 2.11 -3.16 2.92c-4.64,4.28 -15.39,13.42 -21.52,18.27 -1.78,1.41 -4.72,3.62 -6.55,4.91 -2.53,1.8 -3.73,2.77 -5.11,4.12 -1,0.97 -1.83,1.78 -1.84,1.79 -0.03,0.02 -0.53,-0.08 -1.12,-0.23l-1.09 -0.27 -1.13 0.98c-0.62,0.52 -1.91,1.63 -2.88,2.44 -1.68,1.39 -3.99,3.63 -7.48,7.26 -0.9,0.91 -2.78,2.72 -4.22,4 -2.37,2.13 -2.62,2.39 -2.86,3.1 -0.14,0.43 -0.25,1.09 -0.23,1.47l0.04 0.68 -6.29 6.23c-15.25,15.09 -13.51,13.46 -15.45,14.54 -0.95,0.53 -2.84,1.65 -4.23,2.47 -2.3,1.4 -2.66,1.68 -4.55,3.55 -1.41,1.38 -2.52,2.32 -3.53,2.98 -1.06,0.69 -2.15,1.62 -3.94,3.37 -2.36,2.32 -2.46,2.44 -2.46,3 0,0.67 0.3,1.17 0.77,1.28 0.19,0.03 1,0.31 1.81,0.61 3.95,1.46 12.27,3.56 17.79,4.47 3.5,0.58 4.72,0.84 5.88,1.27 0.81,0.29 1.66,0.6 1.88,0.68 0.72,0.2 0.81,0.36 0.68,1.05 -0.08,0.34 -0.19,1.3 -0.25,2.14 -0.08,0.83 -0.21,1.58 -0.28,1.66 -0.08,0.07 -0.47,0.26 -0.87,0.41 -0.6,0.21 -0.72,0.31 -0.71,0.62 0.03,0.63 0.65,3.1 1.22,4.91 0.31,0.97 0.65,2.13 0.75,2.57 0.22,0.97 0.74,2.38 1.36,3.68 0.25,0.53 0.56,1.48 0.69,2.13 0.2,0.98 0.38,1.35 1.01,2.22 0.43,0.59 0.77,1.19 0.77,1.35 0,0.47 4.63,6.65 7.42,9.88 0.66,0.77 1.25,1.56 1.3,1.77 0.04,0.2 0.25,1.16 0.45,2.11 0.22,0.97 0.47,1.9 0.59,2.06 0.4,0.6 4.69,5.44 5.15,5.8 0.25,0.2 0.73,0.64 1.08,0.97 0.55,0.52 0.62,0.66 0.62,1.26 0,0.6 0.24,2.01 0.59,3.46 0.07,0.32 0.28,1.22 0.46,1.98 1.04,4.56 1.44,5.82 2.3,7.66 0.87,1.8 1.06,2.31 2.14,5.65 1.2,3.78 3.64,14.42 3.85,16.83 0.06,0.61 0.26,2.19 0.47,3.53 0.19,1.34 0.51,3.52 0.72,4.85 0.35,2.4 0.5,3.27 0.78,4.86 0.95,5.33 1.72,10.02 2.13,13.08 0.13,0.93 0.29,2.15 0.38,2.72 0.8,5.71 0.8,5.72 0.55,6.12 -0.31,0.5 -0.91,2.69 -1.27,4.64l-0.29 1.65 0.48 1.88c0.62,2.39 1.46,4.4 2.69,6.44 0.53,0.9 1.18,2 1.46,2.46l0.48 0.84 -1.32 3.19c-1.29,3.14 -1.47,3.81 -1.13,4.14 0.18,0.18 0.06,0.36 -2.37,3.19 -0.76,0.89 -1.48,1.77 -1.61,1.96 -0.39,0.53 -6.58,6.04 -7.87,7 -0.65,0.48 -1.99,1.48 -2.96,2.21 -2.6,1.94 -6.61,4.43 -9.04,5.63 -3.79,1.86 -4.69,2.22 -7.72,3.05 -1.79,0.5 -3.59,1.3 -5.41,2.43 -1.06,0.66 -2.06,1.29 -2.21,1.4 -0.41,0.29 -0.98,2.42 -1.14,4.19 -0.12,1.32 -0.19,1.57 -0.46,1.78l-0.32 0.25 0.32 2.61c0.28,2.19 0.38,2.68 0.65,2.96 0.74,0.79 1.91,1.57 3.28,2.19 1.32,0.59 2.15,0.84 6.03,1.76 0.67,0.15 2.16,0.28 4.33,0.37 4,0.15 8.27,-0.16 13.53,-0.97 3.44,-0.53 9.59,-1.7 10.73,-2.04 4.95,-1.52 5.93,-1.88 9.74,-3.77 3.16,-1.54 7.66,-3.57 8.26,-3.72 0.16,-0.03 0.44,0.52 1.33,2.47l0.64 1.47 2.62 -0.01c3.12,-0.03 7.23,-0.41 9.91,-0.94 0.37,-0.07 1.29,-0.24 2.06,-0.37 0.76,-0.13 2.56,-0.62 3.97,-1.07 2.84,-0.91 4.7,-1.87 5.38,-2.75l0.38 -0.52 -0.09 -3.63c-0.04,-2.01 -0.19,-4.76 -0.35,-6.13l-0.26 -2.48 -0.55 -0.46 -0.54 -0.46 -0.15 -2.86c-0.18,-3.12 -0.21,-3.43 -0.97,-7.13 -0.56,-2.78 -0.68,-3.22 -1.44,-5.19 -0.29,-0.77 -0.53,-1.45 -0.53,-1.52 0,-0.07 0.24,-0.13 0.51,-0.13l0.52 0 -0.09 -0.69c-0.06,-0.43 -0.47,-1.44 -1.03,-2.58 -0.51,-1.02 -1.13,-2.35 -1.37,-2.94 -0.23,-0.58 -0.53,-1.3 -0.66,-1.6 -0.22,-0.51 -0.2,-0.56 0.21,-1.22 0.26,-0.41 0.44,-0.88 0.44,-1.19 0,-0.76 -0.69,-2.81 -1.41,-4.18 -0.66,-1.25 -0.83,-2.02 -0.58,-2.79 0.06,-0.21 0.02,-0.46 -0.14,-0.69 -0.13,-0.19 -0.31,-0.88 -0.4,-1.53 -0.16,-1.1 -0.22,-1.22 -0.94,-2.04l-0.75 -0.87 -0.13 -3.35c-0.19,-4.83 -0.15,-21.15 0.07,-24.98 0.09,-1.78 0.24,-4.4 0.31,-5.81 0.09,-1.41 0.21,-3.21 0.28,-3.97 0.07,-0.77 0.25,-2.55 0.38,-3.96 0.13,-1.39 0.32,-2.82 0.44,-3.16 0.11,-0.32 0.37,-1.2 0.59,-1.93 0.22,-0.73 0.56,-1.85 0.77,-2.49 0.2,-0.65 0.42,-1.39 0.48,-1.62 0.07,-0.25 0.29,-1 0.49,-1.69 0.2,-0.69 0.57,-1.93 0.8,-2.75l0.46 -1.52 -0.37 -1.13c-0.19,-0.63 -0.41,-1.35 -0.5,-1.59 -0.07,-0.25 -0.53,-1.79 -1.01,-3.45 -0.49,-1.66 -1.09,-3.63 -1.34,-4.4 -0.25,-0.75 -0.43,-1.41 -0.37,-1.45 0.09,-0.09 0.09,-0.11 0.47,0.55 1.74,2.98 6.09,10.03 7.11,11.52l1.29 1.88 2.37 1.62c1.29,0.88 2.41,1.6 2.48,1.6 0.06,0 0.24,-0.46 0.38,-1.02 0.53,-2.04 -0.1,-4.79 -2.58,-11.33 -0.33,-0.85 -0.71,-1.81 -0.86,-2.13 -0.15,-0.34 -0.44,-1.03 -0.63,-1.55 -1.04,-2.76 -3.74,-8.07 -5.48,-10.8 -1.65,-2.56 -2.56,-4.06 -2.56,-4.21 0,-0.07 0.19,-0.13 0.44,-0.13 0.23,0 0.57,-0.06 0.76,-0.15 0.19,-0.07 0.81,-0.26 1.39,-0.44 0.85,-0.23 1.16,-0.43 1.73,-0.98 0.85,-0.87 1.69,-2.24 2.37,-3.89 0.28,-0.67 0.57,-1.25 0.64,-1.28 0.09,-0.03 0.55,0.18 1,0.46 0.47,0.28 1.39,0.82 2.03,1.21 0.64,0.38 2.59,1.86 4.34,3.27 8.75,7.15 10.54,8.64 12.72,10.52 1.29,1.13 3.48,3.03 4.85,4.22 1.38,1.19 4.44,3.85 6.81,5.91l4.29 3.75 10.26 3.85c8.78,3.29 10.36,3.84 10.86,3.78 0.31,-0.05 1.26,-0.15 2.11,-0.24 6.52,-0.66 7.02,-0.73 7.47,-1.08 0.22,-0.17 2.62,-2.14 5.31,-4.36 2.69,-2.22 5.15,-4.25 5.46,-4.48 0.3,-0.25 1.05,-0.87 1.67,-1.37l1.13 -0.94 3.96 0.12c3.76,0.09 3.97,0.12 4.23,0.41 0.15,0.18 1.67,2.26 3.34,4.65 5.47,7.71 3.75,5.99 13.76,13.82l8.74 6.82 3.53 1 3.53 1 1.39 -0.16c1.4,-0.16 1.77,-0.28 2.24,-0.69 0.23,-0.2 0.31,-0.18 0.76,0.13 0.28,0.17 0.63,0.6 0.81,0.92 0.63,1.27 1.53,2.8 4.62,7.96 0.73,1.21 2.41,3.93 3.75,6.03 2.41,3.79 3.27,5.2 7.16,11.54 3.17,5.2 3.2,5.25 4.6,7.65 1.48,2.58 6.26,10.91 7.09,12.35 0.51,0.89 1.03,1.88 3.73,7.07 0.62,1.19 1.12,2.26 1.12,2.4 0,0.16 -0.13,0.23 -0.43,0.23 -0.39,0 -0.42,0.04 -0.51,0.75 -0.11,0.71 -0.08,0.79 0.32,1.22 0.57,0.6 0.6,0.65 1.62,3.69 1.19,3.59 1.17,3.46 0.63,4.25 -0.25,0.37 -0.46,0.74 -0.46,0.84 0,0.1 0.18,0.75 0.39,1.44 0.31,1.03 0.56,1.48 1.35,2.51 0.53,0.7 1.19,1.5 1.46,1.81 0.26,0.31 0.7,0.99 0.95,1.5 0.46,0.93 0.5,0.96 1.5,1.37l1.03 0.41 0.62 2.19c1.79,6.4 1.83,6.66 1.45,6.99 -0.13,0.1 -0.2,0.29 -0.16,0.42 0.96,3.74 0.74,3.4 2.04,3.3 0.75,-0.06 1.12,-0.03 1.2,0.08 0.05,0.11 0.13,1.17 0.16,2.37 0.03,1.47 0.14,2.63 0.34,3.56 0.16,0.75 0.38,2.22 0.47,3.28 0.25,2.66 0.92,7.04 1.63,10.56 0.82,4.17 1.32,7.16 1.2,7.36 -0.05,0.09 -0.28,0.4 -0.51,0.68 -0.41,0.53 -0.41,0.53 -0.27,1.76 0.68,5.59 0.68,5.72 0.27,6.33 -0.19,0.27 -0.4,0.64 -0.46,0.79 -0.07,0.16 0.14,1.79 0.45,3.73l0.55 3.46 2.36 -0.09c6.04,-0.25 14.79,-0.65 18.3,-0.84 1.34,-0.07 5.81,-0.22 9.93,-0.31 4.13,-0.1 7.54,-0.22 7.6,-0.26 0.06,-0.06 0.07,-1.71 0.01,-3.68l-0.09 -3.57 -0.54 -0.54c-0.4,-0.4 -0.62,-0.81 -0.87,-1.64 -0.95,-3.24 -1.51,-4.79 -2.44,-6.83 -0.17,-0.41 -0.38,-0.9 -0.44,-1.1 -0.06,-0.21 -0.26,-0.71 -0.44,-1.11 -0.19,-0.41 -0.44,-0.98 -0.56,-1.28 -0.35,-0.87 -1.67,-2.53 -3.51,-4.45 -1.83,-1.91 -2.31,-2.69 -3.25,-5.22 -0.93,-2.47 -2.12,-5.6 -3.03,-7.94 -0.49,-1.25 -1.09,-2.97 -1.35,-3.82 -0.49,-1.65 -1.21,-3.89 -1.39,-4.31 -0.08,-0.21 -0.03,-0.25 0.3,-0.25 0.22,0 0.75,-0.11 1.19,-0.24l0.79 -0.22 0 -1.42c0,-0.78 0.05,-1.67 0.09,-1.95 0.07,-0.44 0.02,-0.58 -0.41,-1.03 -0.41,-0.42 -0.54,-0.73 -0.75,-1.76 -0.15,-0.69 -0.43,-2.04 -0.63,-3.01 -0.19,-0.97 -0.43,-2 -0.5,-2.3 -0.28,-1 -0.19,-1.31 0.59,-2.2 1.08,-1.25 1.11,-1.88 0.14,-5.15 -0.81,-2.75 -2.03,-5.09 -3.41,-6.5 -0.47,-0.48 -0.85,-1 -0.85,-1.14 0,-0.15 -0.07,-0.56 -0.15,-0.9 -0.09,-0.35 -0.32,-1.34 -0.51,-2.19 -0.19,-0.86 -0.56,-2.02 -0.81,-2.58 -0.25,-0.55 -0.63,-1.39 -0.85,-1.86 -0.3,-0.68 -0.58,-0.99 -1.27,-1.52 -0.56,-0.41 -0.97,-0.61 -1.12,-0.56 -0.58,0.25 -0.81,0.15 -0.89,-0.45 -0.05,-0.32 -0.46,-2.65 -0.91,-5.16 -0.75,-4.1 -1.02,-5.74 -1.43,-8.66 -0.54,-3.97 -1.1,-7.57 -1.49,-9.56 -0.25,-1.29 -0.6,-3.18 -0.79,-4.19 -0.19,-1.02 -0.54,-2.93 -0.81,-4.26 -0.73,-3.89 -0.85,-4.68 -1.03,-6.62 -0.25,-2.62 -0.56,-5.03 -0.82,-6.4 -0.47,-2.42 -0.87,-4.88 -1.02,-6.17 -0.11,-1.18 -0.33,-2.3 -0.66,-3.46 -0.72,-2.59 -1.91,-7.5 -1.91,-7.91 0,-0.19 0.27,-0.45 0.78,-0.78 5.13,-3.26 5.84,-3.79 8.4,-6.29 1.38,-1.35 3.25,-3.15 4.14,-4 0.9,-0.84 3.4,-3.22 5.56,-5.28 2.16,-2.06 4.15,-3.92 4.41,-4.14 1.22,-1.02 6.03,-3.36 8.28,-4 0.26,-0.09 0.66,0.3 2.72,2.66 1.31,1.51 2.91,3.34 3.53,4.03l1.13 1.26 0.72 -0.16c0.63,-0.13 0.97,-0.37 2.31,-1.63 0.88,-0.81 3.12,-2.68 4.98,-4.16 5.86,-4.65 5.38,-4.21 5.38,-5.02 0,-0.38 -0.05,-1.38 -0.13,-2.23 -0.07,-0.84 -0.22,-2.69 -0.31,-4.1 -0.36,-5.8 -0.41,-6.08 -0.86,-7.09 -0.24,-0.5 -0.61,-1.35 -0.83,-1.88 -0.22,-0.53 -0.51,-1.23 -0.66,-1.55 -0.15,-0.32 -0.41,-0.95 -0.6,-1.39 -0.75,-1.75 -0.94,-2.03 -2.22,-3.12 -0.71,-0.61 -1.74,-1.4 -2.3,-1.78l-1.01 -0.68 -0.18 -1.14c-0.1,-0.64 -0.23,-1.36 -0.29,-1.59 -0.07,-0.25 -0.28,-1 -0.47,-1.68l-0.34 -1.23 -1.34 -0.97c-2.41,-1.78 -2.75,-2.02 -7.5,-5.02 -4.29,-2.72 -8.17,-5.01 -13.43,-7.94 -1.4,-0.78 -2.39,-1.45 -3.39,-2.35 -0.78,-0.68 -5.97,-5.78 -11.55,-11.34 -5.58,-5.54 -11.5,-11.36 -13.16,-12.94 -1.66,-1.55 -5.3,-5.04 -8.1,-7.73l-5.08 -4.88 -1.07 -2.75 -1.07 -2.76 -2.53 -3.61c-3.18,-4.53 -7.94,-11.52 -8.77,-12.88 -0.33,-0.56 -0.63,-1.19 -0.64,-1.39 -0.02,-0.22 -0.4,-0.84 -0.87,-1.44 -1.32,-1.65 -1.38,-1.8 -2.23,-4.67 -0.21,-0.73 -0.45,-1.45 -0.51,-1.61 -0.07,-0.17 -0.23,-0.53 -0.35,-0.81 -0.12,-0.28 -0.69,-1.68 -1.28,-3.09 -0.57,-1.41 -1.36,-3.18 -1.75,-3.9 -1.16,-2.16 -1.66,-3.07 -1.88,-3.42 -0.23,-0.38 -0.21,-0.43 0.57,-1.37 0.61,-0.75 0.67,-1.06 0.42,-2.29 -0.08,-0.39 -0.25,-1.34 -0.39,-2.11 -0.19,-1.16 -0.35,-1.61 -0.95,-2.67 -0.4,-0.71 -0.72,-1.4 -0.72,-1.52 0,-0.13 -0.11,-0.44 -0.25,-0.7 -0.14,-0.27 -0.59,-1.88 -1.02,-3.6 -0.42,-1.72 -0.83,-3.22 -0.91,-3.31 -0.07,-0.11 -1.68,-2.19 -3.56,-4.66 -1.89,-2.47 -3.88,-4.99 -4.42,-5.59 -3.78,-4.24 -3.94,-4.43 -4.25,-5.41 -0.33,-1 -0.31,-1.35 0.07,-1.35 0.13,0 0.91,-0.17 1.74,-0.37l1.5 -0.37 1.8 -1.81c0.99,-0.98 1.8,-1.88 1.8,-1.98 0,-0.11 -0.19,-0.77 -0.44,-1.47 -0.4,-1.19 -0.91,-4.05 -1.33,-7.38 -0.48,-4.03 -2.08,-13.53 -2.63,-15.74 -0.07,-0.28 -0.25,-1.14 -0.39,-1.91 -0.34,-1.88 -1.21,-3.92 -4.55,-10.81 -0.7,-1.45 -1.38,-2.7 -1.5,-2.77 -0.13,-0.06 -0.73,-0.14 -1.35,-0.15l-1.12 -0.02 -0.39 -1.44c-0.39,-1.38 -0.99,-2.78 -2.84,-6.61 -0.9,-1.86 -1.4,-2.41 -2.44,-2.75 -0.31,-0.11 -0.63,-0.27 -0.69,-0.36 -0.25,-0.32 -0.65,-1.94 -1,-3.95 -0.21,-1.15 -0.43,-2.43 -0.5,-2.82 -0.2,-1.09 -0.81,-4.25 -1.33,-6.84 -0.47,-2.37 -1.09,-7.63 -1.32,-11.32l-0.13 -2.12 0.72 -1.06c0.41,-0.59 0.73,-1.13 0.73,-1.22 0,-0.09 0.06,-0.28 0.15,-0.42 0.13,-0.26 0.98,-2.58 1.99,-5.47 0.29,-0.86 0.58,-1.71 0.66,-1.92 0.36,-1.04 1.64,-5.22 1.91,-6.24 0.17,-0.65 0.41,-1.55 0.53,-1.99 0.53,-1.93 2.11,-8.41 2.34,-9.47 0.13,-0.65 0.26,-1.22 0.3,-1.29 0.22,-0.34 0.33,-4.59 0.2,-7.47 -0.09,-1.74 -0.14,-3.43 -0.11,-3.75l0.05 -0.59 0.69 1.18c0.95,1.64 4.41,6.1 6.97,8.98 1.19,1.34 3.22,3.43 4.53,4.65 3.21,3.01 5.19,4.3 11.43,7.51 1.3,0.66 3.65,2.4 5.43,4.01 0.54,0.49 1.19,0.97 1.44,1.08 0.46,0.2 1.03,1.07 2.84,4.35 3.03,5.47 4.22,7.38 5.69,9.16 0.41,0.5 0.75,0.95 0.75,1.01 0,0.06 -0.13,0.28 -0.3,0.49 -0.51,0.65 -0.38,1.38 0.46,2.79 1.06,1.77 1.15,1.91 1.24,2.55 0.07,0.42 0.45,0.98 1.64,2.42 1.97,2.39 2.49,2.91 4.82,5.02 1.56,1.41 2.33,1.97 4.11,3.01l2.19 1.28 0.82 -0.29c0.46,-0.17 1.03,-0.37 1.28,-0.47 0.43,-0.18 0.49,-0.15 2.07,1.08 0.9,0.69 2.41,1.78 3.39,2.42 1.66,1.11 2.28,1.48 4.23,2.54 0.49,0.26 1.09,0.6 1.32,0.73 0.25,0.15 0.89,0.44 1.42,0.64 1.55,0.58 2.13,0.94 3.2,1.95 1.07,1.02 2.22,2.6 2.22,3.1 0,0.17 -0.13,0.68 -0.28,1.17 -0.16,0.47 -0.32,1.33 -0.38,1.89 -0.09,0.94 -0.06,1.07 0.25,1.47 0.25,0.31 0.38,0.78 0.5,1.66 0.13,0.89 0.32,1.55 0.71,2.31 0.49,1.03 0.61,1.15 1.95,2.06 0.77,0.54 1.62,1.1 1.87,1.24 2.47,1.35 3.03,1.7 3.03,1.91 0,0.32 1.22,1.29 2.2,1.75 0.74,0.33 0.99,0.38 2.82,0.39l2 0.03 1.05 0.96c0.57,0.53 1.04,1.03 1.04,1.12 0,0.07 0.58,0.89 1.28,1.8 4.12,5.43 6.44,8.27 8.9,10.9 1.64,1.76 2.23,2.16 2.97,1.97 0.2,-0.04 0.41,0 0.51,0.12 0.13,0.16 0.06,0.38 -0.35,1.03 -0.3,0.45 -0.57,0.82 -0.65,0.82 -0.07,0 -0.31,0.27 -0.53,0.59 -0.28,0.4 -0.51,0.59 -0.75,0.59 -0.35,0 -1.14,0.59 -1.39,1.04 -0.39,0.72 0.69,2.44 1.75,2.79 0.55,0.2 1.73,0.08 2.47,-0.23 0.54,-0.22 0.64,-0.18 0.64,0.32 0,0.59 0.78,0.84 4.69,1.52 1.05,0.19 2.25,0.19 2.77,-0.02 0.67,-0.25 2.54,-2.19 2.54,-2.63 0,-0.21 0.06,-0.44 0.13,-0.53 0.08,-0.07 0.31,-0.67 0.53,-1.35 0.3,-0.93 0.37,-1.38 0.31,-1.87 -0.09,-0.59 -0.06,-0.69 0.66,-1.63 0.42,-0.56 1.18,-1.44 1.69,-1.97 0.52,-0.53 1.06,-1.27 1.21,-1.63 0.31,-0.72 0.65,-0.9 2.16,-1.09 1,-0.13 2.71,-0.49 3.16,-0.68 0.21,-0.07 0.66,-0.57 1,-1.12 0.59,-0.88 0.65,-1.07 0.78,-2.3 0.08,-0.74 0.19,-1.77 0.28,-2.3 0.35,-2.31 0.38,-2.06 -0.29,-3.08 -0.52,-0.81 -0.61,-1.03 -0.52,-1.47 0.05,-0.28 0.13,-1.21 0.21,-2.06 0.13,-1.67 0.29,-2.31 0.7,-2.93 0.22,-0.32 0.27,-0.69 0.27,-2.22 0,-1.73 -0.03,-1.88 -0.44,-2.72l-0.44 -0.88 -1.77 -0.62c-1.13,-0.41 -1.92,-0.6 -2.23,-0.56 -0.43,0.05 -0.46,0.03 -0.36,-0.26 0.09,-0.21 0.06,-0.49 -0.04,-0.74 -0.16,-0.4 -1.04,-1.13 -1.35,-1.13 -0.25,0 -1.05,-1.03 -1.16,-1.51 -0.14,-0.52 -0.23,-0.58 -1.86,-1.24 -1.56,-0.62 -1.29,-0.35 -3.83,-3.57l-1.11 -1.4 -2.26 -0.84c-1.25,-0.47 -2.43,-0.91 -2.63,-0.98 -0.21,-0.08 -1.11,-0.74 -1.99,-1.49 -0.9,-0.73 -1.87,-1.47 -2.18,-1.63 -0.3,-0.16 -0.58,-0.38 -0.63,-0.5 -0.04,-0.12 -0.5,-0.47 -0.98,-0.78 -0.5,-0.32 -1.09,-0.78 -1.3,-1.03 -0.36,-0.44 -2.29,-1.32 -3.45,-1.56 -0.66,-0.14 -2.97,-1.86 -3.38,-2.54 -0.33,-0.5 -0.68,-1.57 -1.56,-4.53 -0.87,-2.94 -0.97,-3.16 -2.75,-5.95 -0.99,-1.53 -1.78,-2.81 -1.78,-2.86 0,-0.03 -0.19,-0.48 -0.43,-1 -1.29,-2.83 -2.03,-4.52 -2.47,-5.69 -0.19,-0.53 -0.45,-1.2 -0.58,-1.48 -0.33,-0.77 -0.43,-0.99 -0.95,-2.25 -0.5,-1.24 -4.2,-6.99 -5.52,-8.56 -0.4,-0.48 -0.83,-1.15 -0.93,-1.47 -0.18,-0.56 -0.97,-1.71 -1.46,-2.1 -0.13,-0.1 -2.11,-2.06 -4.42,-4.34 -4.13,-4.09 -6.77,-6.37 -7.18,-6.2 -0.7,0.26 -0.92,0.23 -1.6,-0.19 -0.94,-0.59 -4.19,-2.15 -5.13,-2.45 -0.43,-0.14 -0.93,-0.44 -1.19,-0.72 -0.41,-0.42 -3.28,-6.1 -3.28,-6.48 0,-0.21 -0.9,-1.54 -1.4,-2.09 -0.2,-0.22 -0.37,-0.45 -0.37,-0.53 0,-0.13 -0.16,-0.41 -1.83,-2.98 -0.62,-0.97 -1.28,-1.93 -1.47,-2.13 -0.21,-0.24 -0.47,-0.93 -0.72,-1.9 -0.77,-3.02 -3.31,-7.32 -7.22,-12.22 -0.42,-0.53 -1.55,-1.94 -2.5,-3.15l-1.75 -2.2 0.41 -0.3c1.06,-0.78 1.01,-0.63 0.69,-1.7 -0.15,-0.53 -0.51,-1.5 -0.79,-2.16l-0.52 -1.21 0.34 -0.31c0.22,-0.2 0.4,-0.61 0.49,-1.14 0.13,-0.72 0.1,-0.95 -0.17,-1.58 -0.31,-0.76 -2.2,-4.51 -3.04,-6 -0.25,-0.47 -0.79,-1.7 -1.21,-2.72 -0.81,-2.05 -0.81,-1.88 0.18,-2.54 0.32,-0.21 0.37,-0.34 0.34,-1.12 -0.06,-2.94 -4.4,-11.19 -6.59,-12.54 -0.6,-0.37 -1.2,-0.32 -2.16,0.16l-0.54 0.28 -0.58 -0.76c-0.31,-0.43 -0.72,-1.02 -0.91,-1.3 -0.21,-0.28 -1.07,-1.35 -1.94,-2.38l-1.57 -1.88 0.36 -1.28c0.19,-0.72 0.53,-1.93 0.74,-2.69 0.2,-0.77 0.66,-2.49 1.03,-3.82 1.1,-3.99 2.04,-7.43 2.78,-10.15 0.91,-3.35 1.14,-4.12 2.57,-8.23 0.65,-1.9 1.41,-4.12 1.69,-4.93 0.27,-0.81 1.03,-3.03 1.69,-4.92 0.66,-1.9 1.25,-3.62 1.33,-3.83 0.05,-0.2 0.66,-1.92 1.32,-3.82 0.66,-1.9 1.42,-4.12 1.7,-4.91 0.28,-0.81 0.5,-1.57 0.5,-1.71 0,-0.23 -1.39,-4.58 -1.77,-5.54 -0.12,-0.28 -0.39,-0.54 -0.7,-0.69 -0.72,-0.35 -5.08,-1.41 -6.1,-1.5 -0.82,-0.06 -0.94,-0.03 -2.69,0.85l-1.84 0.93 -8.89 10.51c-10.06,11.9 -7.9,8.94 -18.1,24.78 -2.87,4.44 -5.24,8.1 -5.25,8.11 -0.01,0.02 -0.75,0.19 -1.63,0.4 -4.36,0.97 -5.4,1.28 -6.41,1.94 -0.55,0.35 -1.05,0.65 -1.12,0.65 -0.07,0 -0.52,-0.41 -1,-0.9 -1.16,-1.19 -4.07,-3.35 -4.84,-3.59 -2.29,-0.72 -3.85,-1.1 -6.29,-1.55 -0.68,-0.14 -1.37,-0.49 -3.38,-1.75 -3.31,-2.06 -5.83,-4.28 -7.08,-6.22 -0.47,-0.71 -0.83,-1.34 -0.83,-1.42 0,-0.07 -0.96,-1.25 -2.13,-2.6 -1.18,-1.37 -2.14,-2.56 -2.14,-2.66 0,-0.09 -0.26,-0.99 -0.59,-1.97 -0.32,-1.01 -0.66,-2.4 -0.74,-3.15 -0.09,-0.72 -0.36,-2.05 -0.58,-2.94 -1.67,-6.48 -1.54,-6.01 -3.1,-11.02 -0.82,-2.61 -3.32,-10.16 -4.32,-13.02 -1.12,-3.19 -5.63,-12.14 -8.11,-16.08 -0.63,-1 -3.17,-3.53 -4.32,-4.3 -0.28,-0.19 -2.04,-0.86 -3.92,-1.51 -4.96,-1.71 -11.24,-4.19 -15.9,-6.28 -0.43,-0.19 -0.79,-0.35 -0.84,-0.35 -0.04,0 -2.47,-1.15 -2.72,-1.28 -0.04,-0.03 -0.14,0.04 -0.22,0.16l0 0zm93.06 151.14l0.44 0.79 -0.32 0.4c-0.16,0.22 -0.35,0.39 -0.43,0.39 -0.06,0 -0.19,-0.54 -0.26,-1.19 -0.22,-1.63 -0.12,-1.69 0.57,-0.39l0 0zm-122.58 25.33c-0.13,0.13 -0.41,-0.09 -0.31,-0.26 0.06,-0.09 0.15,-0.09 0.25,0.01 0.09,0.09 0.12,0.19 0.06,0.25zm234.93 53.23c-0.15,0.11 -0.34,0.19 -0.41,0.16 -0.11,-0.03 -0.66,-1.46 -0.69,-1.72 0,-0.05 0.3,0.25 0.7,0.63 0.66,0.68 0.68,0.72 0.4,0.93l0 0zm12.41 7.8c0.6,0.18 1.17,0.34 1.28,0.34 0.19,0 0.75,1.28 0.6,1.41 -0.13,0.14 -1,-0.2 -1.35,-0.51 -0.16,-0.16 -0.8,-0.62 -1.4,-1.04 -1.19,-0.83 -1.13,-0.83 0.87,-0.2l0 0zm-326.99 22.91c-0.1,0.13 -0.22,0.19 -0.26,0.15 -0.05,-0.03 0.01,-0.16 0.11,-0.29 0.11,-0.14 0.22,-0.2 0.27,-0.15 0.04,0.03 -0.02,0.16 -0.12,0.29zm-13.15 11.49c-0.11,0.32 -1.02,1.51 -1.14,1.52 -0.08,0 -0.12,-0.29 -0.12,-0.64 0,-0.53 0.07,-0.72 0.37,-0.94 0.41,-0.33 1.03,-0.28 0.89,0.06l0 0zm-10.96 13.2c0,0.03 -0.09,0.23 -0.21,0.44 -0.16,0.32 -0.22,0.35 -0.29,0.15 -0.09,-0.25 0.13,-0.65 0.36,-0.65 0.08,0 0.14,0.03 0.14,0.06l0 0zm3.23 5.98c0,0.09 -0.06,0.11 -0.15,0.06 -0.07,-0.04 -0.14,-0.16 -0.14,-0.23 0,-0.09 0.07,-0.11 0.14,-0.06 0.09,0.04 0.15,0.16 0.15,0.23zm10.41 10.9c0.34,0.31 0.69,0.56 0.78,0.56 0.09,0 0.35,0.16 0.6,0.36 0.24,0.21 0.53,0.37 0.65,0.37 0.24,0 0.28,0.24 0.06,0.37 -0.15,0.09 -2.88,-1.19 -3.03,-1.41 -0.04,-0.08 -0.1,-0.47 -0.15,-0.9l-0.09 -0.78 0.28 0.44c0.17,0.24 0.58,0.69 0.9,0.99l0 0zm6.99 0.28c-0.12,0.12 -0.28,0.12 -0.59,0.01 -0.41,-0.15 -0.41,-0.15 0.17,-0.16 0.42,-0.01 0.53,0.03 0.42,0.15z"></path></svg></div><div class="hero hero-3 svg-icon"><svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 355 852"><path data-mask="hover" d="M140.42 32.75c-0.93,0.62 -1.33,1.1 -1.88,2.26l-0.71 1.46 0.52 1.07 0.5 1.05 -1.17 0.71c-0.64,0.38 -1.76,1.33 -2.5,2.1 -1.21,1.23 -1.35,1.5 -1.45,2.57 -0.14,2.04 -1.21,7.81 -1.64,8.92 -0.31,0.79 -0.38,1.55 -0.29,2.86 0.05,0.98 0.03,2.03 -0.09,2.34 -0.12,0.28 -0.22,2.11 -0.24,4.04 -0.02,4.19 0.4,6.57 1.57,9 0.45,0.96 0.83,1.81 0.83,1.95 0,0.15 -0.69,0.89 -1.54,1.67 -0.86,0.79 -1.55,1.55 -1.55,1.69 0,0.17 -0.93,1.84 -2.05,3.74l-2.05 3.48 -0.35 3.83c-0.19,2.12 -0.29,4.38 -0.22,5 0.1,0.86 0.05,1.17 -0.21,1.26 -0.29,0.12 -4.67,-0.52 -4.74,-0.67 -0.02,-0.04 -0.26,-0.54 -0.52,-1.14l-0.5 -1.07 -3.91 -0.81 -3.88 -0.81 -2.97 0.38c-1.67,0.22 -3.82,0.53 -4.84,0.67l-1.81 0.26 -1.45 2.48c-0.81,1.35 -1.45,2.57 -1.45,2.69 0,0.14 0.21,0.35 0.5,0.5 0.47,0.26 0.45,0.31 -0.45,0.97 -1.03,0.77 -3.43,3.46 -4.15,4.67 -0.52,0.88 -0.66,0.93 -2.9,1.14 -0.91,0.1 -2.12,0.38 -2.72,0.62 -0.59,0.26 -2.85,0.93 -5.02,1.5 -3.67,0.98 -4.26,1.22 -8.12,3.29 -5.02,2.66 -7.45,4.57 -13,10.07 -4.97,4.95 -11.05,12.78 -13.14,16.93 -1.05,2.04 -1.88,7.76 -2.07,14.04 -0.17,4.74 -0.91,13.34 -1.31,14.81 -0.17,0.67 -0.03,1.12 1.19,3.6 1.26,2.57 1.47,2.86 2.14,3 0.64,0.14 0.74,0.24 0.6,0.67 -0.34,1.11 -0.41,2.8 -0.15,3.45 0.24,0.57 0.57,0.78 1.72,1.12 0.78,0.23 1.47,0.5 1.5,0.57 0.05,0.07 -0.34,2.02 -0.84,4.31 -0.5,2.28 -1.04,5.02 -1.19,6.07 -0.24,1.59 -0.47,2.19 -1.42,3.76 -1.22,1.95 -1.91,3.98 -1.72,5.02 0.07,0.36 -0.07,0.93 -0.36,1.46 -0.28,0.45 -0.62,1.45 -0.78,2.19 -0.26,1.31 -0.24,1.52 0.59,4.33 0.86,2.91 0.88,3 0.53,3.95 -0.22,0.53 -0.38,1.57 -0.38,2.31 0,1.17 -0.1,1.45 -0.81,2.31 -0.46,0.53 -1.05,1.67 -1.34,2.53 -0.35,1.07 -0.64,1.54 -0.9,1.54 -0.22,0 -0.72,0.38 -1.07,0.86 -0.41,0.5 -0.84,0.79 -1.03,0.71 -0.66,-0.26 -1.45,0.41 -2.31,1.86 -0.5,0.83 -0.88,1.74 -0.88,2.03 0,0.28 -0.47,1.45 -1.05,2.61 -3.52,7 -5.35,13.67 -6.33,23 -0.26,2.62 -0.76,6.58 -1.07,8.81 -0.9,6.1 -1.98,15.81 -2.14,19.17 -0.19,3.9 0.16,10.26 0.62,11 0.26,0.43 0.33,1.83 0.31,7.21 -0.03,3.67 -0.1,7.69 -0.17,8.93 -0.69,10.52 -0.71,11.33 -0.33,12.05 0.35,0.69 0.33,0.9 -0.46,3.93 -0.71,2.83 -0.81,3.5 -0.76,5.93 0.03,1.81 -0.14,3.9 -0.47,6.12 -0.29,1.88 -0.58,4.18 -0.65,5.11 -0.07,0.96 -0.28,2.34 -0.47,3.05 -0.57,2.38 -0.79,4.41 -0.57,5.62 0.11,0.64 0.9,3.17 1.73,5.59 1.1,3.17 1.46,4.53 1.27,4.72 -0.5,0.5 1.16,3.57 2.85,5.26 0.84,0.86 2.03,2.24 2.64,3.07 0.62,0.86 1.58,1.88 2.15,2.26 1.05,0.77 3.93,4.27 4.43,5.36 0.42,1 2.85,4.29 3.16,4.29 0.17,0.02 0.48,0.28 0.67,0.59 0.67,1 2.07,1.81 3.14,1.81 1.15,0 2.31,-0.83 2.55,-1.81 0.1,-0.33 0.29,-0.54 0.45,-0.47 1.98,0.81 3.31,0.73 4.38,-0.29 0.53,-0.48 0.79,-1.12 1.12,-2.5l0.43 -1.86 -0.88 -2.19c-0.95,-2.35 -2.59,-5.02 -4.71,-7.66l-1.36 -1.67 0 -4.14c0,-4.62 0.19,-5.76 1.71,-10.5 1.07,-3.34 2.74,-6.79 3.86,-7.98 0.93,-0.97 2.48,-1.28 4.38,-0.88 1.69,0.36 2.31,0.83 4.07,3.24 0.83,1.12 1.62,2.05 1.72,2.05 0.09,0 0.9,1.4 1.78,3.11 1.15,2.22 1.88,3.34 2.57,3.93 1.81,1.57 2.03,1.62 5.24,1.29 4.12,-0.43 4.88,-1 4.91,-3.6 0,-1.64 -0.05,-1.76 -2.19,-5.81 -0.19,-0.4 -0.72,-1.83 -1.17,-3.19 -1,-3.19 -2.41,-5.57 -5.86,-10.07 -1.55,-2 -3.07,-4.02 -3.4,-4.47 -0.31,-0.46 -1.57,-1.88 -2.79,-3.17 -1.52,-1.64 -2.19,-2.5 -2.16,-2.86 0.02,-0.28 -0.51,-1.47 -1.2,-2.64 -1.19,-2.02 -1.47,-2.76 -1.02,-2.76 0.26,0 1.05,-1.86 1.55,-3.69 0.24,-0.79 0.83,-2.84 1.33,-4.53 0.5,-1.71 1.43,-4.76 2.03,-6.78 1.76,-5.86 3.9,-12.29 5.04,-15.1 1.79,-4.4 4.31,-9.38 4.86,-9.54 1.21,-0.38 5.62,-12.27 7.17,-19.29 0.47,-2.24 0.57,-4.69 0.21,-7.14 -0.12,-0.91 -0.12,-1.48 0.02,-1.57 0.15,-0.1 -0.23,-0.53 -0.83,-0.95 -1.24,-0.91 -1.26,-1.01 -0.76,-2.22 0.43,-1 0.64,-1.07 1.07,-0.26 0.17,0.33 1.29,1.24 2.48,2.02 3.19,2.1 3.4,2.29 4.28,3.88 0.45,0.81 1.36,1.98 1.98,2.6 1.07,1.05 1.31,1.16 3.12,1.52 1.88,0.38 1.97,0.38 2.45,-0.05 0.5,-0.45 0.5,-0.45 1.02,0.22 0.34,0.4 0.91,0.76 1.43,0.88 0.48,0.09 3.74,0.09 7.24,-0.05l6.36 -0.24 1.26 -0.71c1.24,-0.71 1.24,-0.71 2.38,-0.31 1.41,0.48 1.71,0.71 2.29,1.86 0.26,0.5 0.85,1.26 1.35,1.69 1.19,1.09 1.74,2.78 1.55,4.74 -0.1,0.8 -0.26,3.4 -0.38,5.76 -0.14,2.69 -0.52,6.31 -1.05,9.74 -0.78,5.02 -0.81,5.5 -0.47,6.28 0.5,1.22 0.09,4.07 -0.86,5.83 -0.69,1.24 -0.72,1.43 -0.76,4.6 -0.03,2.64 -0.17,4.09 -0.79,7.26 -0.43,2.17 -0.93,4.19 -1.14,4.53 -0.55,0.88 -1.84,5.28 -1.84,6.33 0,0.5 -0.16,1.43 -0.35,2.09 -0.5,1.6 -0.26,6.03 0.4,7.29 0.41,0.78 0.41,0.98 0.07,3.55 -0.19,1.5 -0.35,3.28 -0.35,4 0,0.71 -0.81,5.4 -1.79,10.43 -1,5.04 -1.9,10.02 -2.02,11.09 -0.12,1.07 -0.31,2 -0.43,2.07 -0.12,0.07 -0.45,1.38 -0.74,2.88 -0.79,4.12 -3.52,16.76 -4.33,20.19 -1.12,4.69 -1.41,7.88 -1.57,17.07 -0.1,6.15 -0.05,8.81 0.16,10.12 0.17,0.98 0.38,3.33 0.48,5.24 0.09,1.9 0.31,4.24 0.45,5.21 0.24,1.41 0.26,2.93 0.03,7.27 -0.31,6.23 -0.7,14.92 -0.72,15.9 0,0.57 -0.09,0.67 -0.71,0.67 -0.6,0 -0.74,0.12 -0.86,0.66 -0.07,0.38 -1,1.69 -2.05,2.91 -1.05,1.24 -2,2.5 -2.12,2.81 -0.12,0.31 -0.21,1.26 -0.21,2.12 0,1.52 -0.03,1.57 -1.17,2.83 -1.35,1.5 -2.36,3.67 -3.26,7.26 -0.48,1.88 -0.88,2.86 -1.67,4.05 -0.57,0.88 -1.04,1.69 -1.04,1.83 0,0.12 -0.19,0.38 -0.41,0.55 -0.55,0.48 -3.64,5.19 -3.64,5.6 0,0.4 -0.43,0.4 -1.14,0 -1,-0.55 -1.79,-0.2 -3.58,1.59 -1.16,1.19 -2.35,2.81 -3.85,5.26 -3.19,5.19 -3.62,6.24 -4.74,11.86 -1.07,5.28 -1.17,6.55 -0.6,6.95 0.34,0.26 0.31,0.72 -0.26,4.67 -0.59,4.05 -0.64,4.78 -0.5,8.93 0.17,4.59 0.76,10.09 2.07,19.57l0.74 5.26 -0.38 4.36c-0.21,2.4 -0.59,5.5 -0.86,6.88 -0.5,2.66 -1.54,12.66 -1.9,18.21 -0.24,3.79 -1.41,9.6 -2.86,14.41 -0.5,1.64 -1.12,4.09 -1.38,5.47 -0.95,4.88 -1.69,8.95 -1.86,9.88 -0.09,0.6 -0.45,1.29 -0.9,1.79 -1.86,2.02 -2.22,3.33 -2.55,9.21 -0.24,4.19 -0.21,4.93 0.26,8.55 0.48,3.81 0.48,4.02 0.1,6.12 -0.31,1.67 -0.53,2.31 -0.95,2.71 -0.31,0.29 -0.58,0.69 -0.58,0.91 0,0.31 -1.9,4.73 -3.57,8.28 -0.52,1.12 -0.52,1.15 -0.14,3.79 0.48,3.24 0.52,3.31 3.05,4.21l0.62 0.24 -0.79 1.86c-0.45,1.02 -0.98,2.55 -1.17,3.4 -0.21,0.86 -0.85,3.48 -1.45,5.84 -1.59,6.31 -2.04,9.97 -2.24,17.69 -0.07,3.54 -0.07,6.47 0.05,6.47 0.31,0 0.19,0.69 -0.16,0.88 -0.19,0.1 -0.65,1.31 -0.98,2.69 -0.62,2.41 -0.64,2.67 -0.5,6.79 0.07,2.36 0.21,4.5 0.29,4.76 0.07,0.26 0.95,1.17 1.95,2.02l1.81 1.55 2.28 0.07c1.24,0.05 3.29,0.17 4.53,0.29 1.23,0.12 5.73,0.33 10,0.48 4.26,0.14 10.95,0.4 14.88,0.59 10.69,0.53 20.95,0.83 23.09,0.67 1.05,-0.07 2.19,-0.29 2.57,-0.48l0.65 -0.33 0 -3.41c0,-1.9 0.07,-3.59 0.14,-3.81 0.09,-0.23 -0.14,-0.64 -0.6,-1.11l-0.76 -0.74 0.53 -0.38c0.49,-0.34 0.49,-0.46 0.35,-3.24 -0.14,-2.48 -0.28,-3.17 -1,-5 -0.97,-2.55 -1.38,-3.24 -3.33,-5.74 -1.81,-2.36 -3.41,-4 -5.02,-5.24 -0.69,-0.5 -1.27,-1.07 -1.27,-1.21 0,-0.17 -0.38,-0.43 -0.83,-0.57l-0.83 -0.29 0 -2.45c0,-2.86 -0.1,-3.19 -1.67,-5.6 -1.12,-1.71 -1.19,-1.92 -1.4,-4.04 -0.22,-2.05 -0.34,-4.39 -0.29,-5.19 0.02,-0.15 0.26,-0.29 0.57,-0.31 0.29,0 0.91,-0.15 1.36,-0.31 0.71,-0.27 0.93,-0.55 1.83,-2.55 0.69,-1.57 1,-2.57 1,-3.38 0.03,-1.03 0.07,-1.12 0.6,-1.12 0.93,0 1.47,-1.83 1.93,-6.45 0.45,-4.72 0.26,-6.41 -0.74,-6.41 -0.69,0 -0.67,0.12 -0.22,-3.93 0.46,-3.95 0.46,-5.93 0,-7.4 -0.28,-0.98 -0.31,-1.72 -0.09,-4.5 0.26,-3.55 1.07,-10.57 1.4,-12.14 0.1,-0.53 0.26,-1.72 0.36,-2.62 0.07,-0.93 0.45,-3.65 0.83,-6.07 0.38,-2.43 0.81,-5.31 0.98,-6.43 0.14,-1.12 0.52,-2.93 0.81,-4.05 0.31,-1.12 0.95,-3.79 1.43,-5.95 1.74,-7.86 2.74,-11.45 3.88,-13.69 0.62,-1.26 1.88,-4.72 3.05,-8.34 1.07,-3.4 2.73,-8.28 3.66,-10.83 1.46,-3.93 6.38,-18.21 9.48,-27.5l0.88 -2.62 1.26 -0.07c1.91,-0.12 1.91,-0.09 2.07,-7.14l0.17 -6.02 0.81 -1.24c0.45,-0.69 1.02,-1.79 1.26,-2.43 0.24,-0.67 1.45,-3.02 2.64,-5.24 6.12,-11.24 8.69,-16.74 10.48,-22.52l1.43 -4.69 0.5 -6.38c1.19,-15.53 1.12,-15 2.16,-15.88 0.43,-0.36 0.84,-0.65 0.93,-0.65 0.22,0 2.77,-4.97 3.65,-7.07 0.33,-0.83 1.64,-3.69 2.88,-6.38 1.23,-2.69 2.26,-4.95 2.26,-5.02 0,-0.07 0.52,-1.22 1.17,-2.55 0.61,-1.33 1.3,-2.81 1.52,-3.26 0.21,-0.46 0.83,-1.81 1.36,-2.98 0.54,-1.19 1.38,-3.38 1.83,-4.88 0.45,-1.5 0.95,-2.86 1.07,-2.98 0.17,-0.16 0.21,-0.04 0.12,0.36 -0.07,0.33 -0.21,1.45 -0.29,2.5 -0.21,2.48 0.12,3.79 1.08,4.29 0.57,0.28 1.12,1.14 2.54,4 1.03,2 2.5,5.21 3.31,7.19 2.24,5.5 7.65,16.09 9.26,18.16 1.31,1.67 3.39,3.31 9.12,7.17 1.24,0.83 1.6,1.24 2.07,2.31 0.67,1.48 0.84,4.4 0.41,6.88 -0.38,2.36 0.05,5.38 1.26,8.88 0.6,1.64 1.07,3.33 1.07,3.76 0,0.41 0.19,0.91 0.45,1.15 0.34,0.31 0.43,0.69 0.39,1.69 -0.05,0.71 -0.2,1.45 -0.34,1.64 -0.16,0.19 -0.26,0.86 -0.21,1.5 0.05,1.05 -0.07,1.36 -1.43,3.48 -0.81,1.28 -1.64,2.66 -1.86,3.07 -0.21,0.4 -0.47,0.85 -0.62,1 -1.45,1.71 -5.54,7.83 -6.21,9.31 -1.36,3.07 -1.55,3.59 -2.43,6.78l-0.86 3.07 0.72 2.81c0.64,2.6 0.71,3.24 0.83,8.41 0.14,5.64 0.69,12.07 1.07,12.45 0.12,0.12 0.15,0.64 0.1,1.19 -0.07,0.62 0.21,2.52 0.76,5.05 0.48,2.21 1.5,7.09 2.26,10.83 0.79,3.74 2.53,11.45 3.91,17.14 3.73,15.6 5.69,23.98 7.16,30.95 0.74,3.48 1.55,6.88 1.79,7.6 0.45,1.31 0.45,1.31 -0.05,1.64 -0.64,0.48 -0.55,1.29 1.12,8.31 0.71,3.05 1.36,6.1 1.45,6.79 0.1,0.69 0.26,1.38 0.36,1.52 0.12,0.14 0.24,2.19 0.26,4.57 0.05,3.74 0.03,4.36 -0.31,4.62 -0.74,0.57 -2.07,5.33 -2.69,9.72l-0.62 4.14 0.79 0.81c0.4,0.43 1.02,0.95 1.36,1.16 0.59,0.36 0.61,0.38 0.42,2.41 -0.28,2.98 -0.33,6.95 -0.11,7.86 0.19,0.66 0.14,0.76 -0.27,0.76 -0.4,0 -0.5,0.21 -0.64,1.24 -0.12,0.85 -0.64,2.16 -1.67,4.12 -2.43,4.61 -3.73,9.28 -4.14,14.66 -0.21,2.93 -0.1,3.79 0.52,3.79 0.17,0 0.03,0.21 -0.28,0.45 -0.57,0.43 -0.57,0.52 -0.91,7.05l-0.31 6.59 0.88 1.03c0.51,0.57 1.05,1.09 1.24,1.16 1.1,0.5 19.5,1.76 27.88,1.93 8.15,0.14 8.62,0.1 8.77,-1.07 0.19,-1.76 0.02,-1.74 2.83,-0.48 1.4,0.65 2.64,1.1 2.71,1.05 0.1,-0.05 1.12,0.26 2.29,0.72 2.5,0.97 5.48,1.64 10.38,2.33 3.31,0.45 4.93,0.5 18.97,0.59 15,0.12 18.58,0 21.67,-0.66l1.12 -0.24 0.41 -3.26c0.26,-2.03 0.38,-3.91 0.28,-4.93 -0.07,-0.93 -0.24,-2.91 -0.33,-4.41 -0.12,-1.54 -0.36,-3.09 -0.57,-3.57 -0.98,-2.14 -9.79,-10.38 -14.96,-13.93 -1.83,-1.28 -3.76,-2.33 -5.92,-3.28 -2.58,-1.12 -3.77,-1.81 -5.88,-3.41 -4.08,-3.07 -5.72,-4.62 -5.62,-5.28 0.04,-0.31 -0.27,-1.14 -0.65,-1.88 -0.69,-1.29 -0.71,-1.36 -0.33,-1.98 0.36,-0.62 0.36,-0.78 0,-2.07 -0.21,-0.76 -0.6,-2.83 -0.88,-4.6 -1.14,-7.33 -1.45,-9.04 -2.03,-11.35 -1.14,-4.74 -2.54,-9.53 -4.07,-13.91 -0.83,-2.42 -1.52,-4.76 -1.52,-5.16 0,-0.77 0,-0.77 -0.95,-0.62 -1.07,0.16 -1.07,0.16 -0.62,-0.76 0.4,-0.74 0.4,-0.22 -0.36,-17.84 -0.24,-5.9 -0.55,-15 -0.69,-20.24 -0.12,-5.23 -0.28,-11.02 -0.36,-12.85 -0.07,-1.84 -0.16,-10.53 -0.21,-19.29l-0.07 -15.95 -0.67 -2.14 -0.64 -2.14 0.26 -4.89c0.14,-2.69 0.45,-6.59 0.67,-8.69 0.47,-4.38 0.45,-4.85 -0.05,-5.81l-0.36 -0.71 1.05 -0.45c1.5,-0.69 2.24,-1.91 4.69,-7.95 3.26,-8.05 5.26,-16.6 5.88,-25.31 0.22,-2.79 -0.21,-15.07 -0.64,-18.81 -0.14,-1.19 -0.36,-3.19 -0.5,-4.48 -0.17,-1.62 -0.41,-2.66 -0.81,-3.45 -0.57,-1.1 -9.41,-11.1 -10.81,-12.22l-0.71 -0.57 0.33 -2.14c0.19,-1.19 0.43,-2.57 0.5,-3.09 0.09,-0.62 0.38,-1.17 0.78,-1.55 1.24,-1.12 1.62,-3.64 1.22,-7.86 -1.07,-10.43 -1.6,-13.93 -2.76,-18.21 -1.86,-6.74 -5.19,-16.79 -5.88,-17.72 -0.15,-0.21 -0.53,-0.64 -0.81,-0.97 -0.6,-0.67 -1.34,-2.6 -4.27,-11.07 -1.21,-3.5 -2.97,-7.98 -4.3,-10.88 -1.22,-2.72 -2.86,-6.53 -3.65,-8.46 -2.33,-5.85 -3.5,-8.33 -5.12,-10.81 -0.85,-1.28 -2,-3.16 -2.54,-4.19 -0.98,-1.76 -2.67,-4.16 -4.27,-6.04 -0.57,-0.65 -0.78,-1.22 -0.95,-2.39 -0.12,-0.83 -0.45,-2.28 -0.71,-3.19 -0.26,-0.92 -0.6,-2.73 -0.72,-4.04 -0.12,-1.31 -0.35,-2.86 -0.5,-3.46 -0.23,-1 -0.19,-1.23 0.69,-3.45 0.53,-1.31 1.55,-3.69 2.29,-5.28 0.74,-1.6 1.33,-3.03 1.33,-3.15 0,-0.12 0.1,-0.5 0.24,-0.85l0.24 -0.62 2.78 2.43c1.55,1.31 3.62,3.4 4.62,4.62 3.5,4.21 8.46,8.28 19.79,16.28 8.19,5.79 15.05,10.83 18.86,13.88 1.42,1.17 2.95,2.22 3.35,2.38 0.6,0.22 0.98,0.65 1.67,1.95 2.86,5.34 10.83,15.43 13.09,16.58l0.72 0.35 -0.05 2c-0.02,1.1 -0.12,2.07 -0.24,2.17 -0.09,0.09 -0.64,0.33 -1.19,0.55l-1.02 0.4 -0.62 -0.97c-0.95,-1.53 -2.55,-1.98 -3.71,-1.1 -0.39,0.31 -0.39,0.52 -0.03,3.52l0.41 3.22 0.95 0.74c1.47,1.09 2.43,1.33 4.9,1.12 1.31,-0.1 2.15,-0.08 2.15,0.07 0,0.12 -0.31,0.52 -0.69,0.88 -1.03,1 -1.77,2.83 -1.58,3.95 0.1,0.52 0.31,1.05 0.5,1.21 0.19,0.15 1.22,0.38 2.31,0.53 1.84,0.21 2.05,0.19 3.03,-0.31 1.35,-0.69 3.62,-2.19 5,-3.36 0.59,-0.5 1.69,-1.17 2.43,-1.47 0.71,-0.34 1.4,-0.72 1.47,-0.86 0.1,-0.15 0.41,-0.38 0.67,-0.53 0.5,-0.26 0.5,-0.23 0.36,1.67 -0.15,1.88 -0.12,2.07 1.04,5.64 1.05,3.27 1.27,3.72 1.81,3.93 0.6,0.22 0.79,0.1 2.86,-1.97l2.21 -2.22 0 -2.86c0,-3.45 0.39,-5.21 1.38,-6.45 1.43,-1.81 1.46,-3.81 0.15,-8.78 -0.93,-3.5 -0.95,-3.84 -0.36,-4.17 0.29,-0.14 0.72,-0.19 0.98,-0.12 0.9,0.29 2.5,2.43 3.57,4.79 0.57,1.28 1.88,3.95 2.9,5.93l1.84 3.57 2.54 0.78c1.41,0.43 2.65,0.69 2.74,0.6 0.1,-0.12 0.43,-0.95 0.76,-1.86l0.6 -1.67 -0.67 -2.14c-0.35,-1.19 -0.93,-2.71 -1.28,-3.38 -0.88,-1.76 -1.79,-4.36 -1.65,-4.74 0.07,-0.16 -0.81,-1.78 -1.92,-3.59 -1.96,-3.15 -2.31,-3.57 -8.17,-9.5 -6.41,-6.45 -7.98,-8.19 -9.79,-10.65 -0.59,-0.81 -1.21,-1.57 -1.4,-1.66 -0.17,-0.1 -0.31,-0.31 -0.31,-0.48 0,-0.17 -0.41,-0.78 -0.88,-1.4 -0.5,-0.62 -1.22,-1.62 -1.57,-2.22 -1.03,-1.64 -3.77,-4 -7.07,-6.07 -1.74,-1.07 -2.98,-2.02 -2.98,-2.24 0,-0.5 -3.57,-4.73 -7.74,-9.16 -10.55,-11.19 -13.43,-14.76 -18.5,-23 -3.33,-5.38 -8.52,-13.24 -11.78,-17.88 -1.12,-1.57 -2.1,-3.12 -2.17,-3.45 -0.31,-1.17 -2.31,-4.2 -3.64,-5.53 -1.53,-1.48 -3.57,-3.02 -4.05,-3.02 -0.14,0 -1.64,-1.46 -3.29,-3.22 -2.16,-2.31 -3.16,-3.57 -3.59,-4.54l-0.6 -1.34 0.57 -3.31 0.58 -3.31 1.66 -2.43c0.91,-1.35 2.45,-3.99 3.46,-5.9 2.95,-5.69 3.61,-9.09 2.3,-11.67 -0.31,-0.59 -0.42,-1.16 -0.33,-1.54 0.17,-0.69 -0.71,-2.72 -1.31,-2.91 -0.21,-0.07 -0.55,-0.28 -0.74,-0.45 -0.19,-0.17 -0.78,-0.33 -1.31,-0.38l-0.95 -0.07 0.05 -2c0.05,-1.12 0.14,-2.1 0.24,-2.19 0.12,-0.12 0.9,-0.07 1.76,0.07l1.59 0.28 0.98 -0.78c1.1,-0.88 3.98,-5.05 4.4,-6.41 0.7,-2.16 -0.28,-15.45 -1.76,-24.09 -0.92,-5.38 -3.52,-12.67 -5.95,-16.64 -1.48,-2.46 -1.59,-2.69 -2.05,-3.96 -0.42,-1.21 -0.95,-1.81 -5.38,-6.02 -1.02,-0.98 -2.02,-2.17 -2.24,-2.67 -0.23,-0.52 -0.52,-0.85 -0.69,-0.81 -0.16,0.08 -0.57,-0.21 -0.92,-0.64 -0.58,-0.67 -0.62,-0.88 -0.46,-1.74 0.31,-1.62 0.17,-3.54 -0.38,-4.76 -0.66,-1.52 -1.55,-2.62 -4.52,-5.71 -3.91,-4 -7.36,-6.48 -14.38,-10.29 -1.6,-0.88 -3.26,-1.9 -3.72,-2.28 -0.43,-0.38 -1.04,-0.81 -1.35,-0.96 -0.77,-0.35 -0.72,-0.62 0.09,-0.81 0.69,-0.16 3.5,-1.57 4.1,-2.07 0.71,-0.57 1.71,-2.31 2.14,-3.71 0.69,-2.22 1.55,-11.31 1.41,-14.93 -0.1,-2.29 -0.17,-2.55 -1.12,-4.4 -0.55,-1.1 -1.46,-2.62 -2.05,-3.41l-1.05 -1.38 0.57 -2.07c0.31,-1.12 0.74,-2.91 0.93,-3.95 0.52,-2.55 0.57,-2.74 0.93,-2.74 0.19,0 0.88,-2.15 1.88,-5.95 1.41,-5.22 1.6,-6.19 1.6,-8.03 0,-1.86 -0.1,-2.24 -0.7,-3.36 -0.66,-1.16 -0.66,-1.28 -0.35,-1.95 0.33,-0.64 0.31,-0.88 -0.31,-3 -0.36,-1.26 -1.15,-3.16 -1.74,-4.21l-1.07 -1.93 -3.72 -2.19c-3.09,-1.79 -4.5,-2.45 -8.09,-3.74 -4.29,-1.55 -4.45,-1.57 -7.72,-1.78 -3.04,-0.22 -3.52,-0.31 -5.4,-1.1 -1.12,-0.48 -2.95,-1.05 -4.05,-1.24 -1.07,-0.21 -3.35,-0.69 -5.07,-1.07 -3.57,-0.79 -10.14,-1.93 -11.19,-1.95 -0.38,-0.02 -3.48,0.05 -6.83,0.14 -6.74,0.22 -6.36,0.26 -8.48,-1.31 -1.24,-0.93 -1.33,-0.95 -4.4,-1.28 -4.07,-0.43 -3.91,-0.43 -5.29,0.47l0 0zm9.07 20.74l0.17 2.86 -1 1.23c-0.55,0.7 -1.02,1.27 -1.1,1.27 -0.04,0 0.34,-0.65 0.88,-1.41l0.98 -1.43 -0.28 -2.4c-0.34,-3 -0.34,-3.5 -0.03,-3.19 0.12,0.12 0.31,1.52 0.38,3.07l0 0zm-95.38 138.76c0,0.74 -1.88,7.14 -2.19,7.45 -0.09,0.07 -0.23,-0.47 -0.31,-1.21 -0.14,-1.12 -0.09,-1.55 0.41,-2.69 0.33,-0.74 0.78,-2.03 1.05,-2.86 0.5,-1.6 1.04,-1.98 1.04,-0.69l0 0zm241.95 164.02c-0.16,0.17 -0.28,0.19 -0.28,0.05 0,-0.34 0.28,-0.62 0.45,-0.46 0.05,0.08 -0.03,0.27 -0.17,0.41l0 0z"></path></svg></div><div class="hero hero-4 svg-icon"><svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 508 852"><path data-mask="hover" d="M296.23 83.51c-0.16,0.17 -6.92,1.09 -11.24,1.52 -1.48,0.17 -4.46,0.54 -6.58,0.81 -2.13,0.31 -5.03,0.71 -6.42,0.88 -1.38,0.17 -2.9,0.41 -3.37,0.51 -0.48,0.1 -2.3,0.34 -4.06,0.5 -5.87,0.65 -7.32,0.98 -7.93,1.9 -0.88,1.31 -1.08,5.7 -0.61,12.22 0.64,8.81 0.74,9.35 2.74,11.07 1.41,1.25 1.72,1.72 2.02,3.24 0.41,2.03 -0.06,2.97 -1.48,2.97 -0.75,0 -0.78,0.11 -0.61,1.59 0.13,0.91 0.37,1.76 0.51,1.93 0.16,0.2 0.3,0.74 0.3,1.21 0,0.51 0.2,1.66 0.47,2.57 0.24,0.91 0.71,2.87 1.05,4.35 0.34,1.49 0.91,3.75 1.28,5.07 0.34,1.28 0.68,2.9 0.71,3.54 0.03,1.05 -0.13,1.29 -1.55,2.2 -0.88,0.54 -2.33,1.42 -3.28,1.92 -1.62,0.91 -1.68,1.01 -4.89,7.46 -1.79,3.62 -3.24,6.96 -3.24,7.4 0,1.28 2.09,3.41 6.04,6.14 4.83,3.38 4.86,3.41 3.41,4.63 -0.64,0.54 -1.38,0.98 -1.69,0.98 -0.27,0 -1.38,-0.78 -2.46,-1.69 -1.08,-0.95 -2.16,-1.69 -2.37,-1.69 -0.81,0 -29.37,3.34 -29.4,3.45 -0.48,0.87 -3.18,4.08 -3.62,4.35 -0.33,0.17 -1.18,0.3 -1.89,0.3 -0.71,0 -1.82,0.14 -2.46,0.31 -0.64,0.17 -2.94,0.47 -5.07,0.71l-3.88 0.44 -1.79 -0.98c-1.01,-0.54 -2.43,-1.32 -3.21,-1.76 -1.52,-0.81 -1.48,-0.81 -8,-0.1 -1.59,0.2 -3.41,0.51 -4.05,0.67 -0.64,0.21 -2.13,0.38 -3.27,0.38 -1.19,0 -2.77,0.13 -3.55,0.33 -0.81,0.17 -5.17,0.75 -9.72,1.25 -19.89,2.16 -18.37,1.86 -20.57,3.89 -1.01,0.94 -2.12,2.29 -2.46,3 -0.3,0.74 -0.68,1.32 -0.81,1.32 -0.17,0 -23.5,3.17 -38.69,5.26 -0.91,0.14 -1.62,0.34 -1.62,0.48 0,0.1 -0.54,0.84 -1.22,1.62 -1.45,1.72 -2.84,1.92 -3.44,0.57 -0.64,-1.38 -0.48,-2.43 0.44,-3.14 0.6,-0.47 0.97,-1.25 1.21,-2.56 0.47,-2.2 0.78,-1.59 -3.91,-7.13 -5.04,-5.91 -8.11,-9.52 -10.2,-12.12l-1.89 -2.3 -1.96 0.14c-1.12,0.07 -2.16,0.3 -2.36,0.51 -0.24,0.23 0.17,3.88 1.21,11.61 0.85,6.21 1.52,11.72 1.52,12.22 0,0.58 0.17,0.92 0.51,0.92 0.94,0 1.85,1.28 1.85,2.66 0,1.49 -0.37,1.89 -2.02,2.2 -1.62,0.27 -2.47,0.91 -3.75,2.8 -1.21,1.82 -1.21,0.54 0.2,12.09 0.48,3.88 1.02,7.42 1.19,7.86 0.16,0.41 0.7,0.91 1.14,1.08 0.71,0.27 0.85,0.58 1.05,2.67 0.27,2.67 0.84,3.65 2.84,4.9 1.14,0.71 1.38,0.74 4.25,0.44 1.72,-0.17 3.27,-0.51 3.58,-0.78 0.61,-0.54 1.32,-0.61 1.32,-0.14 0,0.51 2.22,0.41 2.66,-0.13 0.31,-0.37 0.64,-0.41 1.56,-0.1 0.84,0.23 1.41,0.23 2.02,-0.04 0.47,-0.23 1.82,-0.4 3.01,-0.4 1.14,0 2.22,-0.1 2.36,-0.24 0.24,-0.23 2.03,-0.4 5.5,-0.54 1.86,-0.07 2.23,-0.2 3.21,-1.18 0.64,-0.57 1.28,-1.08 1.45,-1.08 0.21,0 0.71,0.54 1.15,1.18 0.61,0.91 0.74,1.45 0.61,2.43 -0.14,0.68 -0.37,1.39 -0.54,1.56 -0.2,0.2 -1.99,0.47 -3.99,0.64 -6.68,0.5 -10.4,0.91 -11.91,1.25 -0.85,0.2 -2.27,0.33 -3.21,0.37 -0.91,0 -2.87,0.23 -4.32,0.51 -1.46,0.27 -3.35,0.5 -4.16,0.5 -0.81,0 -1.48,0.14 -1.48,0.34 0,0.17 -0.54,0.4 -1.22,0.54l-1.25 0.24 0.21 2.39c0.1,1.32 0.5,3.24 0.91,4.29l0.74 1.89 1.82 0.24c2.43,0.27 6.08,-0.04 9.59,-0.81 1.59,-0.37 5.07,-0.81 7.77,-1.02 2.7,-0.2 6.28,-0.5 7.93,-0.67 2.47,-0.24 3.18,-0.2 3.82,0.2 0.74,0.51 1.01,1.62 0.44,1.99 -0.21,0.1 -3.52,0.24 -7.4,0.27 -6.11,0.11 -7.16,0.21 -7.66,0.68 -0.31,0.3 -0.85,0.57 -1.22,0.57 -0.34,0 -1.58,0.85 -2.7,1.89 -2.06,1.89 -2.09,1.89 -3.68,1.69 -2.13,-0.27 -8.14,0.68 -8.68,1.35 -0.4,0.58 -0.94,5.17 -0.67,5.95 0.07,0.23 -0.07,0.97 -0.34,1.65 -0.47,1.22 -0.27,4.12 0.41,6.25 0.17,0.54 -0.11,1.08 -1.08,2.22 -0.71,0.85 -1.73,2.16 -2.3,2.94 -0.54,0.81 -1.42,1.93 -1.89,2.5 -1.42,1.76 -4.15,5.67 -5.5,7.87 -1.9,3.1 -3.58,10.33 -3.58,15.39 0,2.47 0.06,2.74 1.21,4.32 1.69,2.37 7.19,6.42 8.75,6.42 1.25,0 0.37,1.96 -3.89,8.88 -2.39,3.92 -4.39,7.39 -4.39,7.73 0,0.37 -0.43,1.22 -0.97,1.89 -0.54,0.68 -1.49,2.53 -2.1,4.12 -0.61,1.59 -1.38,3.28 -1.72,3.78 -0.78,1.15 -0.78,1.25 0.27,2.33 0.84,0.88 0.84,0.98 0.34,1.69 -0.31,0.44 -0.54,1.05 -0.54,1.32 0,1.01 -3.41,3.37 -4.86,3.37 -0.85,0 -3.65,3.41 -4.76,5.84 -1.25,2.7 -1.52,3.82 -1.66,6.86 -0.07,1.82 -0.24,2.26 -1.32,3.58 -0.67,0.84 -1.55,2.39 -1.92,3.47 -1.08,3.14 -3.61,13.17 -4.49,17.73 -0.74,3.85 -0.78,4.66 -0.54,9.55 0.2,4.19 0.54,6.52 1.49,10.81l1.21 5.47 6.18 11.82c9.11,17.42 10.57,19.75 15.46,24.51 2.23,2.16 4.59,4.22 5.27,4.56 0.81,0.43 1.28,0.94 1.38,1.48 0.14,1.05 -0.5,4.05 -1.35,6.25 -2.77,7.26 -3.44,10.84 -3.98,20.59 -0.2,3.35 -0.44,6.59 -0.57,7.16 -0.17,0.88 -0.04,1.35 0.6,2.2 0.44,0.6 0.92,1.38 1.05,1.68 0.1,0.34 0.74,0.68 1.49,0.81 0.7,0.11 1.62,0.41 2.02,0.68 0.41,0.27 1.59,0.51 2.67,0.54 1.89,0.1 1.92,0.07 2.29,-0.98 0.21,-0.57 0.48,-1.18 0.61,-1.32 0.34,-0.3 1.62,0.85 1.62,1.46 0,0.27 0.34,0.77 0.75,1.11 0.7,0.54 0.74,0.71 0.33,1.76 -0.57,1.58 -0.5,2.09 0.27,2.8 0.38,0.34 0.75,1.11 0.88,1.72 0.17,0.98 0.34,1.15 1.12,1.15 0.5,0 2.43,0.44 4.25,0.98 4.02,1.21 4.56,1.08 4.56,-1.15 0,-0.81 0.13,-1.86 0.3,-2.3 0.2,-0.47 0.41,-2.09 0.47,-3.64 0.17,-2.7 0.14,-2.87 -0.77,-3.89 -0.91,-1.04 -0.91,-1.14 -0.78,-4.39 0.17,-3.84 0.24,-4.18 0.88,-4.18 1.05,0 2.43,5.64 2.29,9.42 -0.03,0.81 0.14,1.65 0.34,1.92 0.85,1.05 1.66,3.08 1.66,4.22 0,0.68 0.37,2.43 0.84,3.89 0.47,1.45 0.84,2.97 0.84,3.34 0,0.37 0.24,0.98 0.51,1.32 0.27,0.37 0.51,1.08 0.51,1.62 0,0.77 0.13,0.94 0.88,0.94 0.47,0 1.28,0.27 1.75,0.64 1.32,0.88 3.88,1.22 4.46,0.54 0.23,-0.27 0.77,-0.5 1.21,-0.5 1.02,0 1.18,-0.34 0.81,-1.73 -0.2,-0.64 -0.5,-3.88 -0.67,-7.22 -0.17,-3.44 -0.54,-6.96 -0.88,-8.1 -0.34,-1.32 -0.47,-2.64 -0.34,-3.79 0.24,-1.99 -0.27,-6.34 -0.98,-8.5 -0.67,-1.96 -0.64,-3.72 0,-3.95 0.78,-0.31 1.52,0.5 1.52,1.65 0,0.57 0.21,1.28 0.48,1.55 0.4,0.51 0.98,2.43 2.43,8.31 0.27,1.11 0.64,2.63 0.84,3.38 0.2,0.74 0.57,2.32 0.81,3.54 0.24,1.22 0.57,2.53 0.68,2.9 0.13,0.41 0.06,1.05 -0.14,1.46 -0.27,0.5 -0.3,1.68 -0.03,4.28 0.27,3.08 0.44,3.65 1.08,4.19 0.44,0.37 1.11,0.64 1.55,0.68 0.44,0 1.08,0.16 1.45,0.33 0.47,0.27 1.18,0.17 2.87,-0.4l2.23 -0.78 -0.17 -1.52c-0.13,-0.98 0,-1.82 0.27,-2.36 0.74,-1.32 0.64,-6.79 -0.17,-9.42 -0.54,-1.86 -0.57,-2.4 -0.23,-3.65 0.3,-1.15 0.27,-1.69 -0.07,-2.56 -0.24,-0.58 -0.57,-1.93 -0.74,-2.94 -0.14,-1.01 -0.44,-2.43 -0.64,-3.14 -0.21,-0.71 -0.27,-1.72 -0.17,-2.26 0.17,-0.78 -0.17,-1.62 -1.89,-4.56 -2.5,-4.29 -3.18,-6.01 -2.67,-6.92 0.2,-0.37 0.61,-0.68 0.88,-0.68 0.27,0 1.01,-0.37 1.62,-0.84 0.6,-0.47 1.35,-0.84 1.62,-0.84 0.77,0 1.38,0.87 1.11,1.65 -0.3,1.01 0.44,4.69 1.32,6.45 0.44,0.84 1.01,1.96 1.25,2.53 0.27,0.54 0.81,1.05 1.15,1.11 1.01,0.21 1.89,1.15 1.78,1.89 -0.06,0.41 -0.54,0.92 -1.14,1.19 -0.95,0.4 -1.08,0.67 -1.46,2.6 -0.23,1.38 -0.3,3.47 -0.16,5.91 0.27,4.08 0.4,4.38 2.63,5.53 0.57,0.31 1.72,0.91 2.53,1.35 0.81,0.47 1.69,0.85 1.93,0.85 0.27,0 0.47,-0.78 0.6,-2.13 0.54,-5.06 0.98,-7.02 1.93,-8.51 1.28,-2.02 1.62,-4.02 0.81,-4.89 -0.51,-0.54 -0.54,-0.85 -0.24,-1.49 0.21,-0.44 0.37,-1.82 0.37,-3.04 0,-2.03 -0.1,-2.36 -1.18,-3.68 -0.6,-0.78 -1.38,-1.96 -1.69,-2.6 -0.3,-0.64 -0.74,-1.62 -1.01,-2.16 -0.44,-0.84 -0.44,-1.05 0.04,-1.55 0.77,-0.85 0.67,-3.75 -0.17,-4.83 -0.54,-0.68 -0.68,-1.35 -0.68,-3.58l0 -2.7 -1.75 -2.06c-0.98,-1.15 -2.3,-2.7 -2.91,-3.48l-1.11 -1.35 1.28 -1.25c1.45,-1.38 2.13,-3.34 2.13,-6.24 0,-2.54 -0.68,-4.93 -2.47,-8.68 -2.06,-4.29 -3.27,-7.26 -3.61,-8.71 -0.17,-0.64 -0.74,-2.47 -1.35,-4.05 -0.57,-1.59 -1.28,-3.55 -1.59,-4.39 -0.98,-2.84 -2.19,-4.86 -4.01,-6.62 -1.02,-0.95 -1.83,-1.99 -1.83,-2.26 0,-0.31 -0.27,-1.42 -0.57,-2.47 -0.68,-2.09 -2.43,-4.35 -4.32,-5.53l-1.19 -0.75 0 -2.56c0,-2.57 -0.94,-6.89 -1.68,-7.63 -0.17,-0.17 -0.34,-0.68 -0.34,-1.12 0,-0.98 0.78,-1.01 1.92,-0.1 0.71,0.57 0.98,0.61 1.83,0.24 1.52,-0.64 11.64,-12.36 14.21,-16.48 1.12,-1.75 2.87,-3.37 3.44,-3.14 0.31,0.14 1.46,1.52 2.5,3.11 2.74,4.08 4.76,6.18 8.31,8.54 1.69,1.15 3.34,2.3 3.71,2.63 0.58,0.51 0.64,0.51 1.12,-0.23 0.3,-0.41 0.71,-0.75 0.94,-0.75 0.51,0 0.85,-1.79 0.85,-4.59 0,-1.11 0.17,-2.19 0.4,-2.43 0.27,-0.27 1.79,-0.4 4.66,-0.4 5.07,0 6.18,0.43 6.55,2.6 0.64,3.57 2.3,6.41 5.94,10.33 2.03,2.16 2.87,3.31 3.08,4.22 0.13,0.67 0.4,1.79 0.6,2.43 0.17,0.64 0.54,2.02 0.85,3 0.27,1.02 1.28,3.41 2.26,5.3 1.69,3.35 1.72,3.48 1.49,5.41 -0.38,2.7 -0.21,9.21 0.23,10.06 0.27,0.5 0.24,0.91 -0.17,1.69 -1.72,3.24 -2.63,6.61 -3.1,11.34 -0.44,4.36 -2.67,10.3 -5.3,14.18 -0.44,0.64 -1.49,2.4 -2.3,3.88 -0.84,1.49 -1.79,3.18 -2.09,3.72 -1.46,2.6 -5,9.92 -5,10.36 0,0.27 -0.14,0.61 -0.3,0.81 -0.41,0.41 -1.9,4.83 -2.54,7.57 -1.92,8.1 -1.96,8.84 -0.54,10.63 0.54,0.68 0.92,1.42 0.78,1.59 -0.1,0.2 -0.95,0.27 -2.03,0.17l-1.82 -0.2 0.17 1.07c0.1,0.61 0.27,3.96 0.37,7.5 0.17,5.64 0.88,17.52 1.39,23.74 0.23,2.46 0.64,3.07 2.76,3.74 1.12,0.38 1.73,0.41 2.43,0.14 0.51,-0.2 1.09,-0.27 1.29,-0.14 0.17,0.1 0.5,1.66 0.71,3.41 0.71,6.12 1.35,10.98 1.68,13.14 0.31,1.92 0.28,2.26 -0.23,2.83 -0.44,0.51 -0.85,0.58 -2.06,0.41 -0.81,-0.14 -1.76,-0.37 -2.06,-0.58 -0.37,-0.23 -0.98,-0.27 -1.76,-0.06 -1.45,0.37 -4.32,3.54 -4.32,4.76 0,0.44 -0.23,1.15 -0.5,1.58 -0.65,0.98 -0.71,7.47 -0.17,14.73 0.2,2.49 0.5,6.92 0.67,9.79 0.64,10.56 1.15,14.31 2.13,15.9 0.54,0.88 -0.44,1.86 -2.97,3 -4.56,2.06 -10.64,7.26 -12.8,10.94 -0.5,0.88 -1.55,2.47 -2.26,3.52 -1.28,1.78 -1.32,1.95 -1.32,4.59 0,1.52 0.24,3.78 0.54,5.1 0.27,1.28 0.65,3.03 0.81,3.88 0.68,3.41 3.55,12.76 4.09,13.33 0.17,0.17 0.3,0.54 0.3,0.81 0,0.58 3.62,7.87 5.34,10.67 2.93,4.9 6.82,9.63 7.86,9.63 0.38,0 1.05,-0.24 1.52,-0.54 0.78,-0.54 0.88,-0.51 1.49,0.03 0.64,0.57 0.67,1.08 0.67,7.8 0,3.95 -0.13,7.93 -0.33,8.81 -0.17,0.88 -0.48,3.21 -0.68,5.17 -0.61,6.38 -2.09,15.83 -2.7,17.05 -0.17,0.37 -0.61,2.26 -0.98,4.22 -1.21,6.45 -1.69,8.2 -3.11,10.94 -2.22,4.42 -2.59,4.89 -3.81,5.1 -0.74,0.16 -1.92,1.01 -3.65,2.63 -3.04,2.94 -4.99,5.81 -4.99,7.43 0,1.62 -0.98,2.39 -3.35,2.6l-1.89 0.17 -0.6 1.68c-0.98,2.84 -0.34,14.69 0.87,15.91 0.14,0.13 0.24,0.47 0.24,0.77 0,0.31 0.44,1.39 0.94,2.4 0.88,1.76 0.98,1.86 2.33,1.96 2,0.13 2.64,1.04 1.86,2.63 -0.57,1.22 -0.57,1.08 0.81,12.8 0.27,2.23 0.47,5.27 0.47,6.75 0.04,3.01 0.27,3.61 2.13,5.2 0.74,0.67 1.25,1.42 1.25,1.86 0,0.77 0.95,1.89 1.55,1.89 0.21,0 1.22,0.44 2.3,1.01 1.96,0.98 6.82,2.53 9.66,3.04 10.9,1.99 16.37,2.53 29.88,3.07 14.08,0.54 20.32,-0.07 22.04,-2.16 0.48,-0.54 0.41,-3.48 -0.1,-5.91 -0.17,-0.71 -0.06,-1.45 0.31,-2.26 0.47,-0.98 0.54,-1.96 0.37,-6.31 -0.24,-5.68 -0.44,-6.93 -1.86,-10.91 -1.59,-4.46 -2.4,-7.33 -2.23,-7.8 0.1,-0.27 0.54,-0.47 0.95,-0.47 1.18,0 2.12,-0.81 3.71,-3.14l1.42 -2.09 0.27 -7.77c0.44,-11.88 0.2,-15.94 -1.22,-19.75 -0.81,-2.16 -1.28,-2.8 -3.61,-4.73 -2.09,-1.72 -3.27,-2.09 -4.02,-1.18 -0.5,0.64 -1.48,0.64 -1.99,0.07 -0.27,-0.34 -0.17,-0.95 0.34,-2.3 0.41,-1.01 0.84,-2.7 1.01,-3.78 0.17,-1.08 0.48,-2.23 0.64,-2.53 0.17,-0.31 0.71,-2.4 1.19,-4.63 0.94,-4.22 1.11,-4.76 3.68,-10.63 0.84,-1.96 1.55,-3.65 1.55,-3.78 0,-0.14 0.67,-1.66 1.49,-3.38 2.93,-6.28 3.24,-6.99 3.24,-7.29 0,-0.88 1.11,-1.29 6.07,-2.16 1.22,-0.21 2.37,-0.51 2.6,-0.68 0.48,-0.37 0.61,-1.69 1.15,-10.06l0.37 -6.25 1.56 -1.52c1.75,-1.68 6.58,-7.93 8.37,-10.83 1.11,-1.76 1.69,-3.52 2.53,-7.4 0.17,-0.84 0.61,-2.43 0.95,-3.54 2.06,-6.52 2.02,-6.08 0.84,-8.31l-0.91 -1.62 0.71 -1.65c1.08,-2.5 1.59,-4.23 2.73,-9.02 0.58,-2.43 1.22,-4.93 1.39,-5.57 0.17,-0.64 0.54,-2.4 0.84,-3.88 0.3,-1.49 0.78,-3.62 1.01,-4.73 0.27,-1.11 0.61,-2.87 0.81,-3.88 0.78,-3.99 1.46,-7.33 1.93,-9.15 0.64,-2.57 0.61,-6.01 -0.07,-6.99 -0.47,-0.71 -0.47,-0.88 0,-1.89 0.31,-0.64 0.54,-1.32 0.54,-1.52 0,-0.2 0.14,-0.64 0.34,-0.98 0.74,-1.35 1.99,-7.87 2.16,-11.38 0.07,-2.06 0.3,-5.1 0.51,-6.75 0.16,-1.69 0.5,-7.77 0.71,-13.51 0.3,-7.12 0.54,-10.6 0.81,-10.9 0.33,-0.34 1.21,0 4.45,1.75 2.2,1.19 6.08,3.25 8.61,4.53l4.63 2.36 5.16 0c5.91,-0.03 7.53,0.31 9.83,1.96 2.8,1.99 12.19,7.93 14.45,9.15 3.17,1.72 3.65,2.26 4.25,5.16 1.32,6.39 3.48,8.51 14.66,14.46 3.47,1.85 3.88,2.36 2.9,3.88 -0.95,1.42 -2.57,7.16 -2.57,8.98 0,1.08 -0.77,1.82 -3.74,3.58 -0.64,0.37 -1.93,1.11 -2.87,1.69 -1.89,1.11 -5.91,3.34 -7.23,3.98 -0.74,0.37 -0.84,0.68 -0.94,2.43 -0.07,1.93 0,2.2 1.82,5.23 1.05,1.76 2.19,3.58 2.57,4.06 5.23,6.99 9.82,11.81 14.72,15.53 1.55,1.18 3.2,2.7 3.68,3.44l0.87 1.32 -0.43 8.51c-0.44,8.03 -0.51,8.5 -1.22,9.18 -0.64,0.61 -0.78,1.18 -1.01,5.06 -0.51,8.45 -0.37,9.66 1.25,12.33 0.17,0.27 0.47,0.88 0.64,1.35 0.2,0.47 0.84,1.79 1.38,2.94 1.02,2.02 1.02,2.19 0.64,3.88 -0.98,4.35 -1.35,5.33 -2.02,5.33 -0.17,0 -0.58,-0.54 -0.98,-1.18 -0.91,-1.55 -3.61,-2.87 -5.88,-2.87 -2.33,0 -6.01,1.89 -6.78,3.48 -0.31,0.64 -0.54,1.62 -0.54,2.16 0,0.51 -0.34,2.6 -0.71,4.66 -0.37,2.03 -0.88,5 -1.15,6.58 -0.67,4.02 -1.45,7.67 -2.03,9.46 -0.27,0.84 -0.87,3.34 -1.35,5.57 -0.5,2.23 -1.04,4.42 -1.25,4.89 -0.2,0.48 -0.5,1.59 -0.64,2.54 -0.13,0.91 -0.4,2.36 -0.64,3.2 -0.54,2.13 -0.23,2.81 1.96,4.49 1.99,1.52 3.07,1.86 10.03,2.94 1.11,0.17 2.93,0.47 4.05,0.68 1.79,0.3 7.73,1.14 14.01,2.02 6.65,0.91 16.17,2.3 18.74,2.74 1.11,0.17 4.15,0.37 6.75,0.4 5.37,0.07 5.81,-0.07 8.85,-2.77 0.98,-0.84 2.53,-2.22 3.44,-3 2.06,-1.82 2.94,-3.99 2.6,-6.52 -0.17,-1.31 -0.13,-1.72 0.31,-1.85 0.94,-0.38 2.06,0.16 3.03,1.55 2.67,3.71 6.35,7.76 7.23,7.97 0.47,0.1 1.11,0.3 1.38,0.44 2.03,1.04 4.39,1.41 8.11,1.28 7.12,-0.27 17.05,-0.91 17.55,-1.12 0.27,-0.13 2.81,-0.33 5.57,-0.5 10.34,-0.54 16.45,-1.22 17.36,-1.93 1.45,-1.08 1.62,-2.39 0.54,-4.69 -0.51,-1.08 -1.28,-2.87 -1.69,-3.98 -0.4,-1.12 -1.28,-3.18 -1.96,-4.56 -0.64,-1.39 -1.62,-3.58 -2.12,-4.86 -0.85,-2.06 -1.12,-2.37 -2.33,-2.91 -0.75,-0.3 -2.16,-0.6 -3.18,-0.64 -2.02,-0.07 -2.8,-0.37 -4.15,-1.65 -1.59,-1.45 -9.02,-6.35 -16.07,-10.54 -3.14,-1.85 -3.21,-2.6 -0.24,-2.43 1.12,0.07 2.67,0.04 3.45,-0.1 1.31,-0.2 1.48,-0.3 1.85,-1.55l0.37 -1.35 -2.33 -2.37c-6.61,-6.75 -14.38,-11.44 -21.4,-12.96 -0.64,-0.14 -2.03,-0.81 -3.04,-1.49 -1.65,-1.11 -2.06,-1.21 -3.88,-1.18 -1.12,0.03 -2.2,0.07 -2.4,0.1 -0.2,0 -1.32,0.64 -2.5,1.42 -3.51,2.26 -4.46,1.59 -3.75,-2.8 0.24,-1.56 0.51,-5.57 0.61,-8.95l0.2 -6.14 3.01 -3.75c3.17,-4.02 3.91,-5.2 5.03,-8.34 0.37,-1.08 0.81,-2.26 0.98,-2.63 0.13,-0.38 0.74,-1.83 1.32,-3.21 3.27,-8.11 9.21,-16.75 12.25,-17.9 3.72,-1.35 4.29,-1.75 5.78,-4.05 0.84,-1.21 1.82,-2.83 2.22,-3.58 0.41,-0.71 1.05,-1.82 1.45,-2.43 0.51,-0.81 0.68,-1.65 0.68,-3.24 -0.03,-3.27 -0.57,-4.86 -2.46,-6.82 -1.56,-1.69 -1.63,-1.79 -1.29,-2.87 0.85,-2.63 0.81,-2.9 -0.57,-3.78 -1.96,-1.25 -2.9,-2.4 -2.94,-3.65 -0.07,-0.98 0.07,-1.14 0.95,-1.42 0.57,-0.16 1.48,-0.43 2.06,-0.6 0.57,-0.17 1.72,-0.31 2.53,-0.31 1.38,0 1.65,-0.17 3.24,-1.79 2.36,-2.36 4.39,-6.34 4.86,-9.45 0.54,-3.38 -0.27,-8.31 -1.79,-11.31 -1.25,-2.43 -1.72,-2.94 -3.91,-4.12 -2.03,-1.08 -3.85,-4.32 -3.55,-6.25 0.14,-0.84 -0.03,-1.65 -0.67,-2.93 -0.48,-0.98 -1.25,-2.87 -1.76,-4.16 -0.51,-1.31 -1.49,-3.64 -2.16,-5.16 -1.32,-3.07 -1.01,-2.8 -5.61,-4.83 -1.55,-0.68 -5.06,-2.3 -9.58,-4.49 -1.02,-0.47 -2.03,-0.88 -2.2,-0.88 -0.2,0 -1.35,-0.84 -2.5,-1.85 -1.28,-1.12 -2.46,-1.86 -2.9,-1.86 -1.12,0 -1.35,-0.48 -2.03,-3.55 -0.64,-3.07 -2.36,-6.82 -4.39,-9.76 -0.77,-1.08 -1.72,-2.46 -2.09,-3.03 -1.35,-1.96 -6.31,-6.79 -16.17,-15.81 -0.91,-0.84 -3.45,-2.93 -5.57,-4.69 -2.16,-1.75 -5,-4.08 -6.38,-5.2 -1.35,-1.11 -3.72,-3 -5.27,-4.22 -5.88,-4.56 -9.22,-7.49 -12.53,-10.9 -2.63,-2.7 -4.39,-4.16 -7.59,-6.25 -4.97,-3.17 -5.71,-3.85 -5.71,-4.86 0,-0.81 -0.41,-1.15 -3.04,-2.57 -6.38,-3.44 -10.3,-4.89 -14.89,-5.47 -1.75,-0.2 -3.71,-0.64 -4.35,-0.94 -1.56,-0.78 -3.04,-2.06 -3.04,-2.64 0,-0.27 -0.48,-1.52 -1.05,-2.77 -0.88,-1.92 -1.25,-2.36 -2.43,-2.93 -1.35,-0.64 -1.42,-0.74 -1.52,-2.4 -0.07,-1.35 0.03,-1.82 0.61,-2.33 0.54,-0.5 0.67,-1.01 0.67,-2.77 0,-2.56 -0.57,-3.78 -3.04,-6.68 -2.05,-2.4 -3.47,-5.13 -4.62,-8.71 -0.88,-2.77 -0.84,-3.72 0.13,-4.93 0.54,-0.64 0.75,-0.68 1.79,-0.37 1.62,0.47 2.91,0.43 3.99,-0.14 1.08,-0.57 3.78,-5.17 9.48,-16.24 1.39,-2.7 2.4,-3.54 4.19,-3.54 2.5,-0.04 4.36,-0.54 5,-1.39 0.34,-0.44 1.15,-1.82 1.82,-3.07 0.64,-1.29 1.49,-2.8 1.86,-3.38 0.51,-0.81 0.67,-1.72 0.67,-3.34 0,-2.53 0.04,-2.57 3.72,-5.1 3.17,-2.16 4.08,-2.46 5.3,-1.82 1.75,0.91 1.92,1.32 1.15,3.1 -0.41,0.85 -0.71,1.86 -0.71,2.23 0,1.15 1.69,2.91 4.66,4.86 1.62,1.05 3.58,2.37 4.35,2.91 2,1.35 10.06,5.23 11.72,5.64 0.78,0.17 2.23,0.57 3.24,0.87 2.4,0.71 4.49,1.12 8.34,1.52 4.83,0.51 11.07,-0.81 14.96,-3.2 0.64,-0.41 2.93,-1.49 5.06,-2.37 4.96,-2.09 7.02,-3.21 10.03,-5.47 4.25,-3.14 9.69,-9.28 11.95,-13.5 0.61,-1.08 1.35,-2.37 1.72,-2.87 0.34,-0.47 0.61,-0.98 0.61,-1.08 0,-0.1 0.61,-1.45 1.32,-3.01 0.74,-1.52 1.75,-3.91 2.23,-5.3 0.5,-1.38 1.11,-3 1.35,-3.54 0.57,-1.29 1.25,-3.38 2.19,-6.59 0.41,-1.38 1.05,-3.37 1.38,-4.39 0.34,-1.01 0.71,-2.39 0.81,-3.04 0.11,-0.64 0.75,-3.17 1.39,-5.57 2.16,-8.13 3,-14.04 2.13,-14.92 -0.37,-0.37 -0.92,-2.33 -1.15,-4.19 -0.03,-0.47 -0.41,-1.48 -0.81,-2.26 -0.91,-1.75 -0.91,-1.75 0.3,-3.64 0.54,-0.88 1.32,-2.67 1.72,-3.99 0.41,-1.32 0.85,-2.77 0.98,-3.24 0.17,-0.47 0.48,-2.13 0.71,-3.71 0.2,-1.59 0.51,-3.11 0.68,-3.41 0.27,-0.54 1.11,-0.88 5.97,-2.47 3.21,-1.05 4.12,-1.52 8.92,-4.73 4.93,-3.3 7.83,-6.38 9.62,-10.19 1.82,-3.92 2.26,-6.01 1.89,-9.32 -0.17,-1.45 -0.2,-2.84 -0.03,-3.11 0.4,-0.71 2.87,-1.89 3.95,-1.89 2.02,0 2.93,-0.37 3.31,-1.31 0.27,-0.75 0.6,-0.98 1.65,-1.15 0.71,-0.1 2.23,-0.34 3.34,-0.54 1.79,-0.31 4.09,-0.61 13.17,-1.72 1.32,-0.17 4.63,-0.54 7.39,-0.85 2.81,-0.3 5.34,-0.71 5.64,-0.88 0.34,-0.16 1.02,-0.3 1.56,-0.3 0.87,0 1.01,-0.24 1.89,-2.46 0.5,-1.32 1.25,-3.11 1.62,-3.92 2.06,-4.49 2.16,-7.6 0.4,-10.2 -0.54,-0.81 -1.58,-2.56 -2.29,-3.85 -0.71,-1.31 -1.56,-2.73 -1.89,-3.2 -0.51,-0.78 -2.16,-3.89 -9.09,-17.39 -13.54,-26.41 -13.67,-26.64 -14.92,-26.95 -0.37,-0.1 -3.88,0.17 -7.8,0.65 -8.58,0.98 -11.48,1.28 -18.81,1.99 -3.07,0.3 -6.38,0.67 -7.39,0.84 -1.01,0.2 -2.4,0.34 -3.04,0.34 -1.89,0 -3.17,1.05 -5.06,4.12 -0.95,1.52 -2.16,3.41 -2.67,4.15l-0.94 1.35 -2.54 0.1c-2.19,0.07 -2.7,0 -3.71,-0.67 -2.03,-1.39 -5.13,-3.21 -7.56,-4.46 -2.16,-1.11 -2.6,-1.21 -5.07,-1.18 -3.27,0 -6.48,0.37 -11.82,1.32 -5.9,1.04 -9.48,1.18 -13.87,0.57 -7.77,-1.11 -9.9,-2.57 -15.26,-10.36 -0.31,-0.48 -1.76,-2.5 -3.21,-4.53 -1.66,-2.33 -2.6,-3.92 -2.5,-4.29 0.1,-0.33 -0.24,-1.21 -0.74,-1.95 -4.49,-6.69 -4.76,-6.99 -5.64,-6.66 -0.58,0.21 -1.39,-0.5 -4.29,-3.95 -0.88,-1.04 -2.29,-2.39 -3.14,-2.93 -1.79,-1.25 -5.3,-3.04 -5.97,-3.04 -0.78,0 -1.49,-1.08 -1.76,-2.6 -0.17,-1.08 -0.57,-1.72 -1.86,-2.91 -1.35,-1.25 -1.69,-1.79 -1.85,-3.07 -0.27,-1.69 0.13,-2.56 1.21,-2.56 1.08,0 1.08,-0.51 0,-4.9 -0.17,-0.74 -0.51,-2.26 -0.71,-3.38 -0.2,-1.11 -0.54,-2.63 -0.74,-3.37 -0.2,-0.75 -0.57,-2.33 -0.81,-3.55 -0.58,-2.67 -1.45,-5.77 -3.34,-11.98 -1.42,-4.6 -2.5,-7.63 -3.25,-9.12 -0.57,-1.22 -1.01,-1.89 -2.83,-4.49 -0.41,-0.54 -0.88,-0.74 -1.82,-0.74 -0.71,0 -1.35,0.06 -1.46,0.17l0 -0.01zm31.64 87.62c3.75,0.78 9.29,3.95 9.29,5.4 0,1.45 -3.08,2.37 -7.94,2.37 -3.31,0 -3.41,-0.04 -4.49,-1.02 -2.23,-2.02 -3.21,-6.14 -1.72,-7.19 0.51,-0.37 0.98,-0.4 1.92,-0.2 0.68,0.17 1.99,0.47 2.94,0.64l0 0zm-233.3 19.92c-0.17,0.27 -0.37,0.27 -0.58,0.07 -0.2,-0.21 -0.23,-0.54 -0.1,-0.74 0.17,-0.28 0.37,-0.28 0.58,-0.07 0.2,0.2 0.23,0.54 0.1,0.74zm5.7 0.3c0.71,0.78 0.41,1.59 -0.84,2.23 -1.11,0.61 -2.2,0.64 -2.53,0.14 -0.21,-0.34 2.09,-3.01 2.56,-3.01 0.14,0 0.48,0.27 0.81,0.64l0 0zm332.64 1.9c6.72,1.75 8.37,9.21 2.73,12.12 -1.65,0.84 -2.5,1.01 -5.91,1.25 -2.16,0.16 -5.47,0.43 -7.32,0.64 -1.86,0.17 -4.66,0.33 -6.25,0.33 -1.59,0 -4.46,0.14 -6.41,0.31 -1.96,0.2 -5.14,0.44 -7.09,0.54 -1.96,0.1 -5.3,0.34 -7.43,0.5 -2.13,0.17 -6.25,0.41 -9.12,0.51l-5.23 0.2 -4.53 -2.66c-2.49,-1.49 -4.66,-2.94 -4.82,-3.24 -0.41,-0.71 0.13,-1.42 1.25,-1.69 0.43,-0.1 1.11,-0.68 1.51,-1.22 0.41,-0.57 0.92,-1.01 1.15,-1.01 0.24,0 0.85,-0.3 1.35,-0.71 0.64,-0.51 1.15,-0.64 1.86,-0.47 0.61,0.13 1.38,0.03 1.99,-0.31 1.39,-0.71 7.63,-1.82 12.39,-2.19 7.63,-0.61 22.29,-2.06 24.18,-2.4 1.01,-0.17 2.53,-0.34 3.37,-0.37 0.81,0 2.1,-0.13 2.84,-0.27 2.26,-0.47 7.43,-0.41 9.49,0.14l0 0zm-27.89 49.83c1.59,-0.07 3.95,-0.14 5.23,-0.17l2.37 -0.03 0.47 1.48c0.94,3.01 -0.64,6.45 -3.88,8.34 -2.3,1.35 -2.47,1.12 -2.27,-2.87 0.17,-2.73 0.11,-3.41 -0.27,-3.54 -2.97,-0.85 -5.8,-1.32 -6.31,-1.02 -0.71,0.44 -1.18,1.96 -2.06,6.49 -0.71,3.68 -1.18,4.69 -1.89,4.12 -0.44,-0.38 -0.34,-3.55 0.24,-5.34 0.23,-0.78 0.2,-1.45 -0.1,-2.33 -0.41,-1.28 -0.55,-4.49 -0.21,-5.06 0.1,-0.17 1.39,-0.24 3.01,-0.14 1.55,0.1 4.08,0.14 5.67,0.07l0 0zm-18.64 1.69c0.07,0.81 -0.07,1.35 -0.47,1.69 -0.47,0.4 -0.64,0.33 -1.35,-0.48 -1.35,-1.58 -1.05,-2.7 0.71,-2.53 0.91,0.1 1.01,0.24 1.11,1.32zm-14.58 0.84c0.5,0.78 0.54,0.91 0.06,1.39 -0.4,0.4 -0.67,0.43 -1.24,0.13 -0.78,-0.44 -0.95,-1.35 -0.31,-1.99 0.57,-0.57 0.88,-0.51 1.49,0.47zm-13.51 1.35c0.51,0.74 0.51,0.91 0.07,1.35 -0.47,0.48 -0.61,0.44 -1.49,-0.3 -0.81,-0.71 -0.91,-0.91 -0.5,-1.39 0.64,-0.77 1.28,-0.67 1.92,0.34zm-7.16 0.88c0.27,0.44 0.21,0.84 -0.23,1.59 -0.31,0.54 -0.58,1.42 -0.58,1.92 0,0.54 -0.34,1.32 -0.81,1.79 -0.5,0.54 -0.91,1.49 -1.04,2.4 -0.17,1.25 -0.11,1.65 0.47,2.33 0.84,0.98 0.88,1.08 0.13,2.36 -0.57,0.98 -0.57,1.05 0.04,2.09 0.37,0.65 0.64,1.66 0.61,2.37 -0.04,0.71 0.1,1.38 0.26,1.48 0.21,0.1 0.34,0.44 0.34,0.75 0,0.3 0.31,0.91 0.71,1.31 0.47,0.51 0.81,1.52 1.01,3.21 0.48,3.21 1.12,5.77 2,7.56 0.91,1.86 0.87,2 -0.54,3.99 -1.69,2.33 -4.22,7.32 -5.17,10.19 -0.44,1.29 -0.91,2.5 -1.08,2.7 -0.17,0.17 -0.3,0.78 -0.3,1.39 0,0.57 -0.24,1.62 -0.51,2.26 -0.37,0.88 -0.51,2.47 -0.51,5.64 0,3.58 -0.1,4.59 -0.57,5.3 -0.37,0.57 -0.57,1.59 -0.61,2.9 0,2.77 -0.47,3.01 -2.87,1.56 -1.01,-0.61 -3.07,-2.2 -4.59,-3.51 -1.49,-1.29 -3.85,-3.31 -5.23,-4.46 -2.13,-1.79 -2.6,-2.36 -2.97,-3.72 -1.05,-3.64 -1.35,-4.05 -4.9,-6.41l-3.34 -2.23 0.23 -2.9c0.21,-2.84 -0.2,-8.07 -0.84,-10.54 -0.64,-2.56 -3.68,-5.06 -8.71,-7.12 -1.79,-0.74 -3.38,-1.45 -3.58,-1.59 -0.17,-0.13 -1.49,-0.67 -2.87,-1.18 -1.38,-0.51 -3.68,-1.35 -5.06,-1.86 -1.39,-0.5 -3.89,-1.35 -5.58,-1.85 -3.84,-1.18 -4.62,-1.56 -5.09,-2.53 -0.21,-0.41 -0.88,-1.25 -1.45,-1.86 -1.09,-1.12 -1.36,-2.16 -0.61,-2.37 0.44,-0.13 4.72,-0.74 8.51,-1.24 1.31,-0.14 3.64,-0.55 5.23,-0.82 1.59,-0.3 4.02,-0.64 5.4,-0.81 3.95,-0.4 4.53,-0.81 8.81,-5.73 2.1,-2.44 4.02,-4.43 4.26,-4.43 0.23,0 1.55,0.37 2.93,0.85 2.74,0.91 3.96,1.04 4.97,0.5 0.47,-0.27 0.88,-0.23 1.55,0.1 0.61,0.34 1.18,0.41 1.93,0.17 0.57,-0.13 4.76,-0.64 9.28,-1.11 4.52,-0.44 8.31,-0.91 8.41,-1.01 0.4,-0.41 2.19,0 2.56,0.57l0 0zm8.78 13.37c-0.44,0.68 -0.84,0.68 -1.28,-0.03 -0.24,-0.34 -0.17,-0.71 0.13,-1.08 0.41,-0.51 0.51,-0.51 0.98,0 0.41,0.4 0.44,0.64 0.17,1.11zm-205.82 345.53c0.24,0.24 0.41,0.71 0.44,1.08 0.03,1.59 1.59,4.05 4.15,6.59l2.64 2.66 0.3 2.5c0.41,3.14 0.81,7.13 1.35,12.36 0.37,3.75 0.37,4.19 -0.13,4.69 -0.51,0.51 -0.61,0.51 -1.22,-0.03 -0.37,-0.34 -1.01,-1.66 -1.38,-2.94 -0.41,-1.25 -1.22,-2.94 -1.83,-3.75 -2.16,-2.83 -4.49,-6.55 -5.6,-8.88 -0.61,-1.31 -1.32,-2.6 -1.55,-2.9 -0.51,-0.54 -1.49,-5.44 -1.49,-7.33 0,-0.84 0.34,-1.48 1.55,-2.76 1.66,-1.76 2.1,-1.96 2.77,-1.29l0 0z"></path></svg></div></div><div class="heroes-bg"></div><div class="section-content">
+            <div class="text-block text-block-0 flex-v active">
+              <h2 class="section-title section-title--large">Explore Event Domains</h2>
+              <p>
+                The multiversal tech convergence brings four specialized engineering domains. Hover over each hero to preview Earth-616's four signature event experience domains and interactive zones.
+              </p>
+            </div>
+            <div class="text-block text-block-1 flex-v">
+              <h3 class="section-title section-title--large">Domain 01: Autonomous AI</h3>
+              <p>
+                Command cosmic intelligence with Iron Man. Explore multi-agent LLM swarms, neural vision demonstrations, and autonomous algorithmic pipelines that optimize real-time multiversal telemetry.
+              </p>
+            </div>
+            <div class="text-block text-block-2 flex-v">
+              <h3 class="section-title section-title--large">Domain 02: Zero-Trust Security</h3>
+              <p>
+                The cyber vanguard led by Captain America. Discover zero-trust cryptographic architectures, multi-vector intrusion defense, and quantum-resistant verification protocols.
+              </p>
+            </div>
+            <div class="text-block text-block-3 flex-v">
+              <h3 class="section-title section-title--large">Domain 03: Quantum Compute</h3>
+              <p>
+                Dimensional logic with Doctor Strange. Witness high-performance algorithms, tensor acceleration, and simulated quantum computing solving complex real-world puzzles.
+              </p>
+            </div>
+            <div class="text-block text-block-4 flex-v">
+              <h3 class="section-title section-title--large">Domain 04: Cloud & Edge Scale</h3>
+              <p>
+                Unyielding resilience with Thor Odinson. Experience global multi-region clusters, edge IoT sanctums, and high-throughput low-latency systems built for massive scale.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="ash"></div>
+      </section>
+
+      <!-- ==============================================
+           SECTION 8: PLANET SECTION 1 (SANCTUM SANCTORUM)
+           ============================================== -->
+      <section class="planet-section planet-1" id="sanctum">
+        <div class="section-bg"></div>
+        <div class="container mobile-narrow">
+          <div class="section-content flex-v">
+            <div class="section-subtitle orbitro-14">EXPERIENCE ZONE 01 // EARTH-616</div>
+            <h2 class="section-title section-title--large">Sanctum Sanctorum</h2>
+            <p class="section-text">
+              In Sanctum Sanctorum, attendees explore cutting-edge autonomous AI models, distributed protocols, and interactive tech exhibits. Engage with hands-on live demos, connect with campus developers, and experience real-time engineering showcases.
+            </p>
+          </div>
+        </div>
+        <svg class="planet-mask">
+          <clipPath id="planetMask1" clipPathUnits="objectBoundingBox"><path id="planetPath" d="M0.998,0.913 L0.998,0 C0.997,0.001,0.996,-0.001,0.996,0.001 C0.996,0.002,0.995,0.002,0.995,0.002 C0.993,0.002,0.992,0.005,0.99,0.003 C0.99,0.007,0.989,0.002,0.988,0.003 C0.986,0,0.986,0.001,0.984,0.004 C0.983,0.001,0.983,0.005,0.982,0.005 C0.981,0.006,0.981,0.003,0.981,0.004 C0.979,0.009,0.978,0.006,0.976,0.004 C0.975,0.005,0.974,0.003,0.973,0.003 C0.971,-0.004,0.969,0.006,0.964,0.003 C0.964,0.006,0.96,0.003,0.957,0.008 C0.955,0.011,0.952,0.011,0.95,0.012 C0.948,0.014,0.943,0.01,0.941,0.013 C0.94,0.009,0.939,0.016,0.938,0.016 C0.935,0.021,0.93,0.016,0.928,0.017 C0.927,0.017,0.918,0.014,0.916,0.012 C0.916,0.011,0.915,0.01,0.914,0.01 C0.91,0.005,0.903,0.009,0.898,0.008 C0.897,0.008,0.896,0.008,0.894,0.008 C0.892,0.005,0.89,0.011,0.888,0.009 C0.887,0.008,0.884,0.007,0.883,0.008 C0.883,0.009,0.883,0.009,0.883,0.009 C0.881,0.011,0.881,0.009,0.88,0.01 L0.878,0.011,0.878,0.011 C0.877,0.01,0.877,0.01,0.876,0.012 C0.874,0.009,0.874,0.011,0.873,0.012 C0.87,0.01,0.868,0.014,0.867,0.014 C0.866,0.012,0.865,0.017,0.864,0.014 C0.853,0.013,0.847,0.017,0.844,0.013 C0.84,0.007,0.845,0.018,0.833,0.009 C0.829,0.006,0.824,0.011,0.819,0.009 C0.819,0.012,0.818,0.013,0.817,0.011 C0.815,0.016,0.817,0.007,0.806,0.009 C0.802,0.004,0.797,0.014,0.793,0.01 C0.791,0.012,0.789,0.009,0.787,0.011 C0.785,0.008,0.782,0.009,0.78,0.011 C0.777,0.007,0.779,0.017,0.774,0.015 C0.772,0.014,0.771,0.014,0.771,0.015 C0.766,0.013,0.766,0.022,0.757,0.021 C0.755,0.024,0.755,0.023,0.753,0.023 C0.752,0.024,0.747,0.025,0.747,0.026 C0.746,0.027,0.733,0.027,0.731,0.028 C0.722,0.029,0.724,0.028,0.716,0.026 C0.713,0.02,0.712,0.033,0.71,0.025 C0.709,0.025,0.707,0.026,0.706,0.025 C0.704,0.023,0.702,0.022,0.7,0.023 C0.699,0.025,0.696,0.023,0.694,0.022 C0.693,0.022,0.691,0.021,0.689,0.02 L0.672,0.02 C0.669,0.019,0.665,0.016,0.662,0.02 C0.658,0.019,0.651,0.03,0.643,0.027 C0.642,0.027,0.639,0.029,0.637,0.029 C0.635,0.03,0.632,0.032,0.63,0.031 L0.629,0.032 C0.628,0.035,0.627,0.032,0.626,0.032 C0.625,0.032,0.624,0.035,0.623,0.034 L0.623,0.035 C0.622,0.036,0.621,0.033,0.62,0.035 C0.615,0.036,0.61,0.036,0.605,0.036 L0.592,0.038 C0.592,0.038,0.591,0.039,0.59,0.036 C0.585,0.035,0.58,0.039,0.576,0.035 C0.574,0.034,0.574,0.034,0.572,0.034 C0.569,0.029,0.566,0.034,0.563,0.033 C0.561,0.036,0.559,0.034,0.557,0.034 C0.555,0.03,0.554,0.033,0.552,0.031 C0.549,0.028,0.537,0.03,0.534,0.031 L0.534,0.031 C0.527,0.031,0.524,0.034,0.517,0.037 C0.514,0.038,0.506,0.05,0.501,0.042 C0.5,0.041,0.499,0.039,0.498,0.041 C0.495,0.038,0.497,0.036,0.491,0.037 C0.489,0.031,0.489,0.039,0.487,0.037 C0.487,0.036,0.486,0.035,0.486,0.038 C0.484,0.039,0.471,0.041,0.469,0.039 C0.468,0.038,0.465,0.04,0.462,0.041 C0.459,0.038,0.457,0.042,0.454,0.041 C0.449,0.04,0.446,0.039,0.441,0.036 C0.44,0.034,0.438,0.033,0.437,0.035 C0.432,0.034,0.428,0.039,0.422,0.039 C0.419,0.038,0.417,0.042,0.411,0.041 C0.407,0.041,0.403,0.043,0.399,0.041 C0.396,0.044,0.394,0.039,0.392,0.041 C0.39,0.043,0.375,0.045,0.372,0.045 C0.366,0.044,0.369,0.038,0.354,0.041 C0.353,0.039,0.352,0.042,0.35,0.041 C0.349,0.044,0.34,0.045,0.338,0.044 C0.335,0.043,0.332,0.048,0.329,0.047 C0.325,0.045,0.324,0.05,0.321,0.05 C0.321,0.05,0.32,0.05,0.32,0.05 C0.319,0.051,0.315,0.055,0.31,0.055 C0.305,0.054,0.302,0.061,0.296,0.055 C0.293,0.057,0.29,0.048,0.287,0.05 C0.284,0.047,0.276,0.052,0.266,0.052 C0.264,0.051,0.256,0.055,0.254,0.056 C0.252,0.057,0.238,0.058,0.237,0.058 C0.233,0.064,0.233,0.058,0.228,0.062 C0.227,0.06,0.225,0.062,0.224,0.063 C0.223,0.06,0.223,0.064,0.222,0.064 C0.218,0.068,0.21,0.059,0.204,0.063 C0.198,0.068,0.2,0.061,0.192,0.063 C0.186,0.065,0.182,0.061,0.177,0.066 C0.176,0.064,0.176,0.067,0.175,0.067 C0.173,0.07,0.168,0.068,0.165,0.069 C0.164,0.072,0.163,0.07,0.162,0.069 C0.161,0.071,0.16,0.067,0.158,0.07 C0.157,0.069,0.156,0.067,0.154,0.07 L0.14,0.066 C0.139,0.067,0.139,0.067,0.138,0.064 C0.136,0.069,0.134,0.063,0.13,0.064 C0.126,0.065,0.116,0.063,0.111,0.069 C0.11,0.07,0.108,0.067,0.107,0.07 C0.106,0.071,0.104,0.07,0.103,0.071 C0.101,0.07,0.097,0.073,0.096,0.075 C0.09,0.08,0.088,0.072,0.083,0.077 C0.08,0.079,0.078,0.076,0.076,0.078 C0.072,0.08,0.071,0.08,0.068,0.079 C0.064,0.083,0.058,0.076,0.051,0.08 C0.05,0.079,0.049,0.079,0.048,0.081 C0.046,0.08,0.045,0.084,0.043,0.084 C0.042,0.09,0.043,0.081,0.036,0.087 C0.034,0.089,0.029,0.091,0.027,0.088 C0.025,0.087,0.024,0.085,0.023,0.09 C0.018,0.087,0.013,0.092,0.011,0.088 L0.004,0.087 C0.002,0.089,0,0.088,-0.002,0.087 L-0.002,1,-0.002,1,0.998,1,0.998,0.913"></path></clipPath>
+        </svg>
+      </section>
+
+      <!-- ==============================================
+           SECTION 9: PLANET SECTION 2 (THE QUANTUM REALM)
+           ============================================== -->
+      <section class="planet-section planet-2" id="quantum-realm">
+        <div class="section-bg"></div>
+        <div class="container mobile-narrow">
+          <div class="section-content flex-v">
+            <div class="section-subtitle orbitro-14">EXPERIENCE ZONE 02 // INTERACTIVE ARENA</div>
+            <h2 class="section-title section-title--large">The Quantum Realm</h2>
+            <p class="section-text">
+              In The Quantum Realm, experience high-octane tech installations, real-time gaming arenas, and live engineering showdowns. From hands-on tech demos to multiversal challenge kiosks, discover the future of computing up close at Bennett University.
+            </p>
+          </div>
+        </div>
+        <svg class="planet-mask">
+          <clipPath id="planetMask2" clipPathUnits="objectBoundingBox"><path id="planetPath" d="M0.998,0.913 L0.998,0 C0.997,0.001,0.996,-0.001,0.996,0.001 C0.996,0.002,0.995,0.002,0.995,0.002 C0.993,0.002,0.992,0.005,0.99,0.003 C0.99,0.007,0.989,0.002,0.988,0.003 C0.986,0,0.986,0.001,0.984,0.004 C0.983,0.001,0.983,0.005,0.982,0.005 C0.981,0.006,0.981,0.003,0.981,0.004 C0.979,0.009,0.978,0.006,0.976,0.004 C0.975,0.005,0.974,0.003,0.973,0.003 C0.971,-0.004,0.969,0.006,0.964,0.003 C0.964,0.006,0.96,0.003,0.957,0.008 C0.955,0.011,0.952,0.011,0.95,0.012 C0.948,0.014,0.943,0.01,0.941,0.013 C0.94,0.009,0.939,0.016,0.938,0.016 C0.935,0.021,0.93,0.016,0.928,0.017 C0.927,0.017,0.918,0.014,0.916,0.012 C0.916,0.011,0.915,0.01,0.914,0.01 C0.91,0.005,0.903,0.009,0.898,0.008 C0.897,0.008,0.896,0.008,0.894,0.008 C0.892,0.005,0.89,0.011,0.888,0.009 C0.887,0.008,0.884,0.007,0.883,0.008 C0.883,0.009,0.883,0.009,0.883,0.009 C0.881,0.011,0.881,0.009,0.88,0.01 L0.878,0.011,0.878,0.011 C0.877,0.01,0.877,0.01,0.876,0.012 C0.874,0.009,0.874,0.011,0.873,0.012 C0.87,0.01,0.868,0.014,0.867,0.014 C0.866,0.012,0.865,0.017,0.864,0.014 C0.853,0.013,0.847,0.017,0.844,0.013 C0.84,0.007,0.845,0.018,0.833,0.009 C0.829,0.006,0.824,0.011,0.819,0.009 C0.819,0.012,0.818,0.013,0.817,0.011 C0.815,0.016,0.817,0.007,0.806,0.009 C0.802,0.004,0.797,0.014,0.793,0.01 C0.791,0.012,0.789,0.009,0.787,0.011 C0.785,0.008,0.782,0.009,0.78,0.011 C0.777,0.007,0.779,0.017,0.774,0.015 C0.772,0.014,0.771,0.014,0.771,0.015 C0.766,0.013,0.766,0.022,0.757,0.021 C0.755,0.024,0.755,0.023,0.753,0.023 C0.752,0.024,0.747,0.025,0.747,0.026 C0.746,0.027,0.733,0.027,0.731,0.028 C0.722,0.029,0.724,0.028,0.716,0.026 C0.713,0.02,0.712,0.033,0.71,0.025 C0.709,0.025,0.707,0.026,0.706,0.025 C0.704,0.023,0.702,0.022,0.7,0.023 C0.699,0.025,0.696,0.023,0.694,0.022 C0.693,0.022,0.691,0.021,0.689,0.02 L0.672,0.02 C0.669,0.019,0.665,0.016,0.662,0.02 C0.658,0.019,0.651,0.03,0.643,0.027 C0.642,0.027,0.639,0.029,0.637,0.029 C0.635,0.03,0.632,0.032,0.63,0.031 L0.629,0.032 C0.628,0.035,0.627,0.032,0.626,0.032 C0.625,0.032,0.624,0.035,0.623,0.034 L0.623,0.035 C0.622,0.036,0.621,0.033,0.62,0.035 C0.615,0.036,0.61,0.036,0.605,0.036 L0.592,0.038 C0.592,0.038,0.591,0.039,0.59,0.036 C0.585,0.035,0.58,0.039,0.576,0.035 C0.574,0.034,0.574,0.034,0.572,0.034 C0.569,0.029,0.566,0.034,0.563,0.033 C0.561,0.036,0.559,0.034,0.557,0.034 C0.555,0.03,0.554,0.033,0.552,0.031 C0.549,0.028,0.537,0.03,0.534,0.031 L0.534,0.031 C0.527,0.031,0.524,0.034,0.517,0.037 C0.514,0.038,0.506,0.05,0.501,0.042 C0.5,0.041,0.499,0.039,0.498,0.041 C0.495,0.038,0.497,0.036,0.491,0.037 C0.489,0.031,0.489,0.039,0.487,0.037 C0.487,0.036,0.486,0.035,0.486,0.038 C0.484,0.039,0.471,0.041,0.469,0.039 C0.468,0.038,0.465,0.04,0.462,0.041 C0.459,0.038,0.457,0.042,0.454,0.041 C0.449,0.04,0.446,0.039,0.441,0.036 C0.44,0.034,0.438,0.033,0.437,0.035 C0.432,0.034,0.428,0.039,0.422,0.039 C0.419,0.038,0.417,0.042,0.411,0.041 C0.407,0.041,0.403,0.043,0.399,0.041 C0.396,0.044,0.394,0.039,0.392,0.041 C0.39,0.043,0.375,0.045,0.372,0.045 C0.366,0.044,0.369,0.038,0.354,0.041 C0.353,0.039,0.352,0.042,0.35,0.041 C0.349,0.044,0.34,0.045,0.338,0.044 C0.335,0.043,0.332,0.048,0.329,0.047 C0.325,0.045,0.324,0.05,0.321,0.05 C0.321,0.05,0.32,0.05,0.32,0.05 C0.319,0.051,0.315,0.055,0.31,0.055 C0.305,0.054,0.302,0.061,0.296,0.055 C0.293,0.057,0.29,0.048,0.287,0.05 C0.284,0.047,0.276,0.052,0.266,0.052 C0.264,0.051,0.256,0.055,0.254,0.056 C0.252,0.057,0.238,0.058,0.237,0.058 C0.233,0.064,0.233,0.058,0.228,0.062 C0.227,0.06,0.225,0.062,0.224,0.063 C0.223,0.06,0.223,0.064,0.222,0.064 C0.218,0.068,0.21,0.059,0.204,0.063 C0.198,0.068,0.2,0.061,0.192,0.063 C0.186,0.065,0.182,0.061,0.177,0.066 C0.176,0.064,0.176,0.067,0.175,0.067 C0.173,0.07,0.168,0.068,0.165,0.069 C0.164,0.072,0.163,0.07,0.162,0.069 C0.161,0.071,0.16,0.067,0.158,0.07 C0.157,0.069,0.156,0.067,0.154,0.07 L0.14,0.066 C0.139,0.067,0.139,0.067,0.138,0.064 C0.136,0.069,0.134,0.063,0.13,0.064 C0.126,0.065,0.116,0.063,0.111,0.069 C0.11,0.07,0.108,0.067,0.107,0.07 C0.106,0.071,0.104,0.07,0.103,0.071 C0.101,0.07,0.097,0.073,0.096,0.075 C0.09,0.08,0.088,0.072,0.083,0.077 C0.08,0.079,0.078,0.076,0.076,0.078 C0.072,0.08,0.071,0.08,0.068,0.079 C0.064,0.083,0.058,0.076,0.051,0.08 C0.05,0.079,0.049,0.079,0.048,0.081 C0.046,0.08,0.045,0.084,0.043,0.084 C0.042,0.09,0.043,0.081,0.036,0.087 C0.034,0.089,0.029,0.091,0.027,0.088 C0.025,0.087,0.024,0.085,0.023,0.09 C0.018,0.087,0.013,0.092,0.011,0.088 L0.004,0.087 C0.002,0.089,0,0.088,-0.002,0.087 L-0.002,1,-0.002,1,0.998,1,0.998,0.913"></path></clipPath>
+        </svg>
+      </section>
+
+      <!-- ==============================================
+           SECTION 10: S.H.I.E.L.D. DISPATCHES / INTEL (BLOG SECTION)
+           ============================================== -->
+      <section class="blog-section" id="intel">
+        <div class="section-bg"></div>
+        <div class="container mobile-narrow">
+          <h2 class="section-title section-title--large">S.H.I.E.L.D. Dispatches</h2>
+          <div class="section-button">
+            <a href="#faq" class="btn btn--dark btn--large svg-icon">
+              <svg viewBox="0 0 106 98" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M23.307 10.6107L2.71464 49.3398C-0.7956 55.9417 -0.330141 63.9502 3.92129 70.101L17.2414 89.3719C20.976 94.775 27.1255 98 33.6937 98H66.408C74.0238 98 80.9786 93.6748 84.3463 86.8441L103.162 48.6805C106.703 41.4983 105.619 32.8963 100.406 26.8175L83.3965 6.98106C79.5969 2.55001 74.0511 0 68.214 0H40.966C33.5706 0 26.7789 4.08093 23.307 10.6107Z" fill="#D91F40"></path>
+              </svg>
+              <span class="btn-text">Read <br> Intel</span>
+            </a>
+          </div>
+          <div class="section-content" style="margin-top: 40px;">
+            <!-- Intel Card 1 -->
+            <a href="#faq" class="card">
+              <div class="card-image obj-cover">
+                <img alt="Project Nexus Multiverse Guidelines" src="/assets/marvel/stark-lab.jpg" />
+              </div>
+              <div class="card-content">
+                <div class="card-icon svg-icon">
+                  <svg viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="17" cy="17" r="15" stroke="currentColor" stroke-width="2"/>
+                    <path d="M12 17h10M17 12l5 5-5 5" stroke="currentColor" stroke-width="2"/>
+                  </svg>
+                </div>
+                <p class="card-date">OFFICIAL PROTOCOL</p>
+                <h3 class="card-title">Project Nexus: Official Event Code of Conduct & Guidelines</h3>
+                <p class="card-desc">Review the attendee charter, campus safety guidelines, interactive zone entry protocols, and checklist for Bennett University attendees.</p>
+              </div>
+            </a>
+
+            <!-- Intel Card 2 -->
+            <a href="#faq" class="card">
+              <div class="card-image obj-cover">
+                <img alt="Bennett Supercomputing Access" src="/assets/marvel/avengers-compound.jpg" />
+              </div>
+              <div class="card-content">
+                <div class="card-icon svg-icon">
+                  <svg viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="17" cy="17" r="15" stroke="currentColor" stroke-width="2"/>
+                    <path d="M12 17h10M17 12l5 5-5 5" stroke="currentColor" stroke-width="2"/>
+                  </svg>
+                </div>
+                <p class="card-date">CAMPUS INFRASTRUCTURE</p>
+                <h3 class="card-title">Bennett University Tech Labs & Interactive Demo Zones</h3>
+                <p class="card-desc">Experience gigabit connectivity, interactive tech demonstration stations, and student lounge amenities in TechZone II, Greater Noida.</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================================
+           SECTION 11: FORM SECTION (REGISTRATION & QUANTUM TICKET)
+           ============================================== -->
+      <section class="form-section" id="register">
+        <div class="section-bg obj-cover flex-c">
+          <video muted loop playsinline autoplay>
+            <source src="/assets/ev2/video/black-hole.mp4" type="video/mp4"/>
+          </video>
+        </div>
+        <div class="container mobile-narrow">
+          <div class="section-header flex-v text-center">
+            <div class="hud-category-tag" style="margin: 0 auto 12px;">
+              <span class="tag-hash">#REGISTRATION</span>
+              <span class="tag-name">OFFICIAL S.H.I.E.L.D. CLEARANCE GATEWAY</span>
+            </div>
+            <h2 class="section-title section-title--large">Event Registration</h2>
+            <p class="section-subtitle" style="max-width: 750px; margin: 0 auto;">
+              Secure your all-access pass for Project Nexus. Register with your Bennett University credentials to generate your verified cryptographic Quantum Boarding Pass with scannable entry QR.
+            </p>
+            <nav class="socials" style="margin-top: 20px;">
+              <a href="https://youtube.com" class="mask_youtube" title="Youtube" target="_blank" rel="noreferrer"></a>
+              <a href="https://www.instagram.com/geeksforgeeks_bu" class="mask_instagram" title="Instagram (@geeksforgeeks_bu)" target="_blank" rel="noreferrer"></a>
+              <a href="https://twitter.com" class="mask_twitter" title="Twitter" target="_blank" rel="noreferrer"></a>
+              <a href="https://www.linkedin.com/company/gfg-bu/posts/?feedView=all" class="mask_linkedin" title="LinkedIn (GFG Bennett University)" target="_blank" rel="noreferrer"></a>
+            </nav>
+          </div>
+
+          <!-- Live Telemetry Status Pills -->
+          <div class="reg-live-status-bar">
+            <div class="reg-status-pill highlight">
+              <span class="status-dot-green"></span>
+              <span>REGISTRATIONS LIVE // ROUND 1 OPEN</span>
+            </div>
+            <div class="reg-status-pill gold">
+              <span>🎟️ 840+ INNOVATORS ASSEMBLED</span>
+            </div>
+            <div class="reg-status-pill">
+              <span>🛡️ 100% FREE ADMISSION // BENNETT STUDENTS ONLY</span>
+            </div>
+          </div>
+
+          <!-- 3-Step Registration Stepper -->
+          <div class="reg-stepper">
+            <div class="reg-step-item active">
+              <div class="step-num">01</div>
+              <div class="step-meta">
+                <span class="step-name">CADET CREDENTIALS</span>
+                <span class="step-desc">Name, ID & Bennett Email</span>
+              </div>
+            </div>
+            <div class="reg-step-item active">
+              <div class="step-num">02</div>
+              <div class="step-meta">
+                <span class="step-name">TRACK & SQUAD</span>
+                <span class="step-desc">Battle Track & Team Mode</span>
+              </div>
+            </div>
+            <div class="reg-step-item active">
+              <div class="step-num">03</div>
+              <div class="step-meta">
+                <span class="step-name">QUANTUM PASS</span>
+                <span class="step-desc">Instant QR Boarding Pass</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Registration Interactive Hub -->
+          <div class="registration-hub">
+            <!-- Left: Terminal Form -->
+            <div class="reg-terminal-card stark-card">
+              <div class="terminal-bar">
+                <div class="terminal-dots">
+                  <span class="dot-red"></span>
+                  <span class="dot-yellow"></span>
+                  <span class="dot-green"></span>
+                </div>
+                <div class="terminal-title">S.H.I.E.L.D. SECURE REGISTRATION GATEWAY // VER 4.2</div>
+                <div class="terminal-status">ENCRYPTED</div>
+              </div>
+
+              <form id="registration-form" class="reg-form" novalidate>
+                <!-- Full Name -->
+                <div class="form-group">
+                  <label for="reg-fullname" class="form-label">
+                    <span>FULL NAME</span>
+                    <span class="field-req">*</span>
+                  </label>
+                  <div class="input-wrap">
+                    <span class="input-icon">👤</span>
+                    <input 
+                      type="text" 
+                      id="reg-fullname" 
+                      name="fullname" 
+                      class="hud-input" 
+                      placeholder="e.g. Peter Parker" 
+                      required 
+                      autocomplete="name"
+                    />
+                  </div>
+                  <div class="input-error-msg" id="error-fullname">Please enter your full official name.</div>
+                </div>
+
+                <!-- Enrollment Number -->
+                <div class="form-group">
+                  <label for="reg-enrollment" class="form-label">
+                    <span>BENNETT ENROLLMENT NUMBER</span>
+                    <span class="field-req">*</span>
+                  </label>
+                  <div class="input-wrap">
+                    <span class="input-icon">🆔</span>
+                    <input 
+                      type="text" 
+                      id="reg-enrollment" 
+                      name="enrollment" 
+                      class="hud-input" 
+                      placeholder="e.g. E22CSEU0942" 
+                      required 
+                      autocomplete="off"
+                    />
+                  </div>
+                  <div class="input-error-msg" id="error-enrollment">Valid Bennett enrollment number required (e.g. E22CSEU0001).</div>
+                </div>
+
+                <!-- Branch & Year -->
+                <div class="form-row-2">
+                  <div class="form-group">
+                    <label for="reg-branch" class="form-label">
+                      <span>BRANCH / PROGRAM</span>
+                      <span class="field-req">*</span>
+                    </label>
+                    <div class="input-wrap">
+                      <span class="input-icon">⚡</span>
+                      <select id="reg-branch" name="branch" class="hud-select" required>
+                        <option value="">Select Branch</option>
+                        <option value="CSE - Computer Science">CSE - Computer Science</option>
+                        <option value="AI & Data Science">AI & Data Science</option>
+                        <option value="ECE - Electronics">ECE - Electronics</option>
+                        <option value="Biotech & Health-Tech">Biotech & Health-Tech</option>
+                        <option value="BCA / MCA">BCA / MCA</option>
+                        <option value="Other Engineering">Other Engineering</option>
+                      </select>
+                    </div>
+                    <div class="input-error-msg" id="error-branch">Please select your department.</div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="reg-year" class="form-label">
+                      <span>CURRENT YEAR</span>
+                      <span class="field-req">*</span>
+                    </label>
+                    <div class="input-wrap">
+                      <span class="input-icon">📅</span>
+                      <select id="reg-year" name="year" class="hud-select" required>
+                        <option value="">Select Year</option>
+                        <option value="1st Year (Freshman)">1st Year (Freshman)</option>
+                        <option value="2nd Year (Sophomore)">2nd Year (Sophomore)</option>
+                        <option value="3rd Year (Pre-Final)">3rd Year (Pre-Final)</option>
+                        <option value="4th Year (Senior)">4th Year (Senior)</option>
+                        <option value="Postgraduate / Masters">Postgraduate / Masters</option>
+                      </select>
+                    </div>
+                    <div class="input-error-msg" id="error-year">Please select your current year.</div>
+                  </div>
+                </div>
+
+                <!-- University Email (Strict Validation) -->
+                <div class="form-group">
+                  <label for="reg-email" class="form-label">
+                    <span>BENNETT UNIVERSITY EMAIL</span>
+                    <span class="field-req">* STRICT SECURITY</span>
+                  </label>
+                  <div class="input-wrap">
+                    <span class="input-icon">✉️</span>
+                    <input 
+                      type="email" 
+                      id="reg-email" 
+                      name="email" 
+                      class="hud-input" 
+                      placeholder="yourname@bennett.edu.in" 
+                      required 
+                      autocomplete="email"
+                    />
+                    <span class="domain-pill">@bennett.edu.in ONLY</span>
+                  </div>
+                  <!-- Inline Error Prompt -->
+                  <div class="input-error-msg" id="error-email">
+                    ACCESS DENIED: Please use your official Bennett University email address ending in <strong>@bennett.edu.in</strong>.
+                  </div>
+                  <div class="input-success-msg" id="success-email">
+                    ✓ BENNETT UNIVERSITY DOMAIN VERIFIED
+                  </div>
+                </div>
+
+                <!-- Preferred Event Domain & Participation Details -->
+                <div class="form-group">
+                  <label for="reg-track" class="form-label">
+                    <span>PREFERRED EVENT DOMAIN / TRACK</span>
+                    <span class="field-req">*</span>
+                  </label>
+                  <div class="input-wrap">
+                    <span class="input-icon">🎯</span>
+                    <select id="reg-track" name="track" class="hud-select" required>
+                      <option value="">Select Preferred Domain</option>
+                      <option value="Quantum AI & Neural Swarms">Domain 01: Quantum AI & Neural Swarms</option>
+                      <option value="Web3 & Starknet Defense">Domain 02: Web3 & Zero-Trust Defense</option>
+                      <option value="Cloud Nebula Distributed Systems">Domain 03: Cloud & Edge Systems</option>
+                      <option value="Multiversal FinTech Engines">Domain 04: Interactive Tech & Gaming</option>
+                      <option value="Open Multiverse Innovation">Domain 05: Open Multiverse Showcase</option>
+                    </select>
+                  </div>
+                  <div class="input-error-msg" id="error-track">Please choose your preferred event domain.</div>
+                </div>
+
+                <div class="form-row-2">
+                  <div class="form-group">
+                    <label for="reg-mode" class="form-label">
+                      <span>ATTENDANCE TYPE</span>
+                      <span class="field-req">*</span>
+                    </label>
+                    <div class="input-wrap">
+                      <span class="input-icon">👥</span>
+                      <select id="reg-mode" name="mode" class="hud-select" required>
+                        <option value="Individual Attendee">Individual Attendee (Solo Pass)</option>
+                        <option value="Group / Peer Delegate">Group / Peer Delegate</option>
+                        <option value="Campus Tech Ambassador">Campus Tech Ambassador</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="reg-squad" class="form-label">
+                      <span>AFFILIATION / GROUP NAME</span>
+                      <span class="field-opt" style="color: var(--text-muted); font-size: 0.65rem;">(Optional)</span>
+                    </label>
+                    <div class="input-wrap">
+                      <span class="input-icon">🛡️</span>
+                      <input 
+                        type="text" 
+                        id="reg-squad" 
+                        name="squad" 
+                        class="hud-input" 
+                        placeholder="e.g. Bennett Tech Club / Stark Labs" 
+                        autocomplete="off"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Avatar Sync Preview -->
+                <div class="form-avatar-sync-banner">
+                  <div class="avatar-sync-info">
+                    <span class="sync-tag">EQUIPPED AVATAR BADGE:</span>
+                    <strong class="sync-name" id="reg-avatar-name">Spider-Man (Peter Parker)</strong>
+                  </div>
+                  <a href="#heroes-lab" class="sync-change-link" title="Change Avatar in 3D Lab">Change Avatar ↗</a>
+                </div>
+
+                <!-- Action Button -->
+                <div class="form-submit-wrap">
+                  <button type="submit" id="reg-submit-btn" class="reg-submit-btn magnetic-btn">
+                    <span class="submit-sheen"></span>
+                    <span class="submit-text">COMPLETE REGISTRATION & ISSUE BOARDING PASS</span>
+                    <span class="submit-icon">⚡</span>
+                  </button>
+                </div>
+
+                <div class="form-footer-note">
+                  <span class="lock-icon">🔒</span>
+                  <span>Credentials encrypted under Earth-616 protocols. Free admission for all verified Bennett University students.</span>
+                </div>
+              </form>
+            </div>
+
+            <!-- Right: Dynamic Ticket Preview & Output -->
+            <div class="ticket-output-wrap" id="ticket-output-container">
+              <!-- Placeholder State (Before submission) -->
+              <div class="ticket-placeholder" id="ticket-placeholder-card">
+                <div class="scanner-laser"></div>
+                <div class="placeholder-reactor">
+                  <div class="hologram-projection"></div>
+                </div>
+                <h4 class="placeholder-title">AWAITING CREDENTIAL VERIFICATION</h4>
+                <p class="placeholder-desc">
+                  Submit the authentication form with your Bennett email to forge your personalized Marvel Quantum Boarding Pass with dynamic QR code & security serial.
+                </p>
+                <div class="sample-badge">
+                  <span>PREVIEW TIER: LEVEL 5 CLEARANCE</span>
+                </div>
+              </div>
+
+              <!-- REAL GENERATED MARVEL QUANTUM TICKET -->
+              <div class="marvel-ticket-wrapper hidden" id="marvel-ticket-card">
+                <div class="marvel-ticket" id="printable-ticket">
+                  <!-- Holographic Foil Shimmer Border -->
+                  <div class="ticket-hologram-border" data-html2canvas-ignore="true"></div>
+
+                  <!-- Ticket Main Body -->
+                  <div class="ticket-main-section">
+                    <div class="ticket-header-row">
+                      <div class="ticket-brand">
+                        <span class="ticket-logo-a">A</span>
+                        <div class="ticket-brand-text">
+                          <span class="ticket-event-name">PROJECT NEXUS // OFFICIAL PASS</span>
+                          <span class="ticket-sub">GEEKSFORGEEKS BENNETT UNIVERSITY</span>
+                        </div>
+                      </div>
+                      <div class="ticket-clearance-pill">
+                        <span class="pill-dot"></span>
+                        <span class="pill-txt">EARTH-616 // ALL-ACCESS PASS</span>
+                      </div>
+                    </div>
+
+                    <div class="ticket-attendee-grid">
+                      <div class="t-cell t-span-2">
+                        <div class="t-label">ATTENDEE NAME</div>
+                        <div class="t-value name-val" id="t-display-name">PETER PARKER</div>
+                      </div>
+                      <div class="t-cell">
+                        <div class="t-label">ENROLLMENT NO.</div>
+                        <div class="t-value" id="t-display-enrollment">E22CSEU0942</div>
+                      </div>
+                      <div class="t-cell">
+                        <div class="t-label">DEPARTMENT / YEAR</div>
+                        <div class="t-value" id="t-display-dept">CSE // 3RD YEAR</div>
+                      </div>
+                      <div class="t-cell t-span-2">
+                        <div class="t-label">VERIFIED UNIVERSITY EMAIL</div>
+                        <div class="t-value email-val" id="t-display-email">peter.parker@bennett.edu.in</div>
+                      </div>
+                      <div class="t-cell">
+                        <div class="t-label">EVENT DOMAIN</div>
+                        <div class="t-value" id="t-display-track">QUANTUM AI & AGENTS</div>
+                      </div>
+                      <div class="t-cell">
+                        <div class="t-label">EQUIPPED AVATAR</div>
+                        <div class="t-value" id="t-display-avatar" style="color: var(--arc-cyan);">SPIDER-MAN</div>
+                      </div>
+                      <div class="t-cell">
+                        <div class="t-label">CLEARANCE STATUS</div>
+                        <div class="t-value gold-text" id="t-display-status">CONFIRMED // ALL-ACCESS PASS</div>
+                      </div>
+                      <div class="t-cell">
+                        <div class="t-label">ACCESS VENUE</div>
+                        <div class="t-value" id="t-display-venue">INNOVATION LABS & SANCTUM</div>
+                      </div>
+                    </div>
+
+                    <div class="ticket-bottom-bar">
+                      <div class="ticket-barcode-wrap">
+                        <div class="mock-barcode"></div>
+                        <span class="barcode-serial" id="t-display-serial">SEC-616-9082-ALPHA</span>
+                      </div>
+                      <div class="shield-watermark">
+                        <span>S.H.I.E.L.D. CERTIFIED</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Perforated Tear-off Stub Line -->
+                  <div class="ticket-perforation">
+                    <span class="notch-top"></span>
+                    <div class="perf-dashed-line"></div>
+                    <span class="notch-bottom"></span>
+                  </div>
+
+                  <!-- Ticket Stub Section (Right Side with QR Code) -->
+                  <div class="ticket-stub-section">
+                    <div class="stub-header">
+                      <span class="stub-title">GATE PASS</span>
+                      <span class="stub-status">VALIDATED</span>
+                    </div>
+
+                    <!-- Client-Side Generated QR Code -->
+                    <div class="stub-qr-container">
+                      <canvas id="ticket-qr-canvas" class="ticket-qr-canvas"></canvas>
+                    </div>
+
+                    <div class="stub-id-block">
+                      <span class="stub-id-label">QUANTUM PASS ID</span>
+                      <span class="stub-id-val" id="t-display-id">AVN-NEXUS-8429</span>
+                    </div>
+
+                    <div class="stub-watermark-a">A</div>
+                  </div>
+                </div>
+
+                <!-- Ticket Action Controls -->
+                <div class="ticket-action-bar">
+                  <button id="btn-download-ticket" class="ticket-btn action-download" title="Download High-Resolution PNG Ticket">
+                    <span class="btn-icon">⬇</span>
+                    <span>DOWNLOAD PASS (PNG)</span>
+                  </button>
+                  <button id="btn-copy-ticket" class="ticket-btn action-copy" title="Copy Ticket Clearance ID">
+                    <span class="btn-icon">📋</span>
+                    <span>COPY PASS ID</span>
+                  </button>
+                  <button id="btn-print-ticket" class="ticket-btn action-print" title="Print Clean Ticket (Stripped Layout)">
+                    <span class="btn-icon">🖨️</span>
+                    <span>PRINT PASS</span>
+                  </button>
+                  <button id="btn-reset-ticket" class="ticket-btn action-reset" title="Register Another Attendee">
+                    <span class="btn-icon">↺</span>
+                    <span>REGISTER ANOTHER</span>
+                  </button>
+                </div>
+
+                <!-- Saved Registrations Counter -->
+                <div class="stored-tickets-bar">
+                  <span id="stored-tickets-msg">1 ticket saved locally in browser vault.</span>
+                  <button id="btn-view-stored" class="link-btn">View Saved Passes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Event Benefits & Inclusions Showcase -->
+          <div class="reg-benefits-showcase">
+            <div class="benefits-header">
+              <div class="hud-category-tag" style="margin: 0 auto 10px;">
+                <span class="tag-hash">#INCLUSIONS</span>
+                <span class="tag-name">OFFICIAL REGISTRATION PERKS</span>
+              </div>
+              <h3 class="benefits-title">WHAT EVERY REGISTERED INNOVATOR RECEIVES</h3>
+              <p class="benefits-sub">All-inclusive access provided free of charge by GeeksForGeeks Student Chapter & Bennett University.</p>
+            </div>
+            <div class="benefits-grid">
+              <div class="benefit-item">
+                <div class="benefit-icon">🎟️</div>
+                <div class="benefit-details">
+                  <h4>Verified Digital Pass</h4>
+                  <p>Cryptographic QR clearance pass for rapid physical check-in at Bennett University Innovation Wings.</p>
+                </div>
+              </div>
+              <div class="benefit-item">
+                <div class="benefit-icon">⚡</div>
+                <div class="benefit-details">
+                  <h4>Interactive Tech Labs</h4>
+                  <p>High-speed campus Wi-Fi, interactive demo stations, charging lounges, and cutting-edge tech exploration zones.</p>
+                </div>
+              </div>
+              <div class="benefit-item">
+                <div class="benefit-icon">🍕</div>
+                <div class="benefit-details">
+                  <h4>Refreshments & Energy Lounges</h4>
+                  <p>Curated snacks, beverage lounges, energy stations, and complimentary event refreshments throughout the day.</p>
+                </div>
+              </div>
+              <div class="benefit-item">
+                <div class="benefit-icon">👕</div>
+                <div class="benefit-details">
+                  <h4>Marvel x GFG BU Swag</h4>
+                  <p>Limited-edition Project Nexus badge, holographic pass, sticker cache, and student delegate kit.</p>
+                </div>
+              </div>
+              <div class="benefit-item">
+                <div class="benefit-icon">🏆</div>
+                <div class="benefit-details">
+                  <h4>Official Certificates & Honors</h4>
+                  <p>Accredited S.H.I.E.L.D. certificates of participation, event mementos, and collegiate honors.</p>
+                </div>
+              </div>
+              <div class="benefit-item">
+                <div class="benefit-icon">🧠</div>
+                <div class="benefit-details">
+                  <h4>Industry Workshops & Keynotes</h4>
+                  <p>Direct keynote sessions, interactive tech masterclasses, and networking with engineering leaders.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================================
+           SECTION 12: FAQ (TACTICAL INTEL PROTOCOLS)
+           ============================================== -->
+      <section class="faq-section" id="faq">
+        <div class="container">
+          <div class="section-header text-center">
+            <div class="hud-category-tag">
+              <span class="tag-hash">#08</span>
+              <span class="tag-name">TACTICAL INTEL & PROTOCOLS</span>
+            </div>
+            <h2 class="section-title text-scramble" data-scramble="FREQUENTLY ASKED QUESTIONS">
+              FREQUENTLY ASKED QUESTIONS
+            </h2>
+            <div class="title-accent-bar"></div>
+            <p class="section-lead">
+              Everything you need to know before stepping through the Bennett Multiverse Portal.
+            </p>
+          </div>
+
+          <!-- Interactive Accordion List -->
+          <div class="faq-accordion-list" id="faq-accordion">
+            <div class="faq-item">
+              <button class="faq-trigger" aria-expanded="false">
+                <span class="faq-question">Who is eligible to participate in Project Nexus?</span>
+                <span class="faq-arrow">▼</span>
+              </button>
+              <div class="faq-panel">
+                <p>
+                  Any currently enrolled undergraduate, postgraduate, or doctoral student at Bennett University is eligible to participate. You must possess a valid Bennett University student email address (<code>@bennett.edu.in</code>) and student ID card for physical campus clearance.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-trigger" aria-expanded="false">
+                <span class="faq-question">Can I attend individually or with friends?</span>
+                <span class="faq-arrow">▼</span>
+              </button>
+              <div class="faq-panel">
+                <p>
+                  Both individual attendees and student groups are welcome! You can register as an individual attendee or represent a group. Throughout the event, explore interactive installations, workshops, and showcase arenas together.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-trigger" aria-expanded="false">
+                <span class="faq-question">Is there any registration or entry fee?</span>
+                <span class="faq-arrow">▼</span>
+              </button>
+              <div class="faq-panel">
+                <p>
+                  <strong>Absolutely zero cost (100% Free).</strong> GeeksForGeeks Student Chapter Bennett University and our campus partners provide full access to all exhibitions, workshops, gaming arenas, refreshments, and exclusive Marvel merchandise completely free of charge.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-trigger" aria-expanded="false">
+                <span class="faq-question">What hardware or materials should I bring to campus?</span>
+                <span class="faq-arrow">▼</span>
+              </button>
+              <div class="faq-panel">
+                <p>
+                  Bring your primary laptop or mobile device for interactive zones, Bennett student ID card, and your digital or printed Quantum Boarding Pass for rapid campus gate clearance. Bennett provides high-speed campus Wi-Fi throughout the venue.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-trigger" aria-expanded="false">
+                <span class="faq-question">Are freshmen and students from all branches welcome?</span>
+                <span class="faq-arrow">▼</span>
+              </button>
+              <div class="faq-panel">
+                <p>
+                  Yes, absolutely! Project Nexus is designed for students across all years (freshmen through seniors) and all academic branches. There are beginner-friendly workshops, interactive exhibits, and tech showcases tailored for all curiosity levels.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-trigger" aria-expanded="false">
+                <span class="faq-question">What amenities and refreshments will be provided during the event?</span>
+                <span class="faq-arrow">▼</span>
+              </button>
+              <div class="faq-panel">
+                <p>
+                  Bennett University's state-of-the-art auditorium, student lounges, and exhibition halls will be equipped with event helpdesks, interactive zones, complimentary swag kits, curated refreshments, and beverage stations for all registered attendees.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================================
+           SECTION 13: EV2 CYBERNETIC FOOTER
+           ============================================== -->
+      <footer class="footer flex">
+        <div class="footer-wrapper flex w-full">
+          <div class="footer-logo">
+            <a class="ev2-logo svg-icon inverted" title="GFG BU x Marvel" data-current="true" href="#hero">
+              <svg viewBox="0 0 100 100" style="width: 50px; height: 50px;">
+                <circle cx="50" cy="50" r="46" fill="none" stroke="#ED1D24" stroke-width="4" />
+                <polygon points="50,15 63,57 53,57 49,42 41,42 37,57 27,57" fill="#ED1D24" />
+                <polygon points="45,46 56,46 59,52 43,52" fill="#07070B" />
+                <line x1="20" y1="57" x2="68" y2="57" stroke="#FFD700" stroke-width="4" stroke-linecap="round" />
+                <polygon points="63,52 76,57 63,62" fill="#FFD700" />
+              </svg>
+            </a>
+          </div>
+
+          <menu class="footer-menu flex-v">
+            <nav class="menu flex-v">
+              <div class="menu-nav flex-v">
+                <a title="PORTAL APEX" href="#hero">PORTAL APEX</a>
+                <a title="3D HERO LAB" href="#heroes-lab">3D HERO LAB</a>
+                <a title="ABOUT PROJECT NEXUS" href="#about">ABOUT PROJECT NEXUS</a>
+                <a title="EVENT ROADMAP" href="#roadmap">EVENT ROADMAP</a>
+                <a title="BATTLE SUITS" href="#suits">BATTLE SUITS</a>
+                <a title="EVENT DOMAINS" href="#tracks">EVENT DOMAINS</a>
+                <a title="TERMS OF USE" href="#faq">TERMS OF USE</a>
+                <a title="PRIVACY POLICY" href="#faq">PRIVACY POLICY</a>
+              </div>
+            </nav>
+            <nav class="socials">
+              <a href="https://youtube.com" class="mask_youtube" title="Youtube" target="_blank" rel="noreferrer"></a>
+              <a href="https://www.instagram.com/geeksforgeeks_bu" class="mask_instagram" title="Instagram (@geeksforgeeks_bu)" target="_blank" rel="noreferrer"></a>
+              <a href="https://twitter.com" class="mask_twitter" title="Twitter" target="_blank" rel="noreferrer"></a>
+              <a href="https://www.linkedin.com/company/gfg-bu/posts/?feedView=all" class="mask_linkedin" title="LinkedIn (GFG Bennett University)" target="_blank" rel="noreferrer"></a>
+            </nav>
+          </menu>
+
+          <p class="footer-copyright">
+            Copyright © 2026 GeeksForGeeks Student Chapter, Bennett University. <br/>
+            Project Nexus Flagship Event. Inspired by Marvel Studios MCU aesthetic. All rights reserved.
+          </p>
+
+          <svg class="clip-svg">
+            <clipPath id="clipSVG" clipPathUnits="objectBoundingBox">
+              <path d="M0.084,0.015 C0.09,0.005,0.097,0,0.105,0 H0.962 C0.965,0,0.968,0.003,0.971,0.007 L0.996,0.054 C0.999,0.058,1,0.064,1,0.071 V0.848 C1,0.865,0.996,0.881,0.99,0.892 L0.937,0.983 C0.931,0.994,0.923,1,0.915,1 H0.01 C0.004,1,0,0.992,0,0.982 V0.184 C0,0.169,0.003,0.155,0.009,0.144 L0.084,0.015"></path>
+            </clipPath>
+            <clipPath id="clipButton" clipPathUnits="objectBoundingBox">
+              <path d="M0.223,0.101 L0.021,0.511 C-0.01,0.574,-0.006,0.65,0.031,0.709 L0.166,0.918 C0.199,0.969,0.254,1,0.312,1 H0.637 C0.704,1,0.766,0.959,0.796,0.894 L0.982,0.489 C1,0.42,1,0.338,0.957,0.28 L0.787,0.066 C0.753,0.024,0.704,0,0.652,0 H0.38 C0.314,0,0.254,0.039,0.223,0.101"></path>
+            </clipPath>
+          </svg>
+        </div>
+      </footer>
+
+    </main>
+
+    <!-- SAVED TICKETS MODAL (POPOVER) -->
+    <div id="saved-tickets-modal" class="hud-modal hidden" aria-hidden="true">
+      <div class="modal-backdrop"></div>
+      <div class="modal-window stark-card">
+        <div class="modal-header">
+          <h3 class="modal-title">BROWSER VAULT // SAVED CLEARANCE PASSES</h3>
+          <button id="modal-close-btn" class="modal-close" aria-label="Close Modal">✕</button>
+        </div>
+        <div class="modal-body" id="saved-tickets-list">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN APP SCRIPT -->
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

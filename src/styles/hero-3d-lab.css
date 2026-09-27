@@ -1,0 +1,505 @@
+/* ==========================================================================
+   MARVEL HERO ROSTER & AVATAR SHOWCASE STYLES
+   (Simple, Clean, Cinematic Character Showcase)
+   ========================================================================== */
+
+.heroes-lab-section {
+  position: relative;
+  padding: 110px 0 100px;
+  background: radial-gradient(circle at 50% 30%, rgba(20, 24, 45, 0.6) 0%, #06060A 75%);
+  overflow: hidden;
+  border-top: 1px solid rgba(0, 240, 255, 0.15);
+  border-bottom: 1px solid rgba(237, 29, 36, 0.2);
+}
+
+.lab-bg-haze {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 40%, rgba(237, 29, 36, 0.12) 0%, transparent 60%),
+              radial-gradient(circle at 70% 60%, rgba(0, 240, 255, 0.08) 0%, transparent 60%);
+  opacity: 0.85;
+  pointer-events: none;
+  transition: background 0.8s ease;
+}
+
+/* Marvel Display Headline */
+.section-title--marvel {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 5.2vw, 4.8rem);
+  letter-spacing: 3px;
+  line-height: 1;
+  background: linear-gradient(135deg, #FFFFFF 0%, #F59E0B 45%, #ED1D24 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 30px rgba(237, 29, 36, 0.4));
+  margin-bottom: 12px;
+}
+
+/* ==========================================================================
+   HERO ROSTER DOCK (Clean, Normal Roster Selector Strip)
+   ========================================================================== */
+.hero-roster-dock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 35px;
+  position: relative;
+  z-index: 10;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding: 0 12px;
+}
+
+.hero-chip-btn {
+  background: rgba(14, 18, 30, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-secondary);
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  transition: all var(--transition-normal);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.hero-chip-btn .hero-chip-icon {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.hero-chip-btn .hero-chip-label {
+  font-family: var(--font-hud);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.hero-chip-btn:hover {
+  background: rgba(25, 32, 54, 0.95);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+.hero-chip-btn.active {
+  background: rgba(237, 29, 36, 0.2);
+  border-color: var(--marvel-red);
+  color: #FFFFFF;
+  box-shadow: 0 0 20px rgba(237, 29, 36, 0.35);
+  transform: translateY(-2px);
+}
+
+.hero-chip-btn.active .hero-chip-label {
+  color: #FFFFFF;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+/* ==========================================================================
+   HERO SHOWCASE GRID (Stage + Dossier)
+   ========================================================================== */
+.hero-showcase-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 36px;
+  align-items: stretch;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   LEFT: HERO VISUAL STAGE
+   ========================================================================== */
+.hero-stage-card {
+  position: relative;
+  width: 100%;
+  min-height: 560px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 60%, rgba(20, 26, 48, 0.6) 0%, rgba(8, 10, 18, 0.95) 75%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), inset 0 0 35px rgba(255, 255, 255, 0.02);
+  perspective: 1000px;
+  cursor: grab;
+}
+
+/* Ambient colored aura in the background */
+.hero-stage-aura {
+  position: absolute;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background: rgba(237, 29, 36, 0.28);
+  filter: blur(75px);
+  opacity: 0.55;
+  pointer-events: none;
+  transition: background 0.6s ease;
+  z-index: 1;
+}
+
+/* Circular floor pedestal glow */
+.hero-pedestal-disc {
+  position: absolute;
+  bottom: 30px;
+  width: 300px;
+  height: 36px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(0, 240, 255, 0.3) 0%, rgba(0, 240, 255, 0.05) 55%, transparent 75%);
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.25);
+  pointer-events: none;
+  transition: border-color 0.5s ease, box-shadow 0.5s ease, background 0.5s ease;
+  z-index: 1;
+}
+
+/* Character Image Container */
+.hero-image-wrap {
+  position: relative;
+  z-index: 2;
+  height: 90%;
+  max-height: 500px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  pointer-events: none;
+  transition: transform 0.12s ease-out;
+  transform-style: preserve-3d;
+}
+
+.hero-main-img {
+  max-height: 100%;
+  max-width: 100%;
+  height: auto;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.9));
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+/* Left / Right Arrow Buttons */
+.hero-nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(10, 14, 26, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #FFFFFF;
+  font-size: 1.6rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 6;
+  transition: all var(--transition-fast);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  user-select: none;
+}
+
+.hero-nav-arrow.arrow-prev {
+  left: 18px;
+  padding-right: 2px;
+}
+
+.hero-nav-arrow.arrow-next {
+  right: 18px;
+  padding-left: 2px;
+}
+
+.hero-nav-arrow:hover {
+  background: rgba(237, 29, 36, 0.3);
+  border-color: var(--marvel-red);
+  color: #FFFFFF;
+  box-shadow: 0 0 16px rgba(237, 29, 36, 0.5);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.hero-nav-arrow:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+/* Subtle Interactive Badge */
+.hero-stage-badge {
+  position: absolute;
+  bottom: 12px;
+  font-family: var(--font-hud);
+  font-size: 0.58rem;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.hero-stage-badge .badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--arc-cyan);
+  box-shadow: 0 0 8px var(--arc-cyan);
+}
+
+/* ==========================================================================
+   RIGHT: CLEAN HERO DOSSIER CARD
+   ========================================================================== */
+.hero-dossier-card {
+  position: relative;
+  background: rgba(12, 16, 28, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  padding: 36px 32px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), inset 0 0 30px rgba(255, 255, 255, 0.02);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.dossier-top-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.dossier-secret-badge {
+  font-family: var(--font-hud);
+  font-size: 0.65rem;
+  letter-spacing: 1.5px;
+  color: var(--stark-gold);
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.dossier-track-badge {
+  font-family: var(--font-hud);
+  font-size: 0.62rem;
+  letter-spacing: 1px;
+  color: var(--arc-cyan);
+  background: rgba(0, 240, 255, 0.1);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.dossier-hero-name {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 4vw, 4.2rem);
+  letter-spacing: 2px;
+  line-height: 1;
+  color: #FFFFFF;
+  margin-bottom: 6px;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
+  transition: color 0.3s ease;
+}
+
+.dossier-hero-title {
+  font-family: var(--font-hud);
+  font-size: 0.74rem;
+  letter-spacing: 1.5px;
+  color: var(--arc-cyan);
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.dossier-lore {
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+
+.dossier-quote {
+  font-style: italic;
+  font-size: 0.88rem;
+  color: var(--stark-gold);
+  border-left: 3px solid var(--stark-gold);
+  padding-left: 12px;
+  margin-bottom: 22px;
+  line-height: 1.45;
+}
+
+/* ==========================================================================
+   3 SIMPLE STAT BARS
+   ========================================================================== */
+.dossier-stats-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+  background: rgba(8, 10, 18, 0.6);
+  padding: 16px 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.dossier-stat-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dossier-stat-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-hud);
+  font-size: 0.66rem;
+  letter-spacing: 1px;
+}
+
+.dossier-stat-meta .stat-name {
+  color: var(--text-muted);
+}
+
+.dossier-stat-meta .stat-val {
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+.stat-bar-track {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.stat-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--arc-cyan) 0%, var(--marvel-red) 100%);
+  border-radius: 3px;
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1), background 0.4s ease;
+}
+
+/* ==========================================================================
+   EQUIP AVATAR ACTION BUTTON & SUCCESS BADGE
+   ========================================================================== */
+.dossier-action-btn {
+  margin-top: 10px;
+}
+
+.hero-equip-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 24px;
+  background: linear-gradient(135deg, #ED1D24 0%, #B91C1C 100%);
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  border-radius: 8px;
+  color: #FFFFFF;
+  font-family: var(--font-hud);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  box-shadow: 0 0 25px rgba(237, 29, 36, 0.4);
+  transition: all var(--transition-fast);
+  text-transform: uppercase;
+}
+
+.hero-equip-btn .btn-sigil {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.hero-equip-btn:hover {
+  background: linear-gradient(135deg, #FF2B32 0%, #DC2626 100%);
+  box-shadow: 0 0 35px rgba(237, 29, 36, 0.7), 0 0 12px rgba(255, 215, 0, 0.5);
+  transform: translateY(-2px);
+}
+
+.hero-equip-btn:active {
+  transform: scale(0.98);
+}
+
+.equip-success-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 9px 14px;
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  border-radius: 6px;
+  font-family: var(--font-hud);
+  font-size: 0.66rem;
+  letter-spacing: 1px;
+  color: #4ADE80;
+  animation: badge-appear 0.3s ease forwards;
+}
+
+.equip-success-badge.hidden {
+  display: none !important;
+}
+
+@keyframes badge-appear {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   RESPONSIVE ADAPTATIONS
+   ========================================================================== */
+@media (max-width: 992px) {
+  .hero-showcase-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .hero-stage-card {
+    min-height: 440px;
+  }
+
+  .hero-image-wrap {
+    max-height: 400px;
+  }
+
+  .dossier-hero-name {
+    font-size: clamp(2.4rem, 6vw, 3.2rem);
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-chip-btn {
+    padding: 8px 12px;
+  }
+
+  .hero-chip-btn .hero-chip-label {
+    font-size: 0.7rem;
+  }
+
+  .hero-stage-card {
+    min-height: 380px;
+  }
+
+  .hero-image-wrap {
+    max-height: 340px;
+  }
+
+  .hero-dossier-card {
+    padding: 24px 20px;
+  }
+}

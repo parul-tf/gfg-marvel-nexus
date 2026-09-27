@@ -1,0 +1,512 @@
+/* ==========================================================================
+   S.H.I.E.L.D. QUANTUM PRELOADER // PROJECT NEXUS BOOT SEQUENCE
+   ========================================================================== */
+
+.quantum-preloader {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  pointer-events: all;
+  user-select: none;
+  background: transparent;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s ease;
+}
+
+.quantum-preloader.loaded-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  display: none !important;
+}
+
+/* 1. Dual Cybernetic Shutter Panels */
+.loader-shutter {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 50.5%;
+  background: radial-gradient(circle at 50% 50%, #0d0f1a 0%, #050508 100%);
+  z-index: 1;
+  transition: transform 0.85s cubic-bezier(0.77, 0, 0.175, 1);
+  will-change: transform;
+  pointer-events: none;
+}
+
+.loader-shutter-top {
+  top: 0;
+  border-bottom: 1px solid rgba(0, 240, 255, 0.4);
+  box-shadow: 0 4px 30px rgba(0, 240, 255, 0.2);
+}
+
+.loader-shutter-bottom {
+  bottom: 0;
+  border-top: 1px solid rgba(237, 29, 36, 0.4);
+  box-shadow: 0 -4px 30px rgba(237, 29, 36, 0.2);
+}
+
+/* Shutter Exit Trigger */
+.quantum-preloader.exiting .loader-shutter-top {
+  transform: translateY(-100%);
+}
+
+.quantum-preloader.exiting .loader-shutter-bottom {
+  transform: translateY(100%);
+}
+
+/* Center Content Exit Transition */
+.quantum-preloader.exiting .loader-content-wrap {
+  transform: scale(1.15);
+  opacity: 0;
+  filter: blur(10px);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.quantum-preloader.exiting .loader-grid-bg,
+.quantum-preloader.exiting .loader-glow-spot,
+.quantum-preloader.exiting .loader-corner,
+.quantum-preloader.exiting .loader-skip-btn {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+/* 2. Cyber Matrix Grid Background & Ambient Flare */
+.loader-grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.loader-glow-spot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.12) 0%, rgba(237, 29, 36, 0.08) 45%, transparent 70%);
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 2;
+  animation: loader-glow-breathe 4s infinite alternate ease-in-out;
+}
+
+@keyframes loader-glow-breathe {
+  0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.7; }
+  100% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+}
+
+/* 3. Corner HUD Telemetry Brackets */
+.loader-corner {
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-hud);
+  font-size: 0.68rem;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.corner-bracket {
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--arc-cyan);
+  display: inline-block;
+}
+
+.corner-tl { top: 24px; left: 24px; }
+.corner-tl .corner-bracket { border-right: none; border-bottom: none; }
+
+.corner-tr { top: 24px; right: 24px; flex-direction: row-reverse; }
+.corner-tr .corner-bracket { border-left: none; border-bottom: none; border-color: var(--stark-gold); }
+
+.corner-bl { bottom: 24px; left: 24px; }
+.corner-bl .corner-bracket { border-right: none; border-top: none; }
+
+.corner-br { bottom: 24px; right: 24px; flex-direction: row-reverse; }
+.corner-br .corner-bracket { border-left: none; border-top: none; border-color: var(--marvel-red); }
+
+@media (max-width: 768px) {
+  .loader-corner {
+    display: none;
+  }
+}
+
+/* 4. Skip / Bypass Button */
+.loader-skip-btn {
+  position: absolute;
+  top: 56px;
+  right: 24px;
+  z-index: 20;
+  background: rgba(14, 18, 30, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: var(--text-secondary);
+  font-family: var(--font-hud);
+  font-size: 0.68rem;
+  letter-spacing: 1.5px;
+  padding: 6px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  backdrop-filter: blur(10px);
+  transition: all var(--transition-fast);
+}
+
+@media (max-width: 768px) {
+  .loader-skip-btn {
+    top: 16px;
+    right: 16px;
+    font-size: 0.62rem;
+    padding: 5px 10px;
+  }
+}
+
+.loader-skip-btn:hover {
+  background: rgba(237, 29, 36, 0.2);
+  border-color: var(--marvel-red);
+  color: #FFFFFF;
+  box-shadow: 0 0 16px rgba(237, 29, 36, 0.4);
+  transform: translateY(-1px);
+}
+
+.loader-skip-btn .skip-arrow {
+  transition: transform var(--transition-fast);
+}
+
+.loader-skip-btn:hover .skip-arrow {
+  transform: translateX(3px);
+}
+
+/* 5. Center Content Container */
+.loader-content-wrap {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  max-width: 520px;
+  width: 100%;
+}
+
+/* 6. Arc Reactor Assembly */
+.loader-core-wrap {
+  position: relative;
+  width: 190px;
+  height: 190px;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Outer SVG Ring */
+.reactor-outer-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: reactor-spin-cw 16s linear infinite;
+}
+
+.ring-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.ring-track {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 4;
+}
+
+.ring-fill-energy {
+  fill: none;
+  stroke: url(#arcGradient);
+  stroke-width: 4.5;
+  stroke-linecap: round;
+  stroke-dasharray: 565;
+  stroke-dashoffset: 565;
+  transition: stroke-dashoffset 0.15s ease-out;
+  filter: drop-shadow(0 0 10px var(--arc-cyan));
+}
+
+.ring-ticks {
+  stroke: rgba(0, 240, 255, 0.4);
+  stroke-width: 2;
+}
+
+@keyframes reactor-spin-cw {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Segmented Coils (Mid Ring) */
+.reactor-mid-ring {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 215, 0, 0.35);
+  animation: reactor-spin-ccw 9s linear infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes reactor-spin-ccw {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+.segmented-coil {
+  position: absolute;
+  width: 14px;
+  height: 4px;
+  background: var(--arc-cyan);
+  border-radius: 2px;
+  box-shadow: 0 0 8px var(--arc-cyan);
+}
+
+.coil-1 { transform: rotate(0deg) translate(66px); }
+.coil-2 { transform: rotate(60deg) translate(66px); }
+.coil-3 { transform: rotate(120deg) translate(66px); }
+.coil-4 { transform: rotate(180deg) translate(66px); }
+.coil-5 { transform: rotate(240deg) translate(66px); }
+.coil-6 { transform: rotate(300deg) translate(66px); }
+
+/* Inner Glowing Core with Avengers Emblem */
+.reactor-core {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #0F172A 0%, #07070B 100%);
+  border: 2px solid rgba(0, 240, 255, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.35), inset 0 0 15px rgba(0, 240, 255, 0.25);
+  animation: core-pulse 2s infinite ease-in-out;
+}
+
+@keyframes core-pulse {
+  0%, 100% {
+    box-shadow: 0 0 25px rgba(0, 240, 255, 0.35), inset 0 0 15px rgba(0, 240, 255, 0.25);
+    border-color: rgba(0, 240, 255, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 45px rgba(237, 29, 36, 0.6), inset 0 0 25px rgba(237, 29, 36, 0.4);
+    border-color: rgba(237, 29, 36, 0.8);
+  }
+}
+
+.loader-avengers-icon {
+  width: 50px;
+  height: 50px;
+  color: var(--marvel-red);
+  filter: drop-shadow(0 0 10px var(--marvel-red-glow));
+  transition: transform var(--transition-fast);
+}
+
+/* 7. Boot Telemetry & Progress Readout */
+.loader-telemetry {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.loader-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-hud);
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  color: var(--arc-cyan);
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  padding: 5px 14px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+}
+
+.telemetry-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--arc-cyan);
+  box-shadow: 0 0 8px var(--arc-cyan);
+  animation: pulse-telemetry 1.2s infinite ease-in-out;
+}
+
+/* Large Numeric Percentage Counter */
+.loader-counter {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.loader-number {
+  font-family: var(--font-hud);
+  font-size: clamp(3.2rem, 7vw, 4.8rem);
+  font-weight: 900;
+  letter-spacing: 2px;
+  background: linear-gradient(180deg, #FFFFFF 0%, #E2E8F0 50%, #94A3B8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 20px rgba(0, 240, 255, 0.4));
+  font-variant-numeric: tabular-nums;
+  min-width: 2.4ch;
+  text-align: right;
+}
+
+.loader-percent-sym {
+  font-family: var(--font-hud);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--stark-gold);
+  margin-left: 4px;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+/* Holographic Segmented Progress Bar */
+.loader-bar-shell {
+  position: relative;
+  width: min(340px, 85vw);
+  height: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+.loader-bar-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #00F0FF 0%, #FFD700 70%, #ED1D24 100%);
+  border-radius: 3px;
+  box-shadow: 0 0 16px var(--arc-cyan);
+  transition: width 0.15s ease-out;
+}
+
+.bar-head-laser {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 6px;
+  height: 100%;
+  background: #FFFFFF;
+  box-shadow: 0 0 12px #FFFFFF, 0 0 20px var(--arc-cyan);
+}
+
+.loader-bar-segments {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.loader-bar-segments span {
+  width: 1px;
+  height: 100%;
+  background: rgba(5, 5, 8, 0.6);
+}
+
+/* Dynamic Live Status Message */
+.loader-status-stream {
+  display: inline-flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-hud);
+  font-size: clamp(0.68rem, 1.8vw, 0.8rem);
+  letter-spacing: 1.2px;
+  color: #CBD5E1;
+  text-transform: uppercase;
+  min-height: 2.4em;
+  max-width: 320px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.status-prefix {
+  color: var(--marvel-red);
+  font-weight: 800;
+  flex-shrink: 0;
+  line-height: 1.4;
+  animation: blink-prefix 0.8s infinite step-start;
+}
+
+@keyframes blink-prefix {
+  50% { opacity: 0; }
+}
+
+.status-msg {
+  color: var(--arc-cyan);
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+  transition: opacity 0.2s ease;
+  line-height: 1.4;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 480px) {
+  .loader-core-wrap {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 20px;
+  }
+  .reactor-mid-ring {
+    width: 110px;
+    height: 110px;
+  }
+  .coil-1 { transform: rotate(0deg) translate(52px); }
+  .coil-2 { transform: rotate(60deg) translate(52px); }
+  .coil-3 { transform: rotate(120deg) translate(52px); }
+  .coil-4 { transform: rotate(180deg) translate(52px); }
+  .coil-5 { transform: rotate(240deg) translate(52px); }
+  .coil-6 { transform: rotate(300deg) translate(52px); }
+
+  .reactor-core {
+    width: 70px;
+    height: 70px;
+  }
+  .loader-avengers-icon {
+    width: 38px;
+    height: 38px;
+  }
+  .loader-tag {
+    font-size: 0.62rem;
+    padding: 4px 10px;
+  }
+  .loader-bar-shell {
+    width: 270px;
+  }
+}
